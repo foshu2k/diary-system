@@ -22,3 +22,6 @@ def create_entry(request):
         form = EntryForm()
     
     return render(request, "entries/entry_form.html", {"form" : form})
+
+def calendar(request):
+    return render(request, "entries/calendar.html")
