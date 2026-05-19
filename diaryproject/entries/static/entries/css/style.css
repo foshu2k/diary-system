@@ -127,17 +127,23 @@ p  { color: var(--c-text-muted); }
 }
 
 /* Inputs */
+
 .input, .textarea {
   width: 100%;
   background: var(--c-surface);
   border: 1px solid rgba(228, 145, 167, 0.15);
   border-radius: var(--radius-md);
   padding: 14px 16px;
-  color: black;
+  color: var(--c-text);
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
+
+input, textarea {
+  color: #000000;
+}
+
 .input:focus, .textarea:focus {
   border-color: var(--c-primary);
   box-shadow: 0 0 0 4px rgba(228, 145, 167, 0.12);
