@@ -149,7 +149,7 @@ p  { color: var(--c-text-muted); }
   width: calc(100% - 32px);      
   max-width: 440px;
   
-  /* Your awesome new style details */
+  /* Glassmorphism Styling */
   background: rgba(42, 24, 56, .85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px); 
@@ -189,8 +189,8 @@ p  { color: var(--c-text-muted); }
 
 /* Fixed Primary Floating Action Button (+ Button) */
 .bottom-nav .nav-fab {
-  width: 54px;
-  height: 54px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -198,39 +198,20 @@ p  { color: var(--c-text-muted); }
   background: linear-gradient(135deg, var(--c-primary), var(--c-primary-deep));
   color: var(--c-text-dark);
   text-decoration: none;
+  flex-shrink: 0;
   
-  /* Typography configuration for raw text "+" symbol */
-  font-size: 26px;
+  /* Text alignment configuration for raw '+' symbol */
+  font-size: 28px;
   font-weight: 300;
   line-height: 1;
   
   box-shadow: 0 0 0 4px rgba(228, 145, 167, .15), 0 8px 22px rgba(228, 145, 167, 0.4);
-  transition: transform .2s;
+  transition: transform .2s ease;
 }
 
 .bottom-nav .nav-fab:hover {
   transform: translateY(-3px) scale(1.04);
 }
-
-/* Fixed Primary Floating Action Button */
-.bottom-nav .nav-fab {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-deep));
-  color: var(--c-text-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  font-weight: 300;
-  margin-top: -36px;
-  box-shadow: var(--shadow-float);
-  border: 4px solid var(--c-bg);
-  transition: transform 0.2s ease;
-}
-
-.bottom-nav .nav-fab:hover { transform: translateY(-2px); }
 
 /* Responsive Viewports Layout adjustments */
 @media (min-width: 900px) {
