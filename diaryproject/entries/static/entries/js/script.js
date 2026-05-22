@@ -32,6 +32,5 @@ document.addEventListener("DOMContentLoaded", function () {
     function stopRecording() {
         speechObj.stop()
         speechObj = null
-        speechBtn.innerText = "Start Recording"
     }
 })
