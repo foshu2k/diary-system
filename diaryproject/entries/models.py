@@ -6,6 +6,7 @@ class Entry (models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
