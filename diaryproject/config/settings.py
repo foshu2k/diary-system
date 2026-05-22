@@ -31,6 +31,9 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://diary-system.up.railway.app',
+]
 
 # Application definition
 
