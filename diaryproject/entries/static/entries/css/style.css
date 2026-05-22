@@ -1,5 +1,19 @@
-/* Base: reset, variables, typography */
+/* ==========================================================================
+   TOC:
+   1. VARIABLES & DESIGN TOKENS
+   2. RESET & BASE ELEMENTS
+   3. BASE LAYOUT & SHELL COMPONENTS
+   4. GLOBAL UI UI COMPONENTS (Buttons, Cards, Inputs, Chips)
+   5. PAGE: HOME SCREEN
+   6. PAGE: ENTRIES EXPLORER & LISTS
+   7. PAGE: ENTRY VIEW & AUDIO PANELS
+   ========================================================================== */
+
+/* ==========================================================================
+   1. VARIABLES & DESIGN TOKENS
+   ========================================================================== */
 :root {
+  /* Color Palette */
   --c-bg: #18122B;
   --c-surface: #2D1F3D;
   --c-surface-2: #7A4B83;
@@ -7,17 +21,25 @@
   --c-primary-deep: #90426F;
   --c-accent: #FDE0B2;
   --c-lilac: #C9B6E4;
+  
+  /* Typography Colors */
   --c-text: #FDE0B2;
   --c-text-muted: rgba(253, 224, 178, 0.65);
   --c-text-dark: #18122B;
+  
+  /* Structural Radius Tokens */
   --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-pill: 999px;
+  
+  /* Drop Shadows */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
   --shadow-md: 0 6px 20px rgba(24, 18, 43, 0.25);
   --shadow-lg: 0 12px 32px rgba(24, 18, 43, 0.35);
   --shadow-float: 0 8px 24px rgba(228, 145, 167, 0.4);
+  
+  /* Layout Spacing Grid */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -25,10 +47,19 @@
   --space-5: 24px;
   --space-6: 32px;
   --space-7: 48px;
+  
+  /* Fonts */
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* ==========================================================================
+   2. RESET & BASE ELEMENTS
+   ========================================================================== */
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
 
 html, body {
   height: 100%;
@@ -44,121 +75,44 @@ body {
   min-height: 100vh;
 }
 
-a { color: inherit; text-decoration: none; }
-button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-input, textarea { font-family: inherit; color: inherit; }
+a { 
+  color: inherit; 
+  text-decoration: none; 
+}
 
+button { 
+  font-family: inherit; 
+  cursor: pointer; 
+  border: none; 
+  background: none; 
+  color: inherit; 
+}
+
+input, textarea { 
+  font-family: inherit; 
+  color: inherit; 
+}
+
+/* Global Typography Elements */
 h1 { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.5px; }
 h2 { font-size: 1.4rem; font-weight: 600; }
 h3 { font-size: 1.1rem; font-weight: 600; }
 p  { color: var(--c-text-muted); }
 
-::selection { background: var(--c-primary); color: var(--c-text-dark); }
-
-
-
-/* Reusable components: cards, buttons, inputs, chips */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 14px 22px;
-  border-radius: var(--radius-pill);
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s;
+::selection { 
+  background: var(--c-primary); 
+  color: var(--c-text-dark); 
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-deep));
-  color: var(--c-text-dark);
-  box-shadow: var(--shadow-float);
-}
-.btn-primary:hover { transform: translateY(-2px); }
-
-.btn-secondary {
-  background: var(--c-surface);
-  color: var(--c-accent);
-  border: 1px solid rgba(228, 145, 167, 0.2);
-}
-.btn-secondary:hover { background: var(--c-surface-2); color: var(--c-text-dark); }
-
-.btn-block { width: 100%; }
-
-/* Card */
-.card {
-  background: var(--c-surface);
-  border-radius: var(--radius-md);
-  padding: 18px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(228, 145, 167, 0.08);
-  transition: transform 0.18s ease, box-shadow 0.2s;
-}
-.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-
-/* Inputs */
-
-.input, .textarea {
-  width: 100%;
-  background: var(--c-surface);
-  border: 1px solid rgba(228, 145, 167, 0.15);
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
-  color: var(--c-text);
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-input, textarea {
-  color: #000000;
-}
-
-.input:focus, .textarea:focus {
-  border-color: var(--c-primary);
-  box-shadow: 0 0 0 4px rgba(228, 145, 167, 0.12);
-}
-.input::placeholder, .textarea::placeholder { color: var(--c-text-muted); }
-
-.search-bar {
-  position: relative;
-  margin-bottom: 18px;
-}
-.search-bar .input { padding-left: 44px; }
-.search-bar::before {
-  content: "\1F50D";
-  position: absolute;
-  left: 14px; top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.6;
-  font-size: 0.9rem;
-}
-
-/* Section heading */
-.section-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 24px 0 14px;
-}
-.section-title h2 { font-size: 1.1rem; }
-.section-title a { font-size: 0.8rem; color: var(--c-primary); font-weight: 500; }
-
-
-/* Layout: app shell, container, bottom nav */
+/* ==========================================================================
+   3. BASE LAYOUT & SHELL COMPONENTS
+   ========================================================================== */
 .app {
   max-width: 480px;
   margin: 0 auto;
   padding: 24px 20px 24px;
   min-height: 100vh;
   position: relative;
-}
-
-@media (min-width: 900px) {
-  .app { max-width: 720px; padding: 40px 32px; }
-  body { padding-bottom: 120px; }
 }
 
 .topbar {
@@ -176,13 +130,14 @@ input, textarea {
 }
 
 .avatar {
-  width: 40px; height: 40px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--c-primary), var(--c-surface-2));
   box-shadow: var(--shadow-sm);
 }
 
-/* Bottom Navigation */
+/* Bottom Navigation Bar */
 .bottom-nav {
   position: fixed;
   bottom: 16px;
@@ -218,7 +173,7 @@ input, textarea {
 .bottom-nav .nav-item.active { color: var(--c-primary); }
 .bottom-nav .nav-item .icon { font-size: 1.3rem; line-height: 1; }
 
-/* Center primary FAB */
+/* Fixed Primary Floating Action Button */
 .bottom-nav .nav-fab {
   width: 64px;
   height: 64px;
@@ -238,14 +193,118 @@ input, textarea {
 
 .bottom-nav .nav-fab:hover { transform: translateY(-2px); }
 
+/* Responsive Viewports Layout adjustments */
 @media (min-width: 900px) {
+  .app { max-width: 720px; padding: 40px 32px; }
+  body { padding-bottom: 120px; }
   .bottom-nav { max-width: 520px; }
 }
 
+/* ==========================================================================
+   4. GLOBAL UI UI COMPONENTS (Buttons, Cards, Inputs, Chips)
+   ========================================================================== */
+/* Interactive UI Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 22px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s;
+}
 
+.btn-primary {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-deep));
+  color: var(--c-text-dark);
+  box-shadow: var(--shadow-float);
+}
+.btn-primary:hover { transform: translateY(-2px); }
 
+.btn-secondary {
+  background: var(--c-surface);
+  color: var(--c-accent);
+  border: 1px solid rgba(228, 145, 167, 0.2);
+}
+.btn-secondary:hover { background: var(--c-surface-2); color: var(--c-text-dark); }
+.btn-block { width: 100%; }
 
-/* Home page */
+/* Structural Content Card */
+.card {
+  background: var(--c-surface);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(228, 145, 167, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+/* Input fields (Standalone & Structured Form Elements) */
+.input, .textarea, .form-group input, .form-group textarea {
+  width: 100%;
+  background: var(--c-surface);
+  border: 1px solid rgba(228, 145, 167, 0.15);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  color: var(--c-text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus, .textarea:focus, .form-group input:focus, .form-group textarea:focus {
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 4px rgba(228, 145, 167, 0.12);
+}
+.input::placeholder, .textarea::placeholder { color: var(--c-text-muted); }
+
+.form-group {
+  margin-bottom: 16px;
+}
+.form-group textarea {
+  min-height: 220px;
+  resize: vertical;
+}
+
+/* Global Navigation Filter Chips */
+.chip-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.chip {
+  padding: 6px 14px;
+  background: var(--c-surface);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  color: var(--c-text-muted);
+  cursor: pointer;
+  border: 1px solid rgba(228, 145, 167, 0.1);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.chip:hover { color: var(--c-accent); border-color: rgba(228, 145, 167, 0.3); }
+.chip.active { background: var(--c-primary); color: var(--c-text-dark); font-weight: 600; border-color: var(--c-primary); }
+
+/* Header Component Helpers */
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 0 14px;
+}
+.section-title h2 { font-size: 1.1rem; }
+.section-title a { font-size: 0.8rem; color: var(--c-primary); font-weight: 500; }
+
+/* ==========================================================================
+   5. PAGE: HOME SCREEN
+   ========================================================================== */
 .hero {
   margin-top: 8px;
   margin-bottom: 28px;
@@ -262,6 +321,7 @@ input, textarea {
 }
 .hero h1 span { color: var(--c-primary); }
 
+/* Decorative Dashboard Feature Card */
 .featured-card {
   background: linear-gradient(135deg, var(--c-primary-deep), var(--c-surface-2));
   color: var(--c-accent);
@@ -295,13 +355,9 @@ input, textarea {
 }
 .featured-card .btn { background: var(--c-accent); color: var(--c-text-dark); position: relative; z-index: 1; }
 
+/* Compact Alternative Entry Feed */
 .entry-list { display: flex; flex-direction: column; gap: 12px; }
-
-.entry-mini {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-}
+.entry-mini { display: flex; gap: 14px; align-items: center; }
 .entry-mini .swatch {
   width: 48px; height: 48px;
   border-radius: var(--radius-sm);
@@ -311,16 +367,31 @@ input, textarea {
 .entry-mini .meta h3 { font-size: 0.95rem; color: var(--c-accent); margin-bottom: 2px; }
 .entry-mini .meta p { font-size: 0.8rem; }
 
-
-
-
-/* Entries page */
+/* ==========================================================================
+   6. PAGE: ENTRIES EXPLORER & LISTS
+   ========================================================================== */
 .page-header {
   margin-bottom: 18px;
 }
 .page-header h1 { color: var(--c-accent); margin-bottom: 6px; }
 .page-header p { font-size: 0.9rem; }
 
+/* Search Layout Input Shell additions */
+.search-bar {
+  position: relative;
+  margin-bottom: 18px;
+}
+.search-bar .input { padding-left: 44px; }
+.search-bar::before {
+  content: "\1F50D";
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+/* Multi-Column Layout Grid Configuration */
 .entry-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -331,6 +402,7 @@ input, textarea {
   .entry-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
 }
 
+/* Standard Visual Display Cards for individual Journal logs */
 .entry-card {
   background: var(--c-surface);
   border-radius: var(--radius-md);
@@ -343,23 +415,9 @@ input, textarea {
   transition: transform 0.18s ease, box-shadow 0.2s, border-color 0.2s;
   cursor: pointer;
 }
-.entry-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--c-primary);
-  box-shadow: var(--shadow-md);
-}
-.entry-card .date {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--c-primary);
-  font-weight: 600;
-}
-.entry-card h3 {
-  font-size: 1rem;
-  color: var(--c-accent);
-  line-height: 1.3;
-}
+.entry-card:hover { transform: translateY(-3px); border-color: var(--c-primary); box-shadow: var(--shadow-md); }
+.entry-card .date { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--c-primary); font-weight: 600; }
+.entry-card h3 { font-size: 1rem; color: var(--c-accent); line-height: 1.3; }
 .entry-card .preview {
   font-size: 0.8rem;
   color: var(--c-text-muted);
@@ -371,41 +429,22 @@ input, textarea {
   overflow: hidden;
 }
 
-
-/* Month divider */
+/* Date/Month Horizontal Separator */
 .month-divider {
   display: flex;
   align-items: center;
   gap: 12px;
   margin: 28px 0 14px;
 }
+.month-divider span { font-size: 1rem; font-weight: 700; color: var(--c-accent); white-space: nowrap; }
+.month-divider::after { content: ""; flex: 1; height: 1px; background: rgba(228, 145, 167, 0.15); }
 
-.month-divider span {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--c-accent);
-  white-space: nowrap;
-}
-
-.month-divider::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: rgba(228, 145, 167, 0.15);
-}
-
-
-/* Entry Detail */
-.entry-detail-back {
-  padding: 8px 16px;
-  font-size: 0.85rem;
-}
-
-.entry-detail-meta {
-  font-size: 0.8rem;
-  opacity: 0.7;
-}
-
+/* ==========================================================================
+   7. PAGE: ENTRY VIEW & AUDIO PANELS
+   ========================================================================== */
+.entry-detail-back { padding: 8px 16px; font-size: 0.85rem; }
+.entry-detail-meta { font-size: 0.8rem; opacity: 0.7; }
+.entry-detail-card { margin-bottom: 24px; }
 .entry-detail-content {
   font-size: 0.95rem;
   color: var(--c-text);
@@ -413,11 +452,7 @@ input, textarea {
   white-space: pre-wrap;
 }
 
-.entry-detail-card {
-  margin-bottom: 24px;
-}
-
-/* Voice recording panel */
+/* Voice Capturing Dashboard Panel Modules */
 .voice-panel {
   margin-top: 28px;
   background: var(--c-surface);
@@ -429,6 +464,7 @@ input, textarea {
   gap: 14px;
   box-shadow: var(--shadow-sm);
 }
+
 .waveform {
   width: 100%;
   height: 48px;
@@ -437,21 +473,28 @@ input, textarea {
   background-size: 100% 100%;
   opacity: 0.85;
 }
+
 .voice-controls {
   display: flex;
   align-items: center;
   gap: 22px;
 }
+
 .voice-btn {
-  width: 44px; height: 44px;
+  width: 44px; 
+  height: 44px;
   border-radius: 50%;
   background: var(--c-surface-2);
   color: var(--c-accent);
-  display: flex; align-items: center; justify-content: center;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
   font-size: 1.1rem;
 }
+
 .voice-btn.record {
-  width: 64px; height: 64px;
+  width: 64px; 
+  height: 64px;
   background: linear-gradient(135deg, var(--c-primary), var(--c-primary-deep));
   color: var(--c-text-dark);
   font-size: 1.6rem;
