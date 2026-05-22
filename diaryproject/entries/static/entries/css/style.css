@@ -459,6 +459,24 @@ p  { color: var(--c-text-muted); }
 .month-divider span { font-size: 1rem; font-weight: 700; color: var(--c-accent); white-space: nowrap; }
 .month-divider::after { content: ""; flex: 1; height: 1px; background: rgba(228, 145, 167, 0.15); }
 
+/* New Entry Header Group Styling */
+.entry-header-group {
+  margin-bottom: 24px;
+}
+
+.entry-header-group .current-date-stamp {
+  font-size: 0.9rem;
+  color: var(--c-primary, #e491a7); /* Falls back to your pink accent token */
+  margin-bottom: 6px;
+  display: block;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.entry-header-group .page-title {
+  margin-top: 0;
+}
+
 /* ==========================================================================
    7. PAGE: ENTRY VIEW & AUDIO PANELS
    ========================================================================== */

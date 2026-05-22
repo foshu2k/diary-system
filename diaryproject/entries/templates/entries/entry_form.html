@@ -17,6 +17,11 @@
                 <div class="avatar"></div>
             </div>
 
+            <header class="entry-header-group">
+                <span id="liveDate" class="current-date-stamp"></span>
+                <h1 class="page-title">New entry</h1>
+            </header>
+
             <form method="POST">
                 {% csrf_token %}
                 {{ form.non_field_errors }}
