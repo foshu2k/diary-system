@@ -6,6 +6,16 @@ class EntryForm(forms.ModelForm):
         model = Entry
         fields = ['title', 'content']
         labels = {
-            'title' : 'Subject',
-            'content' : 'Write your content here',
+            'title': 'Subject',
+            'content': 'Write your content here',
+        }
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'placeholder': 'Tittle your day...',
+                'class': 'input',
+            }),
+            'content': forms.Textarea(attrs={
+                'placeholder': "What's on your mind?",
+                'class': 'textarea',
+            }),
         }

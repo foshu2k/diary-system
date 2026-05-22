@@ -140,38 +140,77 @@ p  { color: var(--c-text-muted); }
 /* Bottom Navigation Bar */
 .bottom-nav {
   position: fixed;
-  bottom: 16px;
   left: 50%;
+  bottom: 18px;
   transform: translateX(-50%);
-  width: calc(100% - 32px);
-  max-width: 440px;
-  background: var(--c-surface);
-  border-radius: var(--radius-pill);
-  padding: 10px 14px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  box-shadow: var(--shadow-lg);
+  justify-content: space-around; 
+  width: calc(100% - 32px);      
+  max-width: 440px;
+  
+  /* Your awesome new style details */
+  background: rgba(42, 24, 56, .85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px); 
+  border: 1px solid rgba(228, 145, 167, 0.15);
+  border-radius: var(--radius-pill);
+  padding: 10px 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
   z-index: 50;
-  border: 1px solid rgba(228, 145, 167, 0.1);
 }
 
 .bottom-nav .nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 8px 12px;
-  border-radius: var(--radius-md);
-  font-size: 0.7rem;
+  gap: 2px;
   color: var(--c-text-muted);
-  transition: color 0.2s ease;
-  min-width: 56px;
+  font-size: 11px;
+  padding: 6px 18px;
+  border-radius: var(--radius-md);
+  transition: color .2s;
+  text-decoration: none;
 }
 
-.bottom-nav .nav-item:hover { color: var(--c-accent); }
-.bottom-nav .nav-item.active { color: var(--c-primary); }
-.bottom-nav .nav-item .icon { font-size: 1.3rem; line-height: 1; }
+.bottom-nav .nav-item .icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.bottom-nav .nav-item:hover { 
+  color: var(--c-accent); 
+}
+
+.bottom-nav .nav-item.active { 
+  color: var(--c-primary); 
+  filter: drop-shadow(0 0 6px var(--c-primary)); 
+}
+
+/* Fixed Primary Floating Action Button (+ Button) */
+.bottom-nav .nav-fab {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-deep));
+  color: var(--c-text-dark);
+  text-decoration: none;
+  
+  /* Typography configuration for raw text "+" symbol */
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1;
+  
+  box-shadow: 0 0 0 4px rgba(228, 145, 167, .15), 0 8px 22px rgba(228, 145, 167, 0.4);
+  transition: transform .2s;
+}
+
+.bottom-nav .nav-fab:hover {
+  transform: translateY(-3px) scale(1.04);
+}
 
 /* Fixed Primary Floating Action Button */
 .bottom-nav .nav-fab {
