@@ -431,14 +431,6 @@ p  { color: var(--c-text-muted); }
   margin-bottom: 18px;
 }
 .search-bar .input { padding-left: 44px; }
-.search-bar::before {
-  content: "\1F50D";
-  position: absolute;
-  left: 14px; top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.6;
-  font-size: 0.9rem;
-}
 
 /* Multi-Column Layout Grid Configuration */
 .entry-grid {
