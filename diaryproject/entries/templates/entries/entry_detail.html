@@ -10,7 +10,11 @@
 
     <!-- Entry Header Card -->
     <div class="featured-card">
-        <div class="label">{{ entry.created_at|date:"F d, Y" }}</div>
+        <div class="modify-bar">
+            <a href="{% url 'edit_entry' entry.id %}" class="edit-btn">Edit</a>
+            <button class="delete-btn" onclick="document.getElementById('deleteModal').showModal()">Delete</button>
+        </div>
+        <div class="label">{{ entry.created_at|date:"F d, Y · h:i A" }}</div>
         <h2>{{ entry.title }}</h2>
         <div class="entry-detail-meta">
             Updated {{ entry.updated_at|date:"M d, Y · h:i A" }}
@@ -23,4 +27,17 @@
     </div>
 
 </div>
+
+<!-- Delete Confirmation Popup -->
+<dialog id="deleteModal">
+    <p>Delete "<strong>{{ entry.title }}</strong>"? This cannot be undone.</p>
+    <div class="dialog-actions">
+        <form method="POST" action="{% url 'delete_entry' entry.id %}">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn">Yes</button>
+        </form>
+        <button onclick="document.getElementById('deleteModal').close()">Cancel</button>
+    </div>
+</dialog>
+
 {% endblock %}

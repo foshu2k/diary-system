@@ -24,10 +24,10 @@
     
     <!-- Filter Chips -->
     <div class="chip-row">
-        <span class="chip active">All</span>
-        <span class="chip">Year</span>
-        <span class="chip">Month</span>
-        <span class="chip">Day</span>
+        <a href="?filter=all"   class="chip {% if active_filter == 'all' %}active{% endif %}">All</a>
+        <a href="?filter=year"  class="chip {% if active_filter == 'year' %}active{% endif %}">Year</a>
+        <a href="?filter=month" class="chip {% if active_filter == 'month' %}active{% endif %}">Month</a>
+        <a href="?filter=day"   class="chip {% if active_filter == 'day' %}active{% endif %}">Day</a>
     </div>
 
     <!-- Calendar Section -->
