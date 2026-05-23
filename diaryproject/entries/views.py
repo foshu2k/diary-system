@@ -9,20 +9,7 @@ def home(request):
 
 def entry_list(request):
     entries = Entry.objects.all().order_by("-date")
-    selected_date = request.GET.get("date", "")
-
-    if selected_date:
-        try:
-            from datetime import date
-            parsed = date.fromisoformat(selected_date)
-            entries = entries.filter(date=parsed)
-        except ValueError:
-            pass
-
-    return render(request, "entries/entry_list.html", {
-        "entries": entries,
-        "selected_date": selected_date,
-    })
+    return render(request, "entries/entry_list.html", {"entries": entries,})
 
 def entry_detail(request, id):
     entry = get_object_or_404(Entry, id=id)

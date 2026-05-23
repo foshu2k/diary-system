@@ -24,16 +24,10 @@
 
     <!-- Filter Chips -->
     <div class="chip-row">
-        <a href="?" class="chip {% if not selected_date %}active{% endif %}">All</a>
-        {% if selected_date %}
-        <span class="chip active">{{ selected_date }}</span>
-        <a href="?" class="chip">✕ Clear</a>
-        {% endif %}
-
-        <!-- <span class="chip active">All</span>
+        <span class="chip active">All</span>
         <span class="chip">Year</span>
         <span class="chip">Month</span>
-        <span class="chip">Day</span> -->
+        <span class="chip">Day</span>
     </div>
 
     <!-- Calendar Section -->
@@ -43,7 +37,6 @@
                 <img src="{% static 'entries/svg/calendar.svg' %}" class="icon-inline">
                 Calendar
             </button>
-            <input type="date" id="dateFilter" style="display:none;"/>
         </div>
     </section>
 
