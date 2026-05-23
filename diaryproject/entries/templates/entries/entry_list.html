@@ -25,7 +25,7 @@
     <!-- Filter Chips -->
     <div class="chip-row">
         <a href="?filter=all"   class="chip {% if active_filter == 'all' %}active{% endif %}">All</a>
-        
+
         <div class="dropdown">
             <button type="button" class="chip {% if active_filter == 'year' %}active{% endif %}" onclick="toggleDropdown('yearDropdown')">Year</button>
             <div class="dropdown-menu" id="yearDropdown">
@@ -118,4 +118,8 @@
     </div>
 
 </div>
+
+{% load static %}
+<script src="{% static 'entries/js/script.js' %}"></script>
+
 {% endblock %}
