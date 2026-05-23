@@ -24,43 +24,20 @@
     
     <!-- Filter Chips -->
     <div class="chip-row">
-        <a href="?filter=all"   class="chip {% if active_filter == 'all' %}active{% endif %}">All</a>
-
-        <div class="dropdown">
-            <button type="button" class="chip {% if active_filter == 'year' %}active{% endif %}" onclick="toggleDropdown('yearDropdown')">Year</button>
-            <div class="dropdown-menu" id="yearDropdown">
-                {% for year in available_years %}
-                    <a href="?filter=year&value={{ year }}" class="dropdown-item {% if selected_value == year|stringformat:'s' %}active{% endif %}">{{ year }}</a>
-                {% endfor %}
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <button type="button" class="chip {% if active_filter == 'month' %}active{% endif %}" onclick="toggleDropdown('monthDropdown')">Month</button>
-            <div class="dropdown-menu" id="monthDropdown">
-                {% for month in available_months %}
-                    <a href="?filter=month&value={{ month.value }}" class="dropdown-item {% if selected_value == month.value %}active{% endif %}">{{ month.label }}</a>
-                {% endfor %}
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <button type="button" class="chip {% if active_filter == 'day' %}active{% endif %}" onclick="toggleDropdown('dayDropdown')">Day</button>
-            <div class="dropdown-menu" id="dayDropdown">
-                {% for day in available_days %}
-                    <a href="?filter=day&value={{ day }}" class="dropdown-item {% if selected_value == day|stringformat:'s' %}active{% endif %}">{{ day }}</a>
-                {% endfor %}
-            </div>
-        </div>
+        <span class="chip active">All</span>
+        <span class="chip">Year</span>
+        <span class="chip">Month</span>
+        <span class="chip">Day</span>
     </div>
 
     <!-- Calendar Section -->
     <section class="py-5 text-center border border-1">
         <div class="table">
-            <a class="btn btn-secondary btn-lg w-100" href="calendar">
+            <button class="btn btn-secondary btn-lg w-100" onclick="document.getElementById('dateFilter').showPicker()">
                 <img src="{% static 'entries/svg/calendar.svg' %}" class="icon-inline">
                 Calendar
-            </a>
+            </button>
+            <input type="date" id="dateFilter"/>
         </div>
     </section>
     

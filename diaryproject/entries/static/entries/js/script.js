@@ -46,18 +46,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Dropdowns
-    window.toggleDropdown = function (id) {
-        document.querySelectorAll(".dropdown-menu").forEach(menu => {
-            if (menu.id !== id) menu.classList.remove("open")
+    // Calendar Date Filter
+    const dateFilter = document.getElementById("dateFilter")
+
+    if (dateFilter) {
+        const params = new URLSearchParams(window.location.search)
+        if (params.get("date")) dateFilter.value = params.get("date")
+
+        dateFilter.addEventListener("change", () => {
+            if (dateFilter.value) {
+                window.location.href = `?date=${dateFilter.value}`
+            }
         })
-        document.getElementById(id).classList.toggle("open")
     }
-
-    document.addEventListener("click", (e) => {
-        if (!e.target.closest(".dropdown")) {
-            document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.remove("open"))
-        }
-    })
-
 })
