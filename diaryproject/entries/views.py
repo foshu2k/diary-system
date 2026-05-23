@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.utils import timezone
 from .models import Entry
 from .forms import EntryForm
 
@@ -8,8 +7,13 @@ def home(request):
     return render(request, "entries/home.html", {"entries" : entries})
 
 def entry_list(request):
+    query = request.GET.get("q", "")
     entries = Entry.objects.all().order_by("-date")
-    return render(request, "entries/entry_list.html", {"entries": entries,})
+
+    if query:
+        entries = entries.filter(title__icontains=query)
+        
+    return render(request, "entries/entry_list.html", {"entries": entries, "query" : query})
 
 def entry_detail(request, id):
     entry = get_object_or_404(Entry, id=id)

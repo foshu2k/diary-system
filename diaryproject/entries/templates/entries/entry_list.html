@@ -6,7 +6,7 @@
 
     <!-- Top Bar -->
     <div class="topbar">
-        <span class="brand">My Diary</span>
+        <span class="brand">LUMEN</span>
         <div class="avatar"></div>
     </div>
 
@@ -19,7 +19,7 @@
     <!-- Search Bar -->
     <div class="search-bar">
         <img src="{% static 'entries/svg/search.svg' %}" class="search-icon" alt="search">
-        <input type="text" class="input" placeholder="Search entries…" />
+        <input type="text" name="q" class="input" placeholder="Search entries…" value="{{ query }}" />
     </div>
 
     <!-- Filter Chips -->
