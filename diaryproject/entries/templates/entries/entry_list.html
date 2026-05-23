@@ -21,13 +21,19 @@
         <img src="{% static 'entries/svg/search.svg' %}" class="search-icon" alt="search">
         <input type="text" class="input" placeholder="Search entries…" />
     </div>
-    
+
     <!-- Filter Chips -->
     <div class="chip-row">
-        <span class="chip active">All</span>
+        <a href="?" class="chip {% if not selected_date %}active{% endif %}">All</a>
+        {% if selected_date %}
+        <span class="chip active">{{ selected_date }}</span>
+        <a href="?" class="chip">✕ Clear</a>
+        {% endif %}
+
+        <!-- <span class="chip active">All</span>
         <span class="chip">Year</span>
         <span class="chip">Month</span>
-        <span class="chip">Day</span>
+        <span class="chip">Day</span> -->
     </div>
 
     <!-- Calendar Section -->
@@ -37,32 +43,32 @@
                 <img src="{% static 'entries/svg/calendar.svg' %}" class="icon-inline">
                 Calendar
             </button>
-            <input type="date" id="dateFilter"/>
+            <input type="date" id="dateFilter" style="display:none;"/>
         </div>
     </section>
-    
+
     <!-- Entry Section -->
     <section class="py-2">
         <div class="p-5 border border-1 text-center">
-                <a href="{% url 'create_entry' %}" class="btn btn-primary btn-lg w-100">
-                    <img src="{% static 'entries/svg/plus.svg' %}" class="icon-inline">
-                    Add Entry
-                </a>
+            <a href="{% url 'create_entry' %}" class="btn btn-primary btn-lg w-100">
+                <img src="{% static 'entries/svg/plus.svg' %}" class="icon-inline">
+                Add Entry
+            </a>
             <h1 class="fs-6">Create your new entry</h1>
         </div>
     </section>
 
     <div class="entry-grid">
         {% for entry in entries|slice:":2" %}
-            <a href="/entry/{{ entry.id }}">
-                <div class="entry-card">
-                    <span class="date">{{ entry.date|date:"M d" }}</span>
-                    <h3>{{ entry.title }}</h3>
-                    <p class="preview">{{ entry.content|truncatechars:100 }}</p>
-                </div>
-            </a>
+        <a href="/entry/{{ entry.id }}">
+            <div class="entry-card">
+                <span class="date">{{ entry.date|date:"M d" }}</span>
+                <h3>{{ entry.title }}</h3>
+                <p class="preview">{{ entry.content|truncatechars:100 }}</p>
+            </div>
+        </a>
         {% empty %}
-            <p>No recent entries.</p>
+        <p>No recent entries.</p>
         {% endfor %}
     </div>
 
@@ -73,22 +79,22 @@
 
         {% for month_group in entries_by_month %}
 
-            <!-- Month Divider -->
-            <div class="month-divider">
-                <span>{{ month_group.grouper }}</span>
-            </div>
+        <!-- Month Divider -->
+        <div class="month-divider">
+            <span>{{ month_group.grouper }}</span>
+        </div>
 
-            <div class="entry-grid">
-                {% for entry in month_group.list %}
-                    <a href="/entry/{{ entry.id }}">
-                        <div class="entry-card">
-                            <span class="date">{{ entry.date|date:"M d" }}</span>
-                            <h3>{{ entry.title }}</h3>
-                            <p class="preview">{{ entry.content|truncatechars:100 }}</p>
-                        </div>
-                    </a>
-                {% endfor %}
-            </div>
+        <div class="entry-grid">
+            {% for entry in month_group.list %}
+            <a href="/entry/{{ entry.id }}">
+                <div class="entry-card">
+                    <span class="date">{{ entry.date|date:"M d" }}</span>
+                    <h3>{{ entry.title }}</h3>
+                    <p class="preview">{{ entry.content|truncatechars:100 }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
 
         {% endfor %}
 
