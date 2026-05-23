@@ -45,18 +45,4 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
-
-    // Calendar Date Filter
-    const dateFilter = document.getElementById("dateFilter")
-
-    if (dateFilter) {
-        const params = new URLSearchParams(window.location.search)
-        if (params.get("date")) dateFilter.value = params.get("date")
-
-        dateFilter.addEventListener("change", () => {
-            if (dateFilter.value) {
-                window.location.href = `?date=${dateFilter.value}`
-            }
-        })
-    }
 })
