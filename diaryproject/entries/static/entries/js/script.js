@@ -46,4 +46,18 @@ document.addEventListener("DOMContentLoaded", function () {
             speechObj = null
         }
     }
+
+    // Filtering Dropdowns
+    window.toggleDropdown = function(id) {
+        document.querySelectorAll(".dropdown-menu").forEach(menu => {
+            if (menu.id !== id) menu.classList.remove("open")
+        })
+        document.getElementById(id).classList.toggle("open")
+    }
+
+    document.addEventListener("click", (e) => {
+        if (!e.target.closest(".dropdown")) {
+            document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.remove("open"))
+        }
+    })
 })
