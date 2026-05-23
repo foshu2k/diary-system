@@ -63,69 +63,8 @@
                 <p class="preview">{{ entry.content|truncatechars:100 }}</p>
             </div>
         </a>
-        {% if not query %}
-
-        <!-- Recent Entries Preview -->
-        <div class="entry-grid">
-            {% for entry in entries|slice:":2" %}
-            <a href="/entry/{{ entry.id }}">
-                <div class="entry-card">
-                    <span class="date">{{ entry.date|date:"M d" }}</span>
-                    <h3>{{ entry.title }}</h3>
-                    <p class="preview">{{ entry.content|truncatechars:100 }}</p>
-                </div>
-            </a>
-            {% empty %}
-            <p>No recent entries.</p>
-            {% endfor %}
-        </div>
-
-        <!-- All Entries Grouped by Month -->
-        <div style="overflow-y: auto; padding-bottom: 32px;">
-
-            {% regroup entries by date|date:"F Y" as entries_by_month %}
-
-            {% for month_group in entries_by_month %}
-
-            <!-- Month Divider -->
-            <div class="month-divider">
-                <span>{{ month_group.grouper }}</span>
-            </div>
-
-            <div class="entry-grid">
-                {% for entry in month_group.list %}
-                <a href="/entry/{{ entry.id }}">
-                    <div class="entry-card">
-                        <span class="date">{{ entry.date|date:"M d" }}</span>
-                        <h3>{{ entry.title }}</h3>
-                        <p class="preview">{{ entry.content|truncatechars:100 }}</p>
-                    </div>
-                </a>
-                {% endfor %}
-            </div>
-
-            {% endfor %}
-
-        </div>
-
-        {% else %}
-
-        <!-- Flat Search Results -->
-        <div class="entry-grid" style="padding-bottom: 32px;">
-            {% for entry in entries %}
-            <a href="/entry/{{ entry.id }}">
-                <div class="entry-card">
-                    <span class="date">{{ entry.date|date:"M d" }}</span>
-                    <h3>{{ entry.title }}</h3>
-                    <p class="preview">{{ entry.content|truncatechars:100 }}</p>
-                </div>
-            </a>
-            {% empty %}
-            <p>No entries found for "{{ query }}".</p>
-            {% endfor %}
-        </div>
-
-        {% endif %}
+        {% empty %}
+        <p>No recent entries.</p>
         {% endfor %}
     </div>
 
