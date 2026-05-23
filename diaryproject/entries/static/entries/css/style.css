@@ -502,6 +502,24 @@ p  { color: var(--c-text-muted); }
   margin-top: 0;
 }
 
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar .search-icon {
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  opacity: 0.7;
+}
+
+.search-bar .input {
+  padding-left: 44px; /* space for icon */
+}
+
 /* ==========================================================================
    7. PAGE: ENTRY VIEW & AUDIO PANELS
    ========================================================================== */

@@ -18,9 +18,9 @@
 
     <!-- Search Bar -->
     <div class="search-bar">
+        <img src="{% static 'entries/svg/search.svg' %}" class="search-icon" alt="search">
         <input type="text" class="input" placeholder="Search entries…" />
     </div>
-
     <!-- Filter Chips -->
     <div class="chip-row">
         <span class="chip active">All</span>
@@ -42,7 +42,10 @@
     <!-- Entry Section -->
     <section class="py-2">
         <div class="p-5 border border-1 text-center">
-            <a href="{% url 'create_entry' %}" class="btn btn-primary btn-lg w-100">Add Entry</a>
+                <a href="{% url 'create_entry' %}" class="btn btn-primary btn-lg w-100">
+                    <img src="{% static 'entries/svg/plus.svg' %}" class="icon-inline">
+                    Add Entry
+                </a>
             <h1 class="fs-6">Create your new entry</h1>
         </div>
     </section>
