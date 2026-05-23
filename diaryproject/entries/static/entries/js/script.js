@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const speechBtn = document.getElementById("micBtn")
+    const micIcon = document.getElementById("micIcon")
     const outputField = document.getElementById("id_content")
 
     let isRecording = false
@@ -7,18 +8,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 
-    if(!SpeechRecognition) {
-        speechBtn.innerText = "Speech Recognition is not enabled"
+    if (!SpeechRecognition) {
         speechBtn.disabled = true
+        return
     }
 
-    speechBtn.addEventListener('click', () => {
+    speechBtn.addEventListener("click", () => {
         isRecording = !isRecording
-        isRecording ? startRecording() : stopRecording()
+
+        if (isRecording) {
+            startRecording()
+        } else {
+            stopRecording()
+        }
     })
 
     function startRecording() {
-        speechBtn.innerText = "Recording..."
+        micIcon.src = "/static/entries/svg/mic-recording.svg"
+
         speechObj = new SpeechRecognition()
         speechObj.start()
         speechObj.onresult = transcribe
@@ -30,7 +37,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function stopRecording() {
-        speechObj.stop()
-        speechObj = null
+        micIcon.src = "/static/entries/svg/mic-idle.svg"
+
+        if (speechObj) {
+            speechObj.stop()
+            speechObj = null
+        }
     }
 })
