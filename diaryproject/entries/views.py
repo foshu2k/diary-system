@@ -13,7 +13,7 @@ def entry_list(request):
     if search_query:
         entries = entries.filter(title__icontains=search_query)
         
-    return render(request, "entries/entry_list.html", {"entries": entries, "query" : search_query})
+    return render(request, "entries/entry_list.html", {"entries": entries, "search_query" : search_query})
 
 def entry_detail(request, id):
     entry = get_object_or_404(Entry, id=id)
