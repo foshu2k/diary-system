@@ -348,6 +348,13 @@ p  { color: var(--c-text-muted); }
     border-color: rgba(228, 145, 167, 0.3);
 }
 
+.filter-select.active {
+    background: var(--c-primary);
+    color: var(--c-text-dark);
+    font-weight: 600;
+    border-color: var(--c-primary);
+}
+
 /* Filter Errors */
 .filter-error-list {
     list-style: none;

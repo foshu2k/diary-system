@@ -25,6 +25,13 @@
             </div>
 
             <div class="filter-bar">
+
+                <!-- Reset filter / All button -->
+                <a href="{% url 'entry_list' %}" 
+                    class="filter-select filter-reset-btn {% if not request.GET.year and not request.GET.month and not request.GET.day %}active{% endif %}">
+                    All
+                </a>
+
                 <!-- Year Dropdown -->
                 <select name="year" class="filter-select">
                     {% for value, label in entry_filter.form.fields.year.choices %}
