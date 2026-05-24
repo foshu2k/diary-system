@@ -23,15 +23,9 @@
                 <input type="text" name="search" class="input" placeholder="Search entries…" value="{{ search_query }}" />
                 <button type="submit" hidden></button>
             </div>
-        </form>
 
-        <!-- Filter Chips -->
-        <div class="chip-row">
-            <span class="chip active">All</span>
-            <span class="chip">Year</span>
-            <span class="chip">Month</span>
-            <span class="chip">Day</span>
-        </div>
+            {{ entry_filter.form }}
+        </form>
 
         <!-- Calendar Section -->
         <section class="py-5 text-center border border-1">

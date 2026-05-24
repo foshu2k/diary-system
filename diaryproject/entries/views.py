@@ -1,19 +1,26 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Entry
 from .forms import EntryForm
+from .filters import EntryFilter
 
 def home(request):
     entries = Entry.objects.all()
     return render(request, "entries/home.html", {"entries" : entries})
 
 def entry_list(request):
-    search_query = request.GET.get("search", "")
     entries = Entry.objects.all().order_by("-date")
+    search_query = request.GET.get("search", "")
     
     if search_query:
         entries = entries.filter(title__icontains=search_query)
+    
+    entry_filter = EntryFilter(request.GET, queryset=entries)
         
-    return render(request, "entries/entry_list.html", {"entries": entries, "search_query" : search_query})
+    return render(request, "entries/entry_list.html", {
+        "entries": entries, 
+        "search_query" : search_query,
+        "entry_filter": entry_filter
+    })
 
 def entry_detail(request, id):
     entry = get_object_or_404(Entry, id=id)
