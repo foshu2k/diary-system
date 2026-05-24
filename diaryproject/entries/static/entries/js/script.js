@@ -79,9 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
             })
 
             function startNavigating() {
-                voiceNavBtn.setAttribute("aria-pressed", "true")
-                voiceNavBtn.setAttribute("aria-label", "Stop voice navigation")
-
                 micNavIcon.src = "/static/entries/svg/mic-recording.svg"
                 navObj = new SpeechRecognition()
                 navObj.continuous = true
@@ -112,9 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             function stopNavigating() {
-                voiceNavBtn.setAttribute("aria-pressed", "false")
-                voiceNavBtn.setAttribute("aria-label", "Start voice navigation")
-                
                 isNavigating = false
                 micNavIcon.src = "/static/entries/svg/mic-idle.svg"
                 if (navObj) {
