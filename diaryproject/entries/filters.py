@@ -44,9 +44,9 @@ class EntryFilter(django_filters.FilterSet):
     def qs(self):
         data = self.data
 
-        year = data.get("year")
-        month = data.get("month")
-        day = data.get("day")
+        year = data.get("year") or None
+        month = data.get("month") or None
+        day = data.get("day") or None
 
         self.filter_errors = []
 
