@@ -118,6 +118,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const monthSelect = document.getElementById("month-select");
     const daySelect   = document.getElementById("day-select");
 
+    if (!yearSelect.value) {
+        monthSelect.disabled = true;
+        daySelect.disabled = true;
+    } else if (!monthSelect.value) {
+        daySelect.disabled = true;
+    }
+
     if (yearSelect && monthSelect && daySelect) {
         yearSelect.addEventListener("change", () => {
             monthSelect.disabled = !yearSelect.value;
