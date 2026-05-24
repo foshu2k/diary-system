@@ -61,11 +61,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const commands = {
                 "go home": () => window.location.href = "/",
+                "go to home": () => window.location.href = "/",
                 "go back": () => window.history.back(),
                 "go forward": () => window.history.forward(),
                 "go to entries": () => window.location.href = "/entrylist/",
+                "go to entry list": () => window.location.href = "/entrylist/",
+                "view entries": () => window.location.href = "/entrylist/",
+                "view all entries": () => window.location.href = "/entrylist/",
                 "create entry": () => window.location.href = "/create/",
                 "new entry": () => window.location.href = "/create/",
+                "add entry": () => window.location.href = "/create/",
             }
 
             voiceNavBtn.addEventListener("click", () => {
