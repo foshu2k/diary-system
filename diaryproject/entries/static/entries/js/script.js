@@ -81,19 +81,8 @@ document.addEventListener("DOMContentLoaded", function () {
             function startNavigating() {
                 micNavIcon.src = "/static/entries/svg/mic-recording.svg"
                 navObj = new SpeechRecognition()
-                navObj.continuous = true
-                navObj.interimResults = false
                 navObj.start()
-
                 navObj.onresult = handleCommand
-
-                navObj.onend = () => {
-                    if (isNavigating) navObj.start()
-                }
-
-                navObj.onerror = (e) => {
-                    if (e.error !== "no-speech") stopNavigating()
-                }
             }
 
             function handleCommand(e) {
@@ -112,7 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 isNavigating = false
                 micNavIcon.src = "/static/entries/svg/mic-idle.svg"
                 if (navObj) {
-                    navObj.onend = null
                     navObj.stop()
                     navObj = null
                 }
