@@ -37,6 +37,13 @@
 
         </nav>
 
+        <!-- Voice Command -->
+        <nav class="voice-nav" aria-label="Voice navigation">
+            <button type="button" class="voice-btn record" id="micNavBtn">
+                <img src="{% static 'entries/svg/mic-idle.svg' %}" id="micNavIcon" alt="Mic">
+            </button>
+        </nav>
+
         {% block javascript %}
         {% endblock %}
     </body>
