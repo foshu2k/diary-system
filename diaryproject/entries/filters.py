@@ -37,4 +37,4 @@ class EntryFilter(django_filters.FilterSet):
 
     class Meta:
         model = Entry
-        fields = ['year', 'month', 'day']
+        fields = ["year", "month", "day"]
