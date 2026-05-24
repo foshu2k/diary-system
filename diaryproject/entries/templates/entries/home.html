@@ -13,9 +13,9 @@
     </section>
 
     <section class="featured-card">
-      <div class="label">Today · May 18</div>
+      <div class="label">Today · {% now "F j, Y" %}</div>
       <h2>Capture the moment before it fades.</h2>
-      <a href="diary.html" class="btn">Start Writing →</a>
+      <a href="{% url 'create_entry' %}" class="btn">Start Writing →</a>
     </section>
 
     <div class="section-title">

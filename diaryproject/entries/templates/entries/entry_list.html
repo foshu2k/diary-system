@@ -25,6 +25,11 @@
             </div>
         </form>
 
+        <!-- Search Result Text -->
+        {% if search_query %}
+            <p>You searched for <strong>{{ search_query }}</strong></p>
+        {% endif %}
+
         <!-- Filter Chips -->
         <div class="chip-row">
             <span class="chip active">All</span>
@@ -53,11 +58,6 @@
                 <h1 class="fs-6">Create your new entry</h1>
             </div>
         </section>
-
-        <!-- Search Result Text -->
-        {% if search_query %}
-            <p>You searched for <strong>{{ search_query }}</strong></p>
-        {% endif %}
 
         <div class="entry-grid">
             {% for entry in entries|slice:":2" %}
