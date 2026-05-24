@@ -7,7 +7,7 @@ def home(request):
     return render(request, "entries/home.html", {"entries" : entries})
 
 def entry_list(request):
-    search_query = request.GET.get("search")
+    search_query = request.GET.get("search", "")
     entries = Entry.objects.all().order_by("-date")
     
     if search_query:
