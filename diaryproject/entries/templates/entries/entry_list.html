@@ -33,7 +33,7 @@
                 </a>
 
                 <!-- Year Dropdown -->
-                <select name="year" class="filter-select" id="year-select">
+                <select name="year" class="filter-select">
                     {% for value, label in entry_filter.form.fields.year.choices %}
                         <option value="{{ value }}" {% if value|stringformat:"s" == request.GET.year %}selected{% endif %}>
                             {{ label }}
@@ -42,7 +42,7 @@
                 </select>
 
                 <!-- Month Dropdown -->
-                <select name="month" class="filter-select" id="month-select" disabled>
+                <select name="month" class="filter-select">
                     {% for value, label in entry_filter.form.fields.month.choices %}
                         <option value="{{ value }}" {% if value|stringformat:"s" == request.GET.month %}selected{% endif %}>
                             {{ label }}
@@ -51,7 +51,7 @@
                 </select>
 
                 <!-- Day Dropdown -->
-                <select name="day" class="filter-select" id="day-select" disabled>
+                <select name="day" class="filter-select">
                     {% for value, label in entry_filter.form.fields.day.choices %}
                         <option value="{{ value }}" {% if value|stringformat:"s" == request.GET.day %}selected{% endif %}>
                             {{ label }}
