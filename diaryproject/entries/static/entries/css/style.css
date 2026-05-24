@@ -318,30 +318,6 @@ p  { color: var(--c-text-muted); }
   resize: vertical;
 }
 
-/* Global Navigation Filter Chips */
-.chip-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  overflow: visible;
-}
-
-.chip {
-  padding: 6px 14px;
-  background: var(--c-surface);
-  border-radius: var(--radius-pill);
-  font-size: 0.8rem;
-  color: var(--c-text-muted);
-  cursor: pointer;
-  border: 1px solid rgba(228, 145, 167, 0.1);
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-.chip:hover { color: var(--c-accent); border-color: rgba(228, 145, 167, 0.3); }
-.chip.active { background: var(--c-primary); color: var(--c-text-dark); font-weight: 600; border-color: var(--c-primary); }
-
 /* Header Component Helpers */
 .section-title {
   display: flex;
