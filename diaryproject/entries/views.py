@@ -10,14 +10,15 @@ def home(request):
 def entry_list(request):
     entries = Entry.objects.all().order_by("-date")
     search_query = request.GET.get("search", "")
+
+    entry_filter = EntryFilter(request.GET, queryset=entries)
+    filtered_entries = entry_filter.qs
     
     if search_query:
-        entries = entries.filter(title__icontains=search_query)
-    
-    entry_filter = EntryFilter(request.GET, queryset=entries)
+        filtered_entries = filtered_entries.filter(title__icontains=search_query)
         
     return render(request, "entries/entry_list.html", {
-        "entries": entries, 
+        "entries": filtered_entries, 
         "search_query" : search_query,
         "entry_filter": entry_filter
     })
