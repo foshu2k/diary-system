@@ -11,7 +11,7 @@ class EntryForm(forms.ModelForm):
         }
         widgets = {
             'title': forms.TextInput(attrs={
-                'placeholder': 'Tittle your day...',
+                'placeholder': 'Title your day...',
                 'class': 'input',
             }),
             'content': forms.Textarea(attrs={
