@@ -15,18 +15,21 @@ class EntryFilter(django_filters.FilterSet):
         field_name = "date",
         lookup_expr = "year",
         choices = [(y, y) for y in range(2020, date.today().year + 1)],
+        empty_label = "Year"
     )
 
     month = django_filters.ChoiceFilter(
         field_name = "date",
         lookup_expr = "month",
         choices = month_choices,
+        empty_label = "Month"
     )
 
     day = django_filters.ChoiceFilter(
         field_name = "date",
         lookup_expr = "day",
         choices = [(d, d) for d in range(1, 32)],
+        empty_label = "Day"
     )
 
     class Meta:
