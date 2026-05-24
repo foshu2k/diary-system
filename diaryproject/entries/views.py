@@ -14,7 +14,7 @@ def entry_list(request):
     entry_filter = EntryFilter(request.GET, queryset=entries)
     filtered_entries = entry_filter.qs
     
-    if search_query:
+    if search_query and not entry_filter.filter_errors:
         filtered_entries = filtered_entries.filter(title__icontains=search_query)
         
     return render(request, "entries/entry_list.html", {
