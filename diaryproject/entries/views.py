@@ -20,7 +20,8 @@ def entry_list(request):
     return render(request, "entries/entry_list.html", {
         "entries": filtered_entries, 
         "search_query" : search_query,
-        "entry_filter": entry_filter
+        "entry_filter": entry_filter,
+        "filter_errors": entry_filter.filter_errors
     })
 
 def entry_detail(request, id):

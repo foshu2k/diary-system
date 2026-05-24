@@ -3,7 +3,7 @@
    1. VARIABLES & DESIGN TOKENS
    2. RESET & BASE ELEMENTS
    3. BASE LAYOUT & SHELL COMPONENTS
-   4. GLOBAL UI UI COMPONENTS (Buttons, Cards, Inputs, Chips)
+   4. GLOBAL UI UI COMPONENTS (Buttons, Cards, Inputs, Filter Bar)
    5. PAGE: HOME SCREEN
    6. PAGE: ENTRIES EXPLORER & LISTS
    7. PAGE: ENTRY VIEW & AUDIO PANELS
@@ -250,7 +250,7 @@ p  { color: var(--c-text-muted); }
 }
 
 /* ==========================================================================
-   4. GLOBAL UI UI COMPONENTS (Buttons, Cards, Inputs, Chips)
+   4. GLOBAL UI UI COMPONENTS (Buttons, Cards, Inputs, Filter Bar)
    ========================================================================== */
 /* Interactive UI Buttons */
 .btn {
@@ -316,6 +316,50 @@ p  { color: var(--c-text-muted); }
 .form-group textarea {
   min-height: 220px;
   resize: vertical;
+}
+
+/* Filter Bar */
+.filter-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.filter-select {
+    padding: 6px 14px;
+    background: var(--c-surface);
+    border-radius: var(--radius-pill);
+    font-size: 0.8rem;
+    color: var(--c-text-muted);
+    cursor: pointer;
+    border: 1px solid rgba(228, 145, 167, 0.1);
+    transition: all 0.2s ease;
+    appearance: none;
+}
+
+.filter-select:hover {
+    color: var(--c-accent);
+    border-color: rgba(228, 145, 167, 0.3);
+}
+
+.filter-select:focus {
+    outline: none;
+    color: var(--c-accent);
+    border-color: rgba(228, 145, 167, 0.3);
+}
+
+/* Filter Errors */
+.filter-error-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+    display: flex;
+    gap: 8px;
+}
+
+.filter-error-list li {
+    font-size: 0.8rem;
+    color: var(--c-accent);
 }
 
 /* Header Component Helpers */

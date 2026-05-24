@@ -24,7 +24,46 @@
                 <button type="submit">Search</button>
             </div>
 
-            {{ entry_filter.form }}
+            <div class="filter-bar">
+                <!-- Year Dropdown -->
+                <select name="year" class="filter-select">
+                    <option value="">Year</option>
+                    {% for value, label in entry_filter.form.fields.year.choices %}
+                        <option value="{{ value }}" {% if value|stringformat:"s" == request.GET.year %}selected{% endif %}>
+                            {{ label }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <!-- Month Dropdown -->
+                <select name="month" class="filter-select">
+                    <option value="">Month</option>
+                    {% for value, label in entry_filter.form.fields.month.choices %}
+                        <option value="{{ value }}" {% if value|stringformat:"s" == request.GET.month %}selected{% endif %}>
+                            {{ label }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <!-- Day Dropdown -->
+                <select name="day" class="filter-select">
+                    <option value="">Day</option>
+                    {% for value, label in entry_filter.form.fields.day.choices %}
+                        <option value="{{ value }}" {% if value|stringformat:"s" == request.GET.day %}selected{% endif %}>
+                            {{ label }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Date Filter Error -->
+            {% if filter_errors %}
+                <ul class="filter-error-list">
+                    {% for error in filter_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </form>
 
         <!-- Calendar Section -->

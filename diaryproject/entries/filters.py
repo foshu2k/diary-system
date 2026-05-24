@@ -15,26 +15,44 @@ class EntryFilter(django_filters.FilterSet):
         field_name = "date",
         lookup_expr = "year",
         choices = [(y, y) for y in range(2020, date.today().year + 1)],
-        widget = forms.Select(attrs={"class": "filter-select"}),
-        empty_label = "All Years"
     )
 
     month = django_filters.ChoiceFilter(
         field_name = "date",
         lookup_expr = "month",
         choices = month_choices,
-        widget = forms.Select(attrs={"class": "filter-select"}),
-        empty_label = "All Months"
     )
 
     day = django_filters.ChoiceFilter(
         field_name = "date",
         lookup_expr = "day",
         choices = [(d, d) for d in range(1, 32)],
-        widget = forms.Select(attrs={"class": "filter-select"}),
-        empty_label = "All Days"
     )
 
     class Meta:
         model = Entry
         fields = ["year", "month", "day"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.filter_errors = []
+
+    @property
+    def qs(self):
+        data = self.data
+
+        year = data.get("year")
+        month = data.get("month")
+        day = data.get("day")
+
+        self.filter_errors = []
+
+        if month and not year:
+            self.filter_errors.append("Please select a year.")
+        if day and not month:
+            self.filter_errors.append("Please select a month.")
+
+        if self.filter_errors:
+            return self.queryset.none()
+
+        return super().qs
