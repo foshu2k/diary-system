@@ -7,13 +7,13 @@ def home(request):
     return render(request, "entries/home.html", {"entries" : entries})
 
 def entry_list(request):
-    query = request.GET.get("q", "")
+    search_query = request.GET.get("search")
     entries = Entry.objects.all().order_by("-date")
-
-    if query:
-        entries = entries.filter(title__icontains=query)
+    
+    if search_query:
+        entries = entries.filter(title__icontains=search_query)
         
-    return render(request, "entries/entry_list.html", {"entries": entries, "query" : query})
+    return render(request, "entries/entry_list.html", {"entries": entries, "query" : search_query})
 
 def entry_detail(request, id):
     entry = get_object_or_404(Entry, id=id)
