@@ -112,36 +112,4 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
-
-    // Date Filter Dropdowns
-    const yearSelect  = document.getElementById("year-select");
-    const monthSelect = document.getElementById("month-select");
-    const daySelect   = document.getElementById("day-select");
-
-    if (!yearSelect.value) {
-        monthSelect.disabled = true;
-        daySelect.disabled = true;
-    } else if (!monthSelect.value) {
-        daySelect.disabled = true;
-    }
-
-    if (yearSelect && monthSelect && daySelect) {
-        yearSelect.addEventListener("change", () => {
-            monthSelect.disabled = !yearSelect.value;
-
-            if (!yearSelect.value) {
-                monthSelect.value = "";
-                daySelect.value = "";
-                daySelect.disabled = true;
-            }
-        });
-
-        monthSelect.addEventListener("change", () => {
-            daySelect.disabled = !monthSelect.value;
-            
-            if (!monthSelect.value) {
-                daySelect.value = "";
-            }
-        });
-    }
 })
