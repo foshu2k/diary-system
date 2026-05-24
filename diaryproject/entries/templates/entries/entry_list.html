@@ -21,7 +21,7 @@
             <div class="search-bar">
                 <img src="{% static 'entries/svg/search.svg' %}" class="search-icon" alt="search">
                 <input type="text" name="search" class="input" placeholder="Search entries…" value="{{ search_query }}" />
-                <button type="submit" hidden></button>
+                <button type="submit">Search</button>
             </div>
 
             {{ entry_filter.form }}
