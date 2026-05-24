@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const micNavIcon = document.getElementById("micNavIcon")
 
         if (!SpeechRecognition) {
-            speechBtn.disabled = true
+            voiceNavBtn.disabled = true
         } else {
             let isNavigating = false
             let navObj = null
