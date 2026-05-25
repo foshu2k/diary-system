@@ -253,7 +253,7 @@ p  { color: var(--c-text-muted); }
 .voice-assistant-wrapper {
     position: fixed;
     bottom: 120px; 
-    left: 35%;
+    left: 50%;
     width: min(100% - 48px, 1200px); 
     transform: translateX(-50%);   
     display: flex;
