@@ -643,3 +643,43 @@ p  { color: var(--c-text-muted); }
     gap: var(--space-2);   
     padding: 10px 18px;    
 }
+
+/* ==========================================================================
+   MODIFY BAR ACTION BUTTONS 
+   ========================================================================== */
+.modify-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);    /* Gives a healthy 16px separation between buttons */
+    margin-bottom: var(--space-4);
+    position: relative;
+    z-index: 5;             /* Ensures it sits cleanly on top of backgrounds */
+}
+
+/* Common interactive base style for both action triggers */
+.modify-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;               /* Spaces the icon slightly away from the font label */
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--c-accent); /* Inherits your nice cream color token */
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+}
+
+.modify-btn:hover {
+    opacity: 0.8;
+}
+
+/* Icon Sizing & Optical Alignment */
+.modify-icon {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    transform: translateY(0.5px); /* Gentle visual tracking nudge downward */
+    
+    /* Dynamically tints your SVGs to match the --c-accent cream token (#FDE0B2) */
+    filter: brightness(0) saturate(100%) invert(91%) sepia(10%) saturate(1450%) hue-rotate(318deg) brightness(101%) contrast(99%);
+}

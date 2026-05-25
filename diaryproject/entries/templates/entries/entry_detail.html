@@ -12,8 +12,13 @@
     <!-- Entry Header Card -->
     <div class="featured-card">
         <div class="modify-bar">
-            <a href="{% url 'edit_entry' entry.id %}" class="edit-btn">Edit</a>
-            <button class="delete-btn" onclick="document.getElementById('deleteModal').showModal()">Delete</button>
+            <a href="{% url 'edit_entry' entry.id %}" class="modify-btn edit-btn">
+                <img src="{% static 'entries/svg/edit.svg' %}" class="modify-icon" alt=""> Edit
+            </a>
+
+            <button class="modify-btn delete-btn" onclick="document.getElementById('deleteModal').showModal()">
+                <img src="{% static 'entries/svg/delete.svg' %}" class="modify-icon" alt=""> Delete
+            </button>
         </div>
         <div class="label">{{ entry.created_at|date:"F d, Y · h:i A" }}</div>
         <h2>{{ entry.title }}</h2>
