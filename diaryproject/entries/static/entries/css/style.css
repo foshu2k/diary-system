@@ -646,7 +646,7 @@ p  { color: var(--c-text-muted); }
 
 .entry-detail-back .icon {
     display: inline-block;
-    margin: 0;
+    margin: 02px;
     width: 14px;
     height: 16px;
     opacity: 1;
