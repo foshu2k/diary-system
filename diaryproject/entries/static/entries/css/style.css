@@ -256,12 +256,13 @@ p  { color: var(--c-text-muted); }
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 430px;
+    max-width: 480px;
     display: flex;
     justify-content: flex-end; 
     padding-right: 24px;
     pointer-events: none;   
-    z-index: 9999;          
+    z-index: 9999;
+    margin: 0 auto;          
 }
 
 /* Ensure the physical circle button works */
