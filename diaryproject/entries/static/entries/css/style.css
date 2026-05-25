@@ -322,8 +322,8 @@ p  { color: var(--c-text-muted); }
 .filter-bar {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;       /* Smooth wrapping on small screens */
-    gap: 10px;             /* Perfectly matches the mockup spacing */
+    flex-wrap: wrap;       
+    gap: 10px;             
     margin-top: var(--space-2);
     margin-bottom: var(--space-4);
     width: 100%;
@@ -338,27 +338,26 @@ p  { color: var(--c-text-muted); }
     display: inline-flex;
     align-items: center;
     height: 38px;
-    padding: 0 32px 0 16px; /* Right spacing ensures text never hits your arrow */
+    padding: 0 32px 0 16px; 
     
     border-radius: 20px; 
     border: 1px solid rgba(253, 224, 178, 0.15);
-    background-color: rgba(24, 18, 43, 0.4); /* Translucent dark capsule look */
+    background-color: rgba(24, 18, 43, 0.4); 
     
-    color: var(--c-accent); 
+    color: var(--c-accent) !important; /* Forced to match brand cream */
     font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
     outline: none;
     transition: all 0.2s ease;
 
-    /* Embedded Cream Chevron Vector Arrow (%23FDE0B2) */
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FDE0B2' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 12px;
 }
 
-/* HIDES THE SCROLLBAR TRACK AND THUMB INSIDE DROPDOWNS */
+/* Hides the scrollbar track and thumb inside dropdowns */
 .filter-select::-webkit-scrollbar {
     display: none;
     width: 0 !important;
@@ -366,7 +365,7 @@ p  { color: var(--c-text-muted); }
     background: transparent;
 }
 
-/* "All" button style so anchor tags look exactly like the dropdown boxes */
+/* "All" button style anchor tag setup */
 .filter-select-link {
     display: inline-flex;
     align-items: center;
@@ -376,7 +375,8 @@ p  { color: var(--c-text-muted); }
     border-radius: 20px;
     border: 1px solid rgba(253, 224, 178, 0.15);
     background-color: rgba(24, 18, 43, 0.4);
-    color: var(--c-accent);
+    
+    color: var(--c-accent) !important; /*Overrides global link rules to match cream */
     font-size: 0.85rem;
     font-weight: 500;
     text-decoration: none;
@@ -384,11 +384,12 @@ p  { color: var(--c-text-muted); }
     box-sizing: border-box;
 }
 
-/* Hover highlights turn pink */
+/* Hover updates - turning the border and text subtle pink */
 .filter-select:hover,
 .filter-select-link:hover {
     border-color: var(--c-primary);
     background-color: rgba(24, 18, 43, 0.6);
+    color: var(--c-primary) !important;
 }
 
 .filter-select:focus {
@@ -396,11 +397,12 @@ p  { color: var(--c-text-muted); }
     box-shadow: 0 0 0 2px rgba(228, 145, 167, 0.15);
 }
 
-/* Active solid state for the All button anchor link when active */
-.filter-select-link.active {
-    background-color: var(--c-primary); 
-    border-color: var(--c-primary);
-    color: #18122B; 
+/*Active Solid Pink State for Selected Dropdowns and the Active Link */
+.filter-select-link.active,
+.filter-select.active {
+    background-color: var(--c-primary) !important; 
+    border-color: var(--c-primary) !important;
+    color: #18122B !important; /* Beautiful deep purple text contrast */
     font-weight: 600;
 }
 
