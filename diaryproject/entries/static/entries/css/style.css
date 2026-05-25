@@ -637,7 +637,6 @@ p  { color: var(--c-text-muted); }
 
 /* Container Layout Fix */
 .entry-detail-back {
-    font-size: 1rem;
     display: inline-flex;  
     align-items: center;   
     justify-content: center;
