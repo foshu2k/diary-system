@@ -646,9 +646,9 @@ p  { color: var(--c-text-muted); }
 
 .entry-detail-back .icon {
     display: inline-block;
-    margin: 02px;
+    margin: 0;
     width: 14px;
-    height: 16px;
+    height: 14px;
     opacity: 1;
     filter: brightness(0) invert(1);
     transform: translateY(1px); 
