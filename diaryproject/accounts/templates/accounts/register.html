@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Diary Web App</title>
+    </head>
+
+    <body>
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="create-account-btn">Create Account</button>
+        </form>
+
+        <a href="{% url 'login' %}">I already have an account</a>
+    </body>
+</html>

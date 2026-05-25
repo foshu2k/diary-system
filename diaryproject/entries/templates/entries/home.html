@@ -4,11 +4,13 @@
   <main class="app">
     <header class="topbar">
       <div class="brand">LUMEN</div>
-      <div class="avatar" aria-label="Profile"></div>
+      <a href="{% url 'profile' %}">
+        <div class="avatar" aria-label="Profile"></div>
+      </a>
     </header>
 
     <section class="hero">
-      <div class="greeting">Good evening,</div>
+      <div class="greeting">Good evening,  {{ request.user.username }}</div>
       <h1>Your story<br/><span>continues today.</span></h1>
     </section>
 
