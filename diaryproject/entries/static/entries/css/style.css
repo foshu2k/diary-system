@@ -411,6 +411,7 @@ p  { color: var(--c-text-muted); }
     background-color: #2D1F3D; 
     color: var(--c-accent) !important; 
     padding: 12px;
+    border-radius: 12px;
 }
 
 /* Filter Errors */
