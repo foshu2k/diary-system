@@ -634,3 +634,23 @@ p  { color: var(--c-text-muted); }
     min-height: 220px;
     resize: vertical;
 }
+
+/* Container Layout Fix */
+.entry-detail-back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2); 
+    padding: 10px 18px;  
+}
+
+/* Specific overrides for the icon inside this button */
+.entry-detail-back .icon {
+    display: inline-block;
+    margin: 0;          
+    width: 14px;        
+    height: 14px;
+    opacity: 1;         
+    
+   
+    filter: brightness(0) saturate(100%) invert(91%) sepia(10%) saturate(1450%) hue-rotate(318deg) brightness(101%) contrast(99%);
+}
