@@ -26,15 +26,6 @@
                     Search
                 </button>
             </div>
-
-            {% if filter_errors %}
-                <ul class="filter-error-list">
-                    {% for error in filter_errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </form>
         
             <div class="filter-bar">
 
@@ -71,7 +62,8 @@
                     {% endfor %}
                 </select>
             </div> 
-                    {% if filter_errors %}
+
+            {% if filter_errors %}
                 <ul class="filter-error-list">
                     {% for error in filter_errors %}
                         <li>{{ error }}</li>
