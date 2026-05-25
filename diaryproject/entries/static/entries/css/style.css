@@ -680,6 +680,89 @@ p  { color: var(--c-text-muted); }
     filter: brightness(0) saturate(100%) invert(91%) sepia(10%) saturate(1450%) hue-rotate(318deg) brightness(101%) contrast(99%);
 }
 
+/* Empty State Container Box */
+.empty-state-container {
+    grid-column: 1 / -1; /* Forces it to span beautifully across the entire grid width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 24px;
+    background-color: rgba(24, 18, 43, 0.2);
+    border: 1px dashed rgba(253, 224, 178, 0.15);
+    border-radius: var(--radius-md, 16px);
+    margin: 20px 0;
+}
+
+/* Icon Wrap Style */
+.empty-state-icon-wrapper {
+    margin-bottom: 16px;
+    color: rgba(253, 224, 178, 0.4);
+}
+.empty-icon {
+    width: 48px;
+    height: 48px;
+}
+
+/* Typography elements */
+.empty-state-container h2 {
+    color: var(--c-accent, #FDE0B2);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.empty-state-container p {
+    color: rgba(253, 224, 178, 0.6);
+    font-size: 0.95rem;
+    max-width: 320px;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+/* Flex buttons layout */
+.empty-state-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Action button variations */
+.btn-empty-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #E491A7; /* Matches your glowing primary rose accent button */
+    color: #18122B !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+}
+.btn-empty-primary:hover {
+    transform: scale(1.03);
+}
+
+.btn-empty-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(24, 18, 43, 0.6);
+    color: var(--c-accent, #FDE0B2) !important;
+    border: 1px solid rgba(253, 224, 178, 0.2);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+}
+.btn-empty-secondary:hover {
+    background-color: rgba(24, 18, 43, 0.9);
+    border-color: rgba(253, 224, 178, 0.4);
+}
+
 /* ==========================================================================
    7. PAGE: ENTRY VIEW & AUDIO PANELS
    ========================================================================== */

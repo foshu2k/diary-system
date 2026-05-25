@@ -94,7 +94,7 @@
             <p>You searched for <strong>"{{ search_query }}"</strong></p>
         {% endif %}
 
-        <div class="entry-grid">
+<div class="entry-grid">
             {% for entry in entries|slice:":2" %}
                 <a href="/entry/{{ entry.id }}">
                     <div class="entry-card">
@@ -104,7 +104,29 @@
                     </div>
                 </a>
             {% empty %}
-                <p>No recent entries.</p>
+                <div class="empty-state-container">
+                    <div class="empty-state-icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon">
+                            <path d="M16 2v4M8 2v4M3 10h18M21 14v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h2"/>
+                            <line x1="3" y1="3" x2="21" y2="21" />
+                        </svg>
+                    </div>
+                    
+                    <h2>No entries found</h2>
+                    
+                    {% if request.GET.year or request.GET.month or request.GET.day or search_query %}
+                        <p>There are no entries matching your selected criteria.</p>
+                    {% else %}
+                        <p>Start writing your thoughts and capture your moments today.</p>
+                    {% endif %}
+
+                    <div class="empty-state-actions">
+                        {% if request.GET.year or request.GET.month or request.GET.day or search_query %}
+                            <a href="{% url 'entry_list' %}" class="btn-empty-secondary">Clear filters</a>
+                        {% endif %}
+                        <a href="{% url 'create_entry' %}" class="btn-empty-primary">+ New entry</a>
+                    </div>
+                </div>
             {% endfor %}
         </div>
 
