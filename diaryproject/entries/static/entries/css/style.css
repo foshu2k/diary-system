@@ -763,6 +763,85 @@ p  { color: var(--c-text-muted); }
     border-color: rgba(253, 224, 178, 0.4);
 }
 
+/* Custom Native Dialog Styling */
+.custom-modal {
+    border: none;
+    padding: 0;
+    background: #1c162e; /* Sleek dark theme color matching your design */
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    width: calc(100% - 32px);
+    margin: auto; /* Handles perfect screen-centering with <dialog> element */
+}
+
+/* Modal Content Container padding */
+.modal-content {
+    padding: 32px;
+}
+
+/* Typography styles inside popup */
+.modal-content h2 {
+    color: #fde0b2; /* Warm beige/gold header accent color */
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+}
+
+.modal-content p {
+    color: rgba(253, 224, 178, 0.6); /* Semi-transparent cream text */
+    font-size: 1rem;
+    margin: 0 0 28px 0;
+    line-height: 1.5;
+}
+
+/* Layout container for actions layout row */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Pill Button Base Structure */
+.btn-modal-cancel, 
+.btn-modal-delete {
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 100px; /* Perfect pill style shape */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+/* Cancel Action Outline Option */
+.btn-modal-cancel {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.btn-modal-cancel:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #ffffff;
+}
+
+/* Crimson Delete Action Button */
+.btn-modal-delete {
+    background: #e14d4d; /* High contrast energetic red warning tone */
+    color: #ffffff;
+}
+.btn-modal-delete:hover {
+    background: #ff5c5c;
+    box-shadow: 0 0 12px rgba(225, 77, 77, 0.4);
+}
+
+/* NATIVE BACKDROP OVERLAY OVERRIDES */
+.custom-modal::backdrop {
+    background: rgba(10, 7, 18, 0.7); /* Dims your diary behind the modal */
+    backdrop-filter: blur(4px); /* Modern frosted-glass blur look */
+}
+
 /* ==========================================================================
    7. PAGE: ENTRY VIEW & AUDIO PANELS
    ========================================================================== */

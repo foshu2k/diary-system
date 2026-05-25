@@ -36,14 +36,19 @@
 </div>
 
 <!-- Delete Confirmation Popup -->
-<dialog id="deleteModal">
-    <p>Delete "<strong>{{ entry.title }}</strong>"? This cannot be undone.</p>
-    <div class="dialog-actions">
-        <form method="POST" action="{% url 'delete_entry' entry.id %}">
-            {% csrf_token %}
-            <button type="submit" class="delete-btn">Yes</button>
-        </form>
-        <button onclick="document.getElementById('deleteModal').close()">Cancel</button>
+<dialog id="deleteModal" class="custom-modal">
+    <div class="modal-content">
+        <h2>Delete this entry?</h2>
+        <p>"<strong>{{ entry.title }}</strong>" will be permanently removed.</p>
+        
+        <div class="modal-actions">
+            <button class="btn-modal-cancel" onclick="document.getElementById('deleteModal').close()">Cancel</button>
+            
+            <form method="POST" action="{% url 'delete_entry' entry.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-modal-delete">Delete</button>
+            </form>
+        </div>
     </div>
 </dialog>
 
