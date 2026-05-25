@@ -329,7 +329,7 @@ p  { color: var(--c-text-muted); }
     width: 100%;
 }
 
-/* Base custom dropdown setup */
+/* Base dropdown setup */
 .filter-select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -344,7 +344,7 @@ p  { color: var(--c-text-muted); }
     border: 1px solid rgba(253, 224, 178, 0.15);
     background-color: rgba(24, 18, 43, 0.4); 
     
-    color: var(--c-accent) !important; /* Forced to match brand cream */
+    color: var(--c-accent) !important; 
     font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
@@ -355,6 +355,18 @@ p  { color: var(--c-text-muted); }
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 12px;
+
+    filter: drop-shadow(0px 0px 0px transparent);
+}
+
+/* Style the popup window box directly */
+.filter-select select,
+.filter-select option {
+    background-color: #18122B; 
+    color: var(--c-accent) !important; 
+    padding: 12px;
+    /* This handles the corners when the engine switches */
+    border-radius: 12px !important; 
 }
 
 /* Hides the scrollbar track and thumb inside dropdowns */
