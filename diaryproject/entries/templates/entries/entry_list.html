@@ -4,7 +4,7 @@
 {% block content %}
     <div class="app">
 
-        <!-- Top Bar -->
+        <!-- Page Header -->
         <div class="topbar">
             <span class="brand">LUMEN</span>
             <div class="avatar"></div>
@@ -16,8 +16,7 @@
             <p>All your diary entries in one place.</p>
         </div>
 
-        <!-- Search Bar and Filter Bar -->
-        <form method="GET" action="{% url 'entry_list' %}">
+        <form method="GET" action="{% url 'entry_list' %}" id="filterForm">
             <div class="search-bar">
                 <img src="{% static 'entries/svg/search.svg' %}" class="search-icon" alt="search">
                 <input type="text" name="search" class="input" placeholder="Search entries…" value="{{ search_query }}" />
@@ -35,8 +34,7 @@
                     All
                 </a>
 
-                <!-- Year Dropdown -->
-                <select name="year" class="filter-select">
+                <select name="year" class="filter-select" onchange="document.getElementById('filterForm').submit();">
                     {% for value, label in entry_filter.form.fields.year.choices %}
                         <option value="{{ value }}" {% if value|stringformat:"s" == request.GET.year %}selected{% endif %}>
                             {{ label }}
@@ -44,8 +42,7 @@
                     {% endfor %}
                 </select>
 
-                <!-- Month Dropdown -->
-                <select name="month" class="filter-select">
+                <select name="month" class="filter-select" onchange="document.getElementById('filterForm').submit();">
                     {% for value, label in entry_filter.form.fields.month.choices %}
                         <option value="{{ value }}" {% if value|stringformat:"s" == request.GET.month %}selected{% endif %}>
                             {{ label }}
@@ -53,8 +50,7 @@
                     {% endfor %}
                 </select>
 
-                <!-- Day Dropdown -->
-                <select name="day" class="filter-select">
+                <select name="day" class="filter-select" onchange="document.getElementById('filterForm').submit();">
                     {% for value, label in entry_filter.form.fields.day.choices %}
                         <option value="{{ value }}" {% if value|stringformat:"s" == request.GET.day %}selected{% endif %}>
                             {{ label }}
@@ -107,8 +103,8 @@
                         <p class="preview">{{ entry.content|truncatechars:100 }}</p>
                     </div>
                 </a>
-                {% empty %}
-                    <p>No recent entries.</p>
+            {% empty %}
+                <p>No recent entries.</p>
             {% endfor %}
         </div>
 
