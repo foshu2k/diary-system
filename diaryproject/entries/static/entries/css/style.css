@@ -358,6 +358,14 @@ p  { color: var(--c-text-muted); }
     background-size: 12px;
 }
 
+/* HIDES THE SCROLLBAR TRACK AND THUMB INSIDE DROPDOWNS */
+.filter-select::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent;
+}
+
 /* "All" button style so anchor tags look exactly like the dropdown boxes */
 .filter-select-link {
     display: inline-flex;
