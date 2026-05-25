@@ -5,7 +5,9 @@
 
     <!-- Top Bar -->
     <div class="topbar">
-        <a href="{% url 'entry_list' %}" class="btn btn-secondary entry-detail-back">← Back</a>
+        <a href="{% url 'home' %}" class="btn btn-primary entry-detail-back">
+            <img src="{% static 'entries/svg/back.svg' %}" class="icon" alt="Back">Back
+        </a>
     </div>
 
     <!-- Entry Header Card -->
