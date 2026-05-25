@@ -11,6 +11,11 @@
 
     <!-- Entry Header Card -->
     <div class="featured-card">
+        <div class="label">{{ entry.created_at|date:"F d, Y · h:i A" }}</div>
+        <h2>{{ entry.title }}</h2>
+        <div class="entry-detail-meta">
+            Updated {{ entry.updated_at|date:"M d, Y · h:i A" }}
+        </div>
         <div class="modify-bar">
             <a href="{% url 'edit_entry' entry.id %}" class="action-circle-btn edit-action" title="Edit Entry" aria-label="Edit Entry">
                 <img src="{% static 'entries/svg/edit.svg' %}" class="action-icon" alt="">
@@ -19,11 +24,6 @@
             <button class="action-circle-btn delete-action" onclick="document.getElementById('deleteModal').showModal()" title="Delete Entry" aria-label="Delete Entry">
                 <img src="{% static 'entries/svg/delete.svg' %}" class="action-icon" alt="">
             </button>
-        </div>
-        <div class="label">{{ entry.created_at|date:"F d, Y · h:i A" }}</div>
-        <h2>{{ entry.title }}</h2>
-        <div class="entry-detail-meta">
-            Updated {{ entry.updated_at|date:"M d, Y · h:i A" }}
         </div>
     </div>
 
