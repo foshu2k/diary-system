@@ -806,7 +806,7 @@ p  { color: var(--c-text-muted); }
 /* Pill Button Base Structure */
 .btn-modal-cancel, 
 .btn-modal-delete {
-    color: #fde0b2;
+
     font-size: 0.95rem;
     font-weight: 600;
     padding: 12px 24px;
@@ -819,18 +819,18 @@ p  { color: var(--c-text-muted); }
 /* Cancel Action Outline Option */
 .btn-modal-cancel {
     background: transparent;
-    color: #ffffff;
+    color: #fde0b2;
     border: 1px solid rgba(255, 255, 255, 0.4);
 }
 .btn-modal-cancel:hover {
     background: rgba(255, 255, 255, 0.08);
-    border-color: #ffffff;
+    color: #fde0b2;
 }
 
 /* Crimson Delete Action Button */
 .btn-modal-delete {
     background: #e14d4d; /* High contrast energetic red warning tone */
-    color: #ffffff;
+    color: #fde0b2;;
 }
 .btn-modal-delete:hover {
     background: #ff5c5c;
