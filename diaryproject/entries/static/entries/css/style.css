@@ -249,19 +249,16 @@ p  { color: var(--c-text-muted); }
   filter: brightness(0) invert(1);
 }
 
-/* 🎙️ RECONFIGURED VOICE ASSISTANT WRAPPER */
+/*RECONFIGURED VOICE ASSISTANT WRAPPER */
 .voice-assistant-wrapper {
     position: fixed;
     bottom: 120px; 
     left: 50%;
-    width: 100%;
-    max-width: var(--container-max-width, 1200px); 
-    transform: translateX(-50%);
-    pointer-events: none; 
-    
+    width: min(100% - 48px, 1200px); 
+    transform: translateX(-50%);   
     display: flex;
-    justify-content: flex-end; /* Pushes the button to the right side of the container */
-    padding-right: 32px; /* Keeps a clean, intentional gap from the container edge */
+    justify-content: flex-end; 
+    pointer-events: none; 
     z-index: 9999;
 }
 
