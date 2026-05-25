@@ -652,7 +652,7 @@ p  { color: var(--c-text-muted); }
     display: flex;
     align-items: center;
     gap: var(--space-3); /* Tight, clean 12px gap between the circles */
-    margin-bottom: var(--space-4);
+    margin-top: var(--space-4);
     position: relative;
     z-index: 5;
 }

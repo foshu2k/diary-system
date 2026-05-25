@@ -16,6 +16,7 @@
         <div class="entry-detail-meta">
             Updated {{ entry.updated_at|date:"M d, Y · h:i A" }}
         </div>
+        
         <div class="modify-bar">
             <a href="{% url 'edit_entry' entry.id %}" class="action-circle-btn edit-action" title="Edit Entry" aria-label="Edit Entry">
                 <img src="{% static 'entries/svg/edit.svg' %}" class="action-icon" alt="">
