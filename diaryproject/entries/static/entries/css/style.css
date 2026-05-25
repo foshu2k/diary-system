@@ -249,21 +249,30 @@ p  { color: var(--c-text-muted); }
   filter: brightness(0) invert(1);
 }
 
-/*VOICE ASSISTANT WRAPPER - MATCHED TO MAIN CONTAINER FLOW */
+/* VOICE ASSISTANT WRAPPER - SIDE FLOAT CONTEXT */
 .voice-assistant-wrapper {
     position: fixed;
-    bottom: 110px;
-    left: 50%;
+    bottom: 110px;          /* Vertically aligned with your menu cluster */
+    left: 50%;              /* Standard center layout anchor alignment */
     transform: translateX(-50%);
+    
+    /* THE SIDE FIX: Sets full layout box to match container width */
     width: 100%;
-    max-width: 480px;
+    max-width: 430px;       
+    
     display: flex;
     justify-content: flex-end; 
-    padding-right: 24px;
     pointer-events: none;   
-    z-index: 9999;
-    margin: 0 auto; 
-    padding: 24px 20px 24px;         
+    z-index: 9999;          
+}
+
+/* TARGET DESKTOP SCREENS TO PUSH ICON OUTSIDE */
+@media (min-width: 577px) {
+    .voice-assistant-wrapper {
+        /* Calculates container size + extra spacing to safely kick the mic button outside your text lines */
+        max-width: calc(430px + 120px); 
+        padding-right: 0; 
+    }
 }
 
 /* Ensure the physical circle button works */
@@ -294,14 +303,14 @@ p  { color: var(--c-text-muted); }
 }
 
 .voice-btn.record:active {
-    transform: scale(0.95);
+    transform: scale(0.94);
 }
 
-/* 📱 MOBILE RESPONSIVE TWEAKS */
+/* MOBILE RESPONSIVE TWEAKS */
 @media (max-width: 576px) {
     .voice-assistant-wrapper {
-        bottom: 115px;      /* Slightly nudges height up for compact mobile screen borders */
-        padding-right: 20px; /* Snaps tight into alignment with native padding gutters */
+        bottom: 115px;      /* Keeps standard mobile spacing inside your dashboard cards */
+        padding-right: 20px; 
     }
 }
 
