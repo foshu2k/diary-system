@@ -544,6 +544,71 @@ p  { color: var(--c-text-muted); }
   padding-left: 44px; /* space for icon */
 }
 
+/* Align the existing container children side-by-side */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2); /* Adds a clean 8px-12px gap between the input field and your button */
+    width: 100%;
+}
+
+/* Ensure your existing input takes up all remaining left space smoothly */
+.search-bar .input {
+    flex: 1;
+    height: 44px; /* Gives it a matching uniform height */
+    box-sizing: border-box;
+}
+
+/* The Pink Pill Submit Button */
+.search-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Spaces the internal button icon from the text */
+    
+    padding: 0 24px;
+    height: 44px; /* Matches the input height perfectly */
+    border-radius: 22px; /* Smooth pill shapes */
+    border: none;
+    
+    /* Default Base Color Theme: Dark midnight text styling over solid pink background */
+    background-color: var(--c-primary); /* Your #E491A7 Pink token */
+    color: #18122B; /* Dark midnight purple base color */
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap; /* Prevents text from breaking onto two lines */
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+/* Forces the button icon stroke layers to match the dark text contrast */
+.search-btn-icon {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    filter: brightness(0) saturate(100%) invert(9%) sepia(34%) saturate(1900%) hue-rotate(236deg) brightness(93%) contrast(101%);
+    transition: filter 0.2s ease;
+}
+
+/* Subtle physical click scale response */
+.search-pill-btn:active {
+    transform: scale(0.97);
+}
+
+/* --------------------------------------------------------------------------
+   BUTTON HOVER EFFECT
+   -------------------------------------------------------------------------- */
+.search-pill-btn:hover {
+    background-color: #18122B; /* Flips background to your deep midnight purple */
+    color: var(--c-accent);    /* Text shifts cleanly over to your brand cream color */
+    border: 1px solid rgba(253, 224, 178, 0.2);
+}
+
+.search-pill-btn:hover .search-btn-icon {
+    /* Flips magnifying glass icon stroke color layer back to cream token on hover */
+    filter: brightness(0) saturate(100%) invert(91%) sepia(10%) saturate(1450%) hue-rotate(318deg) brightness(101%) contrast(99%);
+}
+
 /* ==========================================================================
    7. PAGE: ENTRY VIEW & AUDIO PANELS
    ========================================================================== */
