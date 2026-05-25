@@ -12,11 +12,11 @@
     <!-- Entry Header Card -->
     <div class="featured-card">
         <div class="modify-bar">
-            <a href="{% url 'edit_entry' entry.id %}" class="action-circle-btn edit-action" title="Edit Entry" aria-label="Edit Entry">
+            <a href="{% url 'edit_entry' entry.id %}" class="action-circle-btn edit-action" title="Edit Entry" aria-label="Edit Entry">Edit
                 <img src="{% static 'entries/svg/edit.svg' %}" class="action-icon" alt="">
             </a>
 
-            <button class="action-circle-btn delete-action" onclick="document.getElementById('deleteModal').showModal()" title="Delete Entry" aria-label="Delete Entry">
+            <button class="action-circle-btn delete-action" onclick="document.getElementById('deleteModal').showModal()" title="Delete Entry" aria-label="Delete Entry">Delete
                 <img src="{% static 'entries/svg/delete.svg' %}" class="action-icon" alt="">
             </button>
         </div>
