@@ -648,7 +648,7 @@ p  { color: var(--c-text-muted); }
     display: inline-block;
     margin: 0;
     width: 14px;
-    height: 14px;
+    height: 16px;
     opacity: 1;
     filter: brightness(0) invert(1);
     transform: translateY(1px); 
