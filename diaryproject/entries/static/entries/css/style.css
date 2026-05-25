@@ -408,8 +408,8 @@ p  { color: var(--c-text-muted); }
 
 /* Native operating system option item lists styling backup */
 .filter-select option {
-    background-color: #18122B; 
-    color: #FFFFFF; 
+    background-color: #2D1F3D; 
+    color: var(--c-accent) !important; 
     padding: 12px;
 }
 
