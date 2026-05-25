@@ -1,5 +1,19 @@
-/* Base: reset, variables, typography */
+/* ==========================================================================
+   TOC:
+   1. VARIABLES & DESIGN TOKENS
+   2. RESET & BASE ELEMENTS
+   3. BASE LAYOUT & SHELL COMPONENTS
+   4. GLOBAL UI UI COMPONENTS (Buttons, Cards, Inputs, Filter Bar)
+   5. PAGE: HOME SCREEN
+   6. PAGE: ENTRIES EXPLORER & LISTS
+   7. PAGE: ENTRY VIEW & AUDIO PANELS
+   ========================================================================== */
+
+/* ==========================================================================
+   1. VARIABLES & DESIGN TOKENS
+   ========================================================================== */
 :root {
+  /* Color Palette */
   --c-bg: #18122B;
   --c-surface: #2D1F3D;
   --c-surface-2: #7A4B83;
@@ -7,17 +21,25 @@
   --c-primary-deep: #90426F;
   --c-accent: #FDE0B2;
   --c-lilac: #C9B6E4;
+  
+  /* Typography Colors */
   --c-text: #FDE0B2;
   --c-text-muted: rgba(253, 224, 178, 0.65);
   --c-text-dark: #18122B;
+  
+  /* Structural Radius Tokens */
   --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-pill: 999px;
+  
+  /* Drop Shadows */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
   --shadow-md: 0 6px 20px rgba(24, 18, 43, 0.25);
   --shadow-lg: 0 12px 32px rgba(24, 18, 43, 0.35);
   --shadow-float: 0 8px 24px rgba(228, 145, 167, 0.4);
+  
+  /* Layout Spacing Grid */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -25,10 +47,19 @@
   --space-5: 24px;
   --space-6: 32px;
   --space-7: 48px;
+  
+  /* Fonts */
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* ==========================================================================
+   2. RESET & BASE ELEMENTS
+   ========================================================================== */
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
 
 html, body {
   height: 100%;
@@ -44,21 +75,249 @@ body {
   min-height: 100vh;
 }
 
-a { color: inherit; text-decoration: none; }
-button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-input, textarea { font-family: inherit; color: inherit; }
+a { 
+  color: inherit; 
+  text-decoration: none; 
+}
 
+button { 
+  font-family: inherit; 
+  cursor: pointer; 
+  border: none; 
+  background: none; 
+  color: inherit; 
+}
+
+input, textarea { 
+  font-family: inherit; 
+  color: inherit; 
+}
+
+.app section {
+    margin-bottom: 20px; /* adjust the value to your preferred spacing */
+}
+
+/* Global Typography Elements */
 h1 { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.5px; }
 h2 { font-size: 1.4rem; font-weight: 600; }
 h3 { font-size: 1.1rem; font-weight: 600; }
 p  { color: var(--c-text-muted); }
 
-::selection { background: var(--c-primary); color: var(--c-text-dark); }
+::selection { 
+  background: var(--c-primary); 
+  color: var(--c-text-dark); 
+}
+
+/* ==========================================================================
+   3. BASE LAYOUT & SHELL COMPONENTS
+   ========================================================================== */
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 20px 24px;
+  min-height: 100vh;
+  position: relative;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.topbar .brand {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--c-accent);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-surface-2));
+  box-shadow: var(--shadow-sm);
+}
+
+/* Bottom Navigation Bar */
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around; 
+  width: calc(100% - 32px);      
+  max-width: 440px;
+  
+/* Glassmorphism Styling */
+  background: rgba(42, 24, 56, .85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px); 
+  border: 1px solid rgba(228, 145, 167, 0.15);
+  border-radius: var(--radius-pill);
+  padding: 10px 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+  z-index: 50;
+}
+
+.bottom-nav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--c-text-muted);
+  font-size: 11px;
+  padding: 6px 18px;
+  border-radius: var(--radius-md);
+  transition: color .2s;
+  text-decoration: none;
+}
+
+.bottom-nav .nav-item:hover { 
+  color: var(--c-accent); 
+}
+
+.bottom-nav .nav-item.active {
+  color: var(--c-primary);
+}
+
+.bottom-nav .nav-item.active .icon {
+  opacity: 1;
+  transform: translateY(-2px) scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(228,145,167,0.6));
+}
+
+.bottom-nav .nav-item:hover .icon {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* Fixed Primary Floating Action Button (+ Button) */
+.bottom-nav .nav-fab {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-deep));
+  color: var(--c-text-dark);
+  text-decoration: none;
+  flex-shrink: 0;
+
+  /* Typography configuration for raw text "+" symbol */
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1;
+  
+  box-shadow: 0 0 0 4px rgba(228, 145, 167, .15), 0 8px 22px rgba(228, 145, 167, 0.4);
+  transition: transform .2s ease;
+}
+
+.bottom-nav .nav-fab:hover {
+  transform: translateY(-3px) scale(1.04);
+}
+
+/* Responsive Viewports Layout adjustments */
+@media (min-width: 900px) {
+  .app { max-width: 720px; padding: 40px 32px; }
+  body { padding-bottom: 120px; }
+  .bottom-nav { max-width: 520px; }
+}
 
 
+.icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  margin: 0 auto 4px;
+  opacity: 0.7;
+  transition: all 0.25s ease;
+}
 
-/* Reusable components: cards, buttons, inputs, chips */
+.nav-item.active .icon {
+  filter: brightness(0) saturate(100%) invert(77%) sepia(18%) saturate(500%) hue-rotate(300deg);
+}
 
+.nav-fab img {
+  width: 26px;
+  height: 26px;
+  filter: brightness(0) invert(1);
+}
+
+/* VOICE ASSISTANT WRAPPER - SIDE FLOAT CONTEXT */
+.voice-assistant-wrapper {
+    position: fixed;
+    bottom: 110px;          /* Vertically aligned with your menu cluster */
+    left: 50%;              /* Standard center layout anchor alignment */
+    transform: translateX(-50%);
+    
+    /* THE SIDE FIX: Sets full layout box to match container width */
+    width: 100%;
+    max-width: 430px;       
+    
+    display: flex;
+    justify-content: flex-end; 
+    pointer-events: none;   
+    z-index: 9999;          
+}
+
+/* TARGET DESKTOP SCREENS TO PUSH ICON OUTSIDE */
+@media (min-width: 577px) {
+    .voice-assistant-wrapper {
+        /* Calculates container size + extra spacing to safely kick the mic button outside your text lines */
+        max-width: calc(430px + 120px); 
+        padding-right: 0; 
+    }
+}
+
+/* Ensure the physical circle button works */
+.voice-btn.record {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, var(--c-primary), var(--c-surface-2));
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(228, 145, 167, 0.35);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.voice-btn.record img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) invert(1);
+}
+
+.voice-btn.record:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(228, 145, 167, 0.55);
+}
+
+.voice-btn.record:active {
+    transform: scale(0.94);
+}
+
+/* MOBILE RESPONSIVE TWEAKS */
+@media (max-width: 576px) {
+    .voice-assistant-wrapper {
+        bottom: 115px;      /* Keeps standard mobile spacing inside your dashboard cards */
+        padding-right: 20px; 
+    }
+}
+
+/* ==========================================================================
+   4. GLOBAL UI UI COMPONENTS (Buttons, Cards, Inputs, Filter Bar)
+   ========================================================================== */
+/* Interactive UI Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -84,10 +343,9 @@ p  { color: var(--c-text-muted); }
   border: 1px solid rgba(228, 145, 167, 0.2);
 }
 .btn-secondary:hover { background: var(--c-surface-2); color: var(--c-text-dark); }
-
 .btn-block { width: 100%; }
 
-/* Card */
+/* Structural Content Card */
 .card {
   background: var(--c-surface);
   border-radius: var(--radius-md);
@@ -98,67 +356,156 @@ p  { color: var(--c-text-muted); }
 }
 .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
-/* Chips row (categories / quick filters) */
-.chip-row {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding-bottom: 6px;
-  margin: 0 -4px 20px;
-  padding-left: 4px;
-  scrollbar-width: none;
-}
-.chip-row::-webkit-scrollbar { display: none; }
-
-.chip {
-  flex-shrink: 0;
-  padding: 8px 16px;
-  border-radius: var(--radius-pill);
-  background: var(--c-surface);
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--c-text-muted);
-  border: 1px solid transparent;
-  white-space: nowrap;
-}
-.chip.active {
-  background: var(--c-primary);
-  color: var(--c-text-dark);
-}
-
-/* Inputs */
-.input, .textarea {
+/* Input fields (Standalone & Structured Form Elements) */
+.input, .textarea, .form-group input, .form-group textarea {
   width: 100%;
   background: var(--c-surface);
   border: 1px solid rgba(228, 145, 167, 0.15);
   border-radius: var(--radius-md);
   padding: 14px 16px;
-  color: black;
+  color: var(--c-text);
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.input:focus, .textarea:focus {
+
+.input:focus, .textarea:focus, .form-group input:focus, .form-group textarea:focus {
   border-color: var(--c-primary);
   box-shadow: 0 0 0 4px rgba(228, 145, 167, 0.12);
 }
 .input::placeholder, .textarea::placeholder { color: var(--c-text-muted); }
 
-.search-bar {
-  position: relative;
-  margin-bottom: 18px;
+.form-group {
+  margin-bottom: 16px;
 }
-.search-bar .input { padding-left: 44px; }
-.search-bar::before {
-  content: "\1F50D";
-  position: absolute;
-  left: 14px; top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.6;
-  font-size: 0.9rem;
+.form-group textarea {
+  min-height: 220px;
+  resize: vertical;
 }
 
-/* Section heading */
+/* Filter Bar */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;       
+    gap: 10px;             
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-4);
+    width: 100%;
+}
+
+/* Base dropdown setup */
+.filter-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    padding: 0 32px 0 16px; 
+    
+    border-radius: 20px; 
+    border: 1px solid rgba(253, 224, 178, 0.15);
+    background-color: rgba(24, 18, 43, 0.4); 
+    
+    color: var(--c-accent) !important; 
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FDE0B2' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+
+    filter: drop-shadow(0px 0px 0px transparent);
+}
+
+/* Style the popup window box directly */
+.filter-select select,
+.filter-select option {
+    background-color: #18122B; 
+    color: var(--c-accent) !important; 
+    padding: 12px;
+    /* This handles the corners when the engine switches */
+    border-radius: 12px !important; 
+}
+
+/* Hides the scrollbar track and thumb inside dropdowns */
+.filter-select::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent;
+}
+
+/* "All" button style anchor tag setup */
+.filter-select-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    padding: 0 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(253, 224, 178, 0.15);
+    background-color: rgba(24, 18, 43, 0.4);
+    
+    color: var(--c-accent) !important; /*Overrides global link rules to match cream */
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+/* Hover updates - turning the border and text subtle pink */
+.filter-select:hover,
+.filter-select-link:hover {
+    border-color: var(--c-primary);
+    background-color: rgba(24, 18, 43, 0.6);
+    color: var(--c-primary) !important;
+}
+
+.filter-select:focus {
+    border-color: var(--c-primary);
+    box-shadow: 0 0 0 2px rgba(228, 145, 167, 0.15);
+}
+
+/*Active Solid Pink State for Selected Dropdowns and the Active Link */
+.filter-select-link.active,
+.filter-select.active {
+    background-color: var(--c-primary) !important; 
+    border-color: var(--c-primary) !important;
+    color: #18122B !important; /* Beautiful deep purple text contrast */
+    font-weight: 600;
+}
+
+/* Native operating system option item lists styling backup */
+.filter-select option {
+    background-color: #2D1F3D; 
+    color: var(--c-accent) !important; 
+    padding: 12px;
+    border-radius: 12px;
+}
+
+/* Filter Errors */
+.filter-error-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+    display: flex;
+    gap: 8px;
+}
+
+.filter-error-list li {
+    font-size: 0.8rem;
+    color: var(--c-accent);
+}
+
+/* Header Component Helpers */
 .section-title {
   display: flex;
   align-items: center;
@@ -168,106 +515,9 @@ p  { color: var(--c-text-muted); }
 .section-title h2 { font-size: 1.1rem; }
 .section-title a { font-size: 0.8rem; color: var(--c-primary); font-weight: 500; }
 
-
-/* Layout: app shell, container, bottom nav */
-.app {
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 24px 20px 24px;
-  min-height: 100vh;
-  position: relative;
-}
-
-@media (min-width: 900px) {
-  .app { max-width: 720px; padding: 40px 32px; }
-  body { padding-bottom: 120px; }
-}
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
-}
-
-.topbar .brand {
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  color: var(--c-accent);
-}
-
-.avatar {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--c-primary), var(--c-surface-2));
-  box-shadow: var(--shadow-sm);
-}
-
-/* Bottom Navigation */
-.bottom-nav {
-  position: fixed;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 32px);
-  max-width: 440px;
-  background: var(--c-surface);
-  border-radius: var(--radius-pill);
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  box-shadow: var(--shadow-lg);
-  z-index: 50;
-  border: 1px solid rgba(228, 145, 167, 0.1);
-}
-
-.bottom-nav .nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 8px 12px;
-  border-radius: var(--radius-md);
-  font-size: 0.7rem;
-  color: var(--c-text-muted);
-  transition: color 0.2s ease;
-  min-width: 56px;
-}
-
-.bottom-nav .nav-item:hover { color: var(--c-accent); }
-.bottom-nav .nav-item.active { color: var(--c-primary); }
-.bottom-nav .nav-item .icon { font-size: 1.3rem; line-height: 1; }
-
-/* Center primary FAB */
-.bottom-nav .nav-fab {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-deep));
-  color: var(--c-text-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  font-weight: 300;
-  margin-top: -36px;
-  box-shadow: var(--shadow-float);
-  border: 4px solid var(--c-bg);
-  transition: transform 0.2s ease;
-}
-
-.bottom-nav .nav-fab:hover { transform: translateY(-2px); }
-
-@media (min-width: 900px) {
-  .bottom-nav { max-width: 520px; }
-}
-
-
-
-
-/* Home page */
+/* ==========================================================================
+   5. PAGE: HOME SCREEN
+   ========================================================================== */
 .hero {
   margin-top: 8px;
   margin-bottom: 28px;
@@ -284,6 +534,7 @@ p  { color: var(--c-text-muted); }
 }
 .hero h1 span { color: var(--c-primary); }
 
+/* Decorative Dashboard Feature Card */
 .featured-card {
   background: linear-gradient(135deg, var(--c-primary-deep), var(--c-surface-2));
   color: var(--c-accent);
@@ -317,13 +568,9 @@ p  { color: var(--c-text-muted); }
 }
 .featured-card .btn { background: var(--c-accent); color: var(--c-text-dark); position: relative; z-index: 1; }
 
+/* Compact Alternative Entry Feed */
 .entry-list { display: flex; flex-direction: column; gap: 12px; }
-
-.entry-mini {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-}
+.entry-mini { display: flex; gap: 14px; align-items: center; }
 .entry-mini .swatch {
   width: 48px; height: 48px;
   border-radius: var(--radius-sm);
@@ -333,16 +580,23 @@ p  { color: var(--c-text-muted); }
 .entry-mini .meta h3 { font-size: 0.95rem; color: var(--c-accent); margin-bottom: 2px; }
 .entry-mini .meta p { font-size: 0.8rem; }
 
-
-
-
-/* Entries page */
+/* ==========================================================================
+   6. PAGE: ENTRIES EXPLORER & LISTS
+   ========================================================================== */
 .page-header {
   margin-bottom: 18px;
 }
 .page-header h1 { color: var(--c-accent); margin-bottom: 6px; }
 .page-header p { font-size: 0.9rem; }
 
+/* Search Layout Input Shell additions */
+.search-bar {
+  position: relative;
+  margin-bottom: 18px;
+}
+.search-bar .input { padding-left: 44px; }
+
+/* Multi-Column Layout Grid Configuration */
 .entry-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -353,6 +607,7 @@ p  { color: var(--c-text-muted); }
   .entry-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
 }
 
+/* Standard Visual Display Cards for individual Journal logs */
 .entry-card {
   background: var(--c-surface);
   border-radius: var(--radius-md);
@@ -365,23 +620,9 @@ p  { color: var(--c-text-muted); }
   transition: transform 0.18s ease, box-shadow 0.2s, border-color 0.2s;
   cursor: pointer;
 }
-.entry-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--c-primary);
-  box-shadow: var(--shadow-md);
-}
-.entry-card .date {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--c-primary);
-  font-weight: 600;
-}
-.entry-card h3 {
-  font-size: 1rem;
-  color: var(--c-accent);
-  line-height: 1.3;
-}
+.entry-card:hover { transform: translateY(-3px); border-color: var(--c-primary); box-shadow: var(--shadow-md); }
+.entry-card .date { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--c-primary); font-weight: 600; }
+.entry-card h3 { font-size: 1rem; color: var(--c-accent); line-height: 1.3; }
 .entry-card .preview {
   font-size: 0.8rem;
   color: var(--c-text-muted);
@@ -393,41 +634,286 @@ p  { color: var(--c-text-muted); }
   overflow: hidden;
 }
 
-
-/* Month divider */
+/* Date/Month Horizontal Separator */
 .month-divider {
   display: flex;
   align-items: center;
   gap: 12px;
   margin: 28px 0 14px;
 }
+.month-divider span { font-size: 1rem; font-weight: 700; color: var(--c-accent); white-space: nowrap; }
+.month-divider::after { content: ""; flex: 1; height: 1px; background: rgba(228, 145, 167, 0.15); }
 
-.month-divider span {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--c-accent);
-  white-space: nowrap;
+/* New Entry Header Group Styling */
+.entry-header-group {
+  margin-bottom: 24px;
 }
 
-.month-divider::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: rgba(228, 145, 167, 0.15);
+.entry-header-group .current-date-stamp {
+  font-size: 0.9rem;
+  color: var(--c-primary, #e491a7); /* Falls back to your pink accent token */
+  margin-bottom: 6px;
+  display: block;
+  font-weight: 500;
+  opacity: 0.8;
 }
 
-
-/* Entry Detail */
-.entry-detail-back {
-  padding: 8px 16px;
-  font-size: 0.85rem;
+.entry-header-group .page-title {
+  margin-top: 0;
 }
 
-.entry-detail-meta {
-  font-size: 0.8rem;
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar .search-icon {
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
   opacity: 0.7;
 }
 
+.search-bar .input {
+  padding-left: 44px; /* space for icon */
+}
+
+/* Align the existing container children side-by-side */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2); /* Adds a clean 8px-12px gap between the input field and your button */
+    width: 100%;
+}
+
+/* Ensure your existing input takes up all remaining left space smoothly */
+.search-bar .input {
+    flex: 1;
+    height: 44px; /* Gives it a matching uniform height */
+    box-sizing: border-box;
+}
+
+/* The Pink Pill Submit Button */
+.search-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Spaces the internal button icon from the text */
+    
+    padding: 0 24px;
+    height: 44px; /* Matches the input height perfectly */
+    border-radius: 22px; /* Smooth pill shapes */
+    border: none;
+    
+    /* Default Base Color Theme: Dark midnight text styling over solid pink background */
+    background-color: var(--c-primary); /* Your #E491A7 Pink token */
+    color: #18122B; /* Dark midnight purple base color */
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap; /* Prevents text from breaking onto two lines */
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+/* Forces the button icon stroke layers to match the dark text contrast */
+.search-btn-icon {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    filter: brightness(0) saturate(100%) invert(9%) sepia(34%) saturate(1900%) hue-rotate(236deg) brightness(93%) contrast(101%);
+    transition: filter 0.2s ease;
+}
+
+/* Subtle physical click scale response */
+.search-pill-btn:active {
+    transform: scale(0.97);
+}
+
+/* --------------------------------------------------------------------------
+   BUTTON HOVER EFFECT
+   -------------------------------------------------------------------------- */
+.search-pill-btn:hover {
+    background-color: #18122B; /* Flips background to your deep midnight purple */
+    color: var(--c-accent);    /* Text shifts cleanly over to your brand cream color */
+    border: 1px solid rgba(253, 224, 178, 0.2);
+}
+
+.search-pill-btn:hover .search-btn-icon {
+    /* Flips magnifying glass icon stroke color layer back to cream token on hover */
+    filter: brightness(0) saturate(100%) invert(91%) sepia(10%) saturate(1450%) hue-rotate(318deg) brightness(101%) contrast(99%);
+}
+
+/* Empty State Container Box */
+.empty-state-container {
+    grid-column: 1 / -1; /* Forces it to span beautifully across the entire grid width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 24px;
+    background-color: rgba(24, 18, 43, 0.2);
+    border: 1px dashed rgba(253, 224, 178, 0.15);
+    border-radius: var(--radius-md, 16px);
+    margin: 20px 0;
+}
+
+/* Icon Wrap Style */
+.empty-state-icon-wrapper {
+    margin-bottom: 16px;
+    color: rgba(253, 224, 178, 0.4);
+}
+.empty-icon {
+    width: 48px;
+    height: 48px;
+}
+
+/* Typography elements */
+.empty-state-container h2 {
+    color: var(--c-accent, #FDE0B2);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.empty-state-container p {
+    color: rgba(253, 224, 178, 0.6);
+    font-size: 0.95rem;
+    max-width: 320px;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+/* Flex buttons layout */
+.empty-state-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Action button variations */
+.btn-empty-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #E491A7; /* Matches your glowing primary rose accent button */
+    color: #18122B !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+}
+.btn-empty-primary:hover {
+    transform: scale(1.03);
+}
+
+.btn-empty-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(24, 18, 43, 0.6);
+    color: var(--c-accent, #FDE0B2) !important;
+    border: 1px solid rgba(253, 224, 178, 0.2);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+}
+.btn-empty-secondary:hover {
+    background-color: rgba(24, 18, 43, 0.9);
+    border-color: rgba(253, 224, 178, 0.4);
+}
+
+/* Custom Native Dialog Styling */
+.custom-modal {
+    border: none;
+    padding: 0;
+    background: #1c162e; /* Sleek dark theme color matching your design */
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    width: calc(100% - 32px);
+    margin: auto; /* Handles perfect screen-centering with <dialog> element */
+}
+
+/* Modal Content Container padding */
+.modal-content {
+    padding: 32px;
+}
+
+/* Typography styles inside popup */
+.modal-content h2 {
+    color: #fde0b2; /* Warm beige/gold header accent color */
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+}
+
+.modal-content p {
+    color: rgba(253, 224, 178, 0.6); /* Semi-transparent cream text */
+    font-size: 1rem;
+    margin: 0 0 28px 0;
+    line-height: 1.5;
+}
+
+/* Layout container for actions layout row */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Pill Button Base Structure */
+.btn-modal-cancel, 
+.btn-modal-delete {
+
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 100px; /* Perfect pill style shape */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+/* Cancel Action Outline Option */
+.btn-modal-cancel {
+    background: transparent;
+    color: #fde0b2;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.btn-modal-cancel:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fde0b2;
+}
+
+/* Crimson Delete Action Button */
+.btn-modal-delete {
+    background: #e14d4d; /* High contrast energetic red warning tone */
+    color: #fde0b2;;
+}
+.btn-modal-delete:hover {
+    background: #ff5c5c;
+    box-shadow: 0 0 12px rgba(225, 77, 77, 0.4);
+}
+
+/*NATIVE BACKDROP OVERLAY OVERRIDES */
+.custom-modal::backdrop {
+    background: rgba(10, 7, 18, 0.7); /* Dims your diary behind the modal */
+    backdrop-filter: blur(4px); /* Modern frosted-glass blur look */
+}
+
+/* ==========================================================================
+   7. PAGE: ENTRY VIEW & AUDIO PANELS
+   ========================================================================== */
+.entry-detail-back { padding: 8px 16px; font-size: 0.85rem; }
+.entry-detail-meta { font-size: 0.8rem; opacity: 0.7; }
+.entry-detail-card { margin-bottom: 24px; }
 .entry-detail-content {
   font-size: 0.95rem;
   color: var(--c-text);
@@ -435,11 +921,7 @@ p  { color: var(--c-text-muted); }
   white-space: pre-wrap;
 }
 
-.entry-detail-card {
-  margin-bottom: 24px;
-}
-
-/* Voice recording panel */
+/* Voice Capturing Dashboard Panel Modules */
 .voice-panel {
   margin-top: 28px;
   background: var(--c-surface);
@@ -451,6 +933,7 @@ p  { color: var(--c-text-muted); }
   gap: 14px;
   box-shadow: var(--shadow-sm);
 }
+
 .waveform {
   width: 100%;
   height: 48px;
@@ -459,23 +942,136 @@ p  { color: var(--c-text-muted); }
   background-size: 100% 100%;
   opacity: 0.85;
 }
+
 .voice-controls {
   display: flex;
   align-items: center;
   gap: 22px;
 }
+
 .voice-btn {
-  width: 44px; height: 44px;
+  width: 44px; 
+  height: 44px;
   border-radius: 50%;
   background: var(--c-surface-2);
   color: var(--c-accent);
-  display: flex; align-items: center; justify-content: center;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
   font-size: 1.1rem;
 }
+
 .voice-btn.record {
-  width: 64px; height: 64px;
+  width: 64px; 
+  height: 64px;
   background: linear-gradient(135deg, var(--c-primary), var(--c-primary-deep));
   color: var(--c-text-dark);
   font-size: 1.6rem;
   box-shadow: var(--shadow-float);
+}
+
+/* Entry Form */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    background: var(--c-surface);
+    border: 1px solid rgba(228, 145, 167, 0.15);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    color: var(--c-text);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--c-primary);
+    box-shadow: 0 0 0 4px rgba(228, 145, 167, 0.12);
+}
+
+.form-group textarea {
+    min-height: 220px;
+    resize: vertical;
+}
+
+/* Container Layout Fix */
+.entry-detail-back {
+    display: inline-flex;  
+    align-items: center;   
+    justify-content: center;
+    gap: var(--space-2);   
+    padding: 10px 18px;    
+}
+
+/* ==========================================================================
+   MODIFY BAR ACTION BUTTONS 
+   ========================================================================== */
+/* Container alignment inside the card */
+.modify-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3); /* Tight, clean 12px gap between the circles */
+    margin-top: var(--space-4);
+    position: relative;
+    z-index: 5;
+}
+
+/* Base style for the circular icon containers */
+.action-circle-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(24, 18, 43, 0.4); /* Subtle dark translucent base color */
+    border: 1px solid rgba(253, 224, 178, 0.1);
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Uniform icon sizing inside the circles */
+.action-circle-btn .action-icon {
+    width: 16px;
+    height: 16px;
+    display: block;
+    transition: filter 0.2s ease;
+    
+    /* Default state: Soft brand cream color */
+    filter: brightness(0) saturate(100%) invert(91%) sepia(10%) saturate(1450%) hue-rotate(318deg) brightness(101%) contrast(99%);
+}
+
+/* Slight tactile pop when clicking down */
+.action-circle-btn:active {
+    transform: scale(0.94);
+}
+
+/* --------------------------------------------------------------------------
+   HOVER STATES
+   -------------------------------------------------------------------------- */
+
+/* Edit Button Hover: Changes container to pink, icon turns dark */
+.action-circle-btn.edit-action:hover {
+    background-color: var(--c-primary); /* Your #E491A7 pink token */
+    border-color: var(--c-primary);
+}
+.action-circle-btn.edit-action:hover .action-icon {
+    /* Turns the icon dark (#18122B) to contrast beautifully over the pink circle */
+    filter: brightness(0) saturate(100%) invert(9%) sepia(34%) saturate(1900%) hue-rotate(236deg) brightness(93%) contrast(101%);
+}
+
+/* Delete Button Hover: Changes container to bright red, icon turns white */
+.action-circle-btn.delete-action:hover {
+    background-color: #E74C3C; /* Crisp, accessible destructive red */
+    border-color: #E74C3C;
+}
+.action-circle-btn.delete-action:hover .action-icon {
+    /* Turns the icon pure white over the red background */
+    filter: brightness(0) invert(1);
 }
