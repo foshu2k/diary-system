@@ -806,6 +806,7 @@ p  { color: var(--c-text-muted); }
 /* Pill Button Base Structure */
 .btn-modal-cancel, 
 .btn-modal-delete {
+    color: #fde0b2;
     font-size: 0.95rem;
     font-weight: 600;
     padding: 12px 24px;
@@ -836,7 +837,7 @@ p  { color: var(--c-text-muted); }
     box-shadow: 0 0 12px rgba(225, 77, 77, 0.4);
 }
 
-/* NATIVE BACKDROP OVERLAY OVERRIDES */
+/*NATIVE BACKDROP OVERLAY OVERRIDES */
 .custom-modal::backdrop {
     background: rgba(10, 7, 18, 0.7); /* Dims your diary behind the modal */
     backdrop-filter: blur(4px); /* Modern frosted-glass blur look */
