@@ -249,58 +249,60 @@ p  { color: var(--c-text-muted); }
   filter: brightness(0) invert(1);
 }
 
-/* Floating Voice Button Positioner Container */
+/* 🎙️ RECONFIGURED VOICE ASSISTANT WRAPPER */
 .voice-assistant-wrapper {
     position: fixed;
-    /* Pinned to the right side so it doesn't obstruct the main navigation links */
-    bottom: 100px; /* Elevated cleanly above your bottom menu pill bar */
-    right: 24px;   /* Safe inner spacing boundary from the screen viewport side edge */
-    z-index: 9999; /* Higher layer stack depth to overlay above everything cleanly */
+    bottom: 120px; 
+    left: 50%;
+    width: 100%;
+    max-width: var(--container-max-width, 1200px); 
+    transform: translateX(-50%);
+    pointer-events: none; 
+    
+    display: flex;
+    justify-content: flex-end; /* Pushes the button to the right side of the container */
+    padding-right: 32px; /* Keeps a clean, intentional gap from the container edge */
+    z-index: 9999;
 }
 
-/* Upgraded Floating Mic Button Frame Style */
+/* Ensure the button inside the wrapper responds to touch/clicks */
 .voice-btn.record {
+    pointer-events: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 56px;
     height: 56px;
-    background: linear-gradient(135deg, #e491a7, #a873b3); /* Smooth gradient pulling your app palette colors */
+    background: linear-gradient(135deg, #e491a7, #a873b3);
     border: none;
-    border-radius: 50%; /* Clean circular modern button circle */
+    border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(228, 145, 167, 0.3), 
-                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    box-shadow: 0 4px 16px rgba(228, 145, 167, 0.4);
     transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
 }
 
-/* Icon image alignment within the button frame */
 .voice-btn.record img {
     width: 24px;
     height: 24px;
-    filter: brightness(0) invert(1); /* Forces your icon path lines to show up bright crisp white on the colored gradient */
+    filter: brightness(0) invert(1);
 }
 
-/* Dynamic Interactive States */
 .voice-btn.record:hover {
-    transform: scale(1.08); /* Tiny playful growth snap look when interactively pointing or hovering */
-    box-shadow: 0 6px 20px rgba(228, 145, 167, 0.5);
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(228, 145, 167, 0.6);
 }
 
-.voice-btn.record:active {
-    transform: scale(0.95); /* Physical click depress action response hint */
-}
-
-/* Mobile Screens Optimization Overrides */
+/* 📱 MOBILE RESPONSIVE TWEAKS */
 @media (max-width: 576px) {
     .voice-assistant-wrapper {
-        bottom: 92px; /* Shifts the button closer down slightly over the mobile optimized bar footer spacing */
-        right: 16px;  /* Nudges slightly inwards on tightly squeezed native screens */
+        /* Elevates the mic higher so it sits clear of the floating navigation menu */
+        bottom: 150px; 
+        padding-right: 20px; /* Snugs cleanly into alignment with your card gutters */
     }
     
     .voice-btn.record {
-        width: 50px;
-        height: 50px; /* Slightly tighter profile sizing layout frame optimized for thumbs */
+        width: 52px;
+        height: 52px; /* Sleeker profile touch target scale for phones */
     }
 }
 
