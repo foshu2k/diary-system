@@ -27,6 +27,15 @@
                 </button>
             </div>
 
+            {% if filter_errors %}
+                <ul class="filter-error-list">
+                    {% for error in filter_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </form>
+        
             <div class="filter-bar">
 
                 <!-- Reset filter / All button -->
@@ -61,17 +70,7 @@
                         </option>
                     {% endfor %}
                 </select>
-            </div>
-
-            <!-- Date Filter Error -->
-            {% if filter_errors %}
-                <ul class="filter-error-list">
-                    {% for error in filter_errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </form>
+            </div>  
 
         <!-- Calendar Section -->
         <section class="py-5 text-center border border-1">
