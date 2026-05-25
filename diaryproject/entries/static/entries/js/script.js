@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const clearBtn = document.getElementById("clearBtn")
 
     // Voice Command
-    const voiceNavBtn = document.getElementById("micNavBtn")
+    // const voiceNavBtn = document.getElementById("micNavBtn")
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    if (voiceNavBtn) {
+/*     if (voiceNavBtn) {
         const micNavIcon = document.getElementById("micNavIcon")
 
         if (!SpeechRecognition) {
@@ -124,5 +124,5 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         }
-    }
+    } */
 })
