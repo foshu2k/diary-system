@@ -643,14 +643,3 @@ p  { color: var(--c-text-muted); }
     gap: var(--space-2);   
     padding: 10px 18px;    
 }
-
-/* Specific overrides for the icon inside this button */
-.entry-detail-back .icon {
-    display: inline-block;
-    margin: 0;         
-    width: 14px;      
-    height: 14px;
-    opacity: 1;     
-    
-    filter: brightness(0) invert(1); 
-}
