@@ -647,39 +647,67 @@ p  { color: var(--c-text-muted); }
 /* ==========================================================================
    MODIFY BAR ACTION BUTTONS 
    ========================================================================== */
+/* Container alignment inside the card */
 .modify-bar {
     display: flex;
     align-items: center;
-    gap: var(--space-4);    /* Gives a healthy 16px separation between buttons */
+    gap: var(--space-3); /* Tight, clean 12px gap between the circles */
     margin-bottom: var(--space-4);
     position: relative;
-    z-index: 5;             /* Ensures it sits cleanly on top of backgrounds */
+    z-index: 5;
 }
 
-/* Common interactive base style for both action triggers */
-.modify-btn {
+/* Base style for the circular icon containers */
+.action-circle-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     display: inline-flex;
     align-items: center;
-    gap: 6px;               /* Spaces the icon slightly away from the font label */
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--c-accent); /* Inherits your nice cream color token */
-    text-decoration: none;
-    transition: opacity 0.2s ease;
+    justify-content: center;
+    background: rgba(24, 18, 43, 0.4); /* Subtle dark translucent base color */
+    border: 1px solid rgba(253, 224, 178, 0.1);
+    transition: background-color 0.2s ease, transform 0.15s ease;
     cursor: pointer;
+    text-decoration: none;
 }
 
-.modify-btn:hover {
-    opacity: 0.8;
-}
-
-/* Icon Sizing & Optical Alignment */
-.modify-icon {
-    width: 14px;
-    height: 14px;
-    display: inline-block;
-    transform: translateY(0.5px); /* Gentle visual tracking nudge downward */
+/* Uniform icon sizing inside the circles */
+.action-circle-btn .action-icon {
+    width: 16px;
+    height: 16px;
+    display: block;
+    transition: filter 0.2s ease;
     
-    /* Dynamically tints your SVGs to match the --c-accent cream token (#FDE0B2) */
+    /* Default state: Soft brand cream color */
     filter: brightness(0) saturate(100%) invert(91%) sepia(10%) saturate(1450%) hue-rotate(318deg) brightness(101%) contrast(99%);
+}
+
+/* Slight tactile pop when clicking down */
+.action-circle-btn:active {
+    transform: scale(0.94);
+}
+
+/* --------------------------------------------------------------------------
+   HOVER STATES (Matching your image designs)
+   -------------------------------------------------------------------------- */
+
+/* Edit Button Hover: Changes container to pink, icon turns dark */
+.action-circle-btn.edit-action:hover {
+    background-color: var(--c-primary); /* Your #E491A7 pink token */
+    border-color: var(--c-primary);
+}
+.action-circle-btn.edit-action:hover .action-icon {
+    /* Turns the icon dark (#18122B) to contrast beautifully over the pink circle */
+    filter: brightness(0) saturate(100%) invert(9%) sepia(34%) saturate(1900%) hue-rotate(236deg) brightness(93%) contrast(101%);
+}
+
+/* Delete Button Hover: Changes container to bright red, icon turns white */
+.action-circle-btn.delete-action:hover {
+    background-color: #E74C3C; /* Crisp, accessible destructive red */
+    border-color: #E74C3C;
+}
+.action-circle-btn.delete-action:hover .action-icon {
+    /* Turns the icon pure white over the red background */
+    filter: brightness(0) invert(1);
 }
