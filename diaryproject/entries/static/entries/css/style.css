@@ -249,57 +249,57 @@ p  { color: var(--c-text-muted); }
   filter: brightness(0) invert(1);
 }
 
-/*RECONFIGURED VOICE ASSISTANT WRAPPER */
+/*VOICE ASSISTANT WRAPPER - MATCHED TO MAIN CONTAINER FLOW */
 .voice-assistant-wrapper {
     position: fixed;
-    bottom: 120px; 
+    bottom: 110px;
     left: 50%;
-    width: min(100% - 48px, 1200px); 
-    transform: translateX(-50%);   
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 430px;
     display: flex;
     justify-content: flex-end; 
-    pointer-events: none; 
-    z-index: 9999;
+    padding-right: 24px;
+    pointer-events: none;   
+    z-index: 9999;          
 }
 
-/* Ensure the button inside the wrapper responds to touch/clicks */
+/* Ensure the physical circle button works */
 .voice-btn.record {
     pointer-events: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(135deg, #e491a7, #a873b3);
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, var(--c-primary), var(--c-surface-2));
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(228, 145, 167, 0.4);
+    box-shadow: 0 4px 16px rgba(228, 145, 167, 0.35);
     transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
 }
 
 .voice-btn.record img {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     filter: brightness(0) invert(1);
 }
 
 .voice-btn.record:hover {
     transform: scale(1.08);
-    box-shadow: 0 6px 20px rgba(228, 145, 167, 0.6);
+    box-shadow: 0 6px 20px rgba(228, 145, 167, 0.55);
+}
+
+.voice-btn.record:active {
+    transform: scale(0.95);
 }
 
 /* 📱 MOBILE RESPONSIVE TWEAKS */
 @media (max-width: 576px) {
     .voice-assistant-wrapper {
-        /* Elevates the mic higher so it sits clear of the floating navigation menu */
-        bottom: 150px; 
-        padding-right: 20px; /* Snugs cleanly into alignment with your card gutters */
-    }
-    
-    .voice-btn.record {
-        width: 52px;
-        height: 52px; /* Sleeker profile touch target scale for phones */
+        bottom: 115px;      /* Slightly nudges height up for compact mobile screen borders */
+        padding-right: 20px; /* Snaps tight into alignment with native padding gutters */
     }
 }
 
