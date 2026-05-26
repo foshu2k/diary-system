@@ -12,12 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Feedback
     const voiceFeedback = () => {
         let text = sessionStorage.getItem("voiceNavFeedback");
-        if (!text) return 
         const voice = new SpeechSynthesisUtterance(text)
         window.speechSynthesis.speak(voice);
-        sessionStorage.removeItem("voiceNavFeedback")   
+        sessionStorage.removeItem("voiceNavFeedback")
     }
-    
+
     voiceFeedback()
 
     // Voice Command Functionality
@@ -32,12 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const commands = {
                 "go home": () => {
-                    const unlock = new SpeechSynthesisUtterance("")
-                    unlock.onend = () => {
-                        sessionStorage.setItem("voiceNavFeedback", "You are at the home page.")
-                        window.location.href = "/"
-                    }
-                    window.speechSynthesis.speak(unlock)
+                    sessionStorage.setItem("voiceNavFeedback", "You are at the home page.");
+                    window.location.href = "/"
                 },
                 "go to home": () => window.location.href = "/",
                 "go back": () => window.history.back(),
