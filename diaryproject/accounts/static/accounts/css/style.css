@@ -1,33 +1,36 @@
-/* accounts/static/accounts/style.css */
+
 :root {
-  --bg: #0c0714;               /* Very dark, near-black obsidian background from screenshot */
-  --bg-soft: #140d1f;          /* Slightly lighter dark background for panels */
-  --card: #20132b;             /* Deep plum/berry container background */
-  --card-border: #321e42;      /* Subtle deep purple border for inputs and cards */
-  --input-bg: #140d1f;         /* Inner inputs matched to dark page accents */
-  --input-border: #2c1a3b;
+  --bg: #18122B;                /* --c-bg */
+  --bg-soft: #2D1F3D;           /* --c-surface */
+  --card: #2D1F3D;              /* --c-surface */
+  --card-border: #7A4B83;       /* --c-surface-2 */
+  --input-bg: #18122B;          /* Inner fields cut into the surface using bg color */
+  --input-border: #7A4B83;      /* --c-surface-2 */
   
-  --text: #f5eefc;             /* Clear, cool cream/white text color */
-  --muted: #a38fb8;            /* Soft violet-tinted mauve for secondary copy */
-  --heading: #ffffff;          /* Pure white headings */
+  --text: #FDE0B2;              /* --c-text */
+  --muted: rgba(253, 224, 178, 0.65); /* --c-text-muted */
+  --heading: #FDE0B2;           /* --c-text */
   
-  /* Primary Accents from your main dashboard cards & buttons */
-  --accent: #fcd7a1;           /* The exact pastel peach color from your 'Start Writing' button */
-  --accent-hover: #ebd0a7;
-  --accent-text: #1b0e24;      /* High-contrast deep text color for readability inside the peach button */
+  --accent: #FDE0B2;            /* --c-accent (That nice pastel sand color) */
+  --accent-hover: #E491A7;      /* Blends into your primary rose color on hover */
+  --accent-text: #18122B;       /* --c-text-dark for high contrast text inside buttons */
   
-  /* Gradient elements matched to your large dashboard card */
-  --pink: #ff8fa3;             /* Vibrant rose-pink for highlights and auth-footer links */
-  --gradient: linear-gradient(135deg, #a04ef6 0%, #d84b80 50%, #f98465 100%); 
-  --shadow-glow: 0 10px 40px rgba(216, 75, 128, 0.12); /* Soft magenta ambient aura */
-  --radius: 24px;             
+  --pink: #E491A7;              /* --c-primary */
+  --gradient: linear-gradient(135deg, #E491A7 0%, #90426F 100%); /* --c-primary to --c-primary-deep */
+  --shadow-glow: 0 8px 24px rgba(228, 145, 167, 0.25); /* Adjusted --shadow-float */
+  --radius: 24px;               /* --radius-lg */
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* 2. Global Resets with native font stack */
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg);
   color: var(--text);
   min-height: 100vh;
   display: flex;
@@ -40,20 +43,17 @@ body {
 .auth-card {
   width: 100%;
   max-width: 420px;
-  background: var(--card);
+  background-color: var(--card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 40px 32px;
-  box-shadow: var(--shadow-glow);
+  box-shadow: 0 12px 32px rgba(24, 18, 43, 0.35); /* --shadow-lg */
 }
 
 .auth-title {
   font-size: 28px;
   font-weight: 700;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--heading);
   margin-bottom: 8px;
 }
 
@@ -81,10 +81,10 @@ body {
 .form-group input {
   width: 100%;
   padding: 12px 14px;
-  background: var(--input-bg);
+  background-color: var(--input-bg);
   border: 1px solid var(--input-border);
-  border-radius: 10px;
-  color: var(--text);
+  border-radius: 10px; /* --radius-sm */
+  color: #ffffff; /* Keeping text fields crisp white for input clarity */
   font-size: 14px;
   outline: none;
   transition: border-color .15s, box-shadow .15s;
@@ -93,7 +93,7 @@ body {
 .auth-card input:focus,
 .form-group input:focus {
   border-color: var(--pink);
-  box-shadow: 0 0 0 3px rgba(240, 168, 184, 0.15);
+  box-shadow: 0 0 0 3px rgba(228, 145, 167, 0.2);
 }
 
 .btn-primary,
@@ -101,21 +101,26 @@ body {
 .create-account-btn {
   width: 100%;
   padding: 13px;
-  background: var(--accent);
+  background-color: var(--accent);
   color: var(--accent-text);
   border: none;
-  border-radius: 999px;
+  border-radius: 999px; /* --radius-pill */
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   margin-top: 8px;
-  transition: background .15s, transform .1s;
+  transition: background-color .15s, transform .1s;
 }
 
 .btn-primary:hover,
 .auth-card button[type="submit"]:hover,
-.create-account-btn:hover { background: var(--accent-hover); }
-.btn-primary:active { transform: scale(0.98); }
+.create-account-btn:hover { 
+  background-color: var(--accent-hover); 
+  color: #ffffff;
+}
+.btn-primary:active { 
+  transform: scale(0.98); 
+}
 
 .auth-footer {
   text-align: center;
@@ -130,10 +135,22 @@ body {
   text-decoration: none;
   font-weight: 500;
 }
-.auth-card a:hover { text-decoration: underline; }
+.auth-card a:hover { 
+  text-decoration: underline; 
+}
 
-.helptext { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
-.errorlist { list-style: none; color: #f0a8b8; font-size: 13px; margin: 4px 0; }
+.helptext { 
+  display: block; 
+  font-size: 12px; 
+  color: var(--muted); 
+  margin-top: 4px; 
+}
+.errorlist { 
+  list-style: none; 
+  color: var(--pink); 
+  font-size: 13px; 
+  margin: 4px 0; 
+}
 
 /* ---------- Profile page ---------- */
 .profile-wrap {
@@ -152,21 +169,22 @@ body {
   text-decoration: none;
   display: inline-block;
 }
-.back-btn:hover { color: var(--text); }
+.back-btn:hover { 
+  color: var(--text); 
+}
 
 .name-pill {
   display: inline-block;
   padding: 10px 22px;
-  background: var(--card);
-  border: 1px solid var(--card-border);
+  background-color: #7A4B83; /* --c-surface-2 for contrast */
   border-radius: 999px;
-  color: var(--heading);
+  color: #ffffff;
   font-weight: 600;
   margin-bottom: 32px;
 }
 
 .stats-card {
-  background: var(--card);
+  background-color: var(--card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 32px;
@@ -174,16 +192,25 @@ body {
   margin-bottom: 24px;
 }
 
-.stats-card h3 { color: var(--muted); font-size: 14px; font-weight: 500; margin-bottom: 20px; }
+.stats-card h3 { 
+  color: var(--muted); 
+  font-size: 14px; 
+  font-weight: 500; 
+  margin-bottom: 20px; 
+}
 
 .stats-circle {
-  width: 140px; height: 140px;
+  width: 140px; 
+  height: 140px;
   border-radius: 50%;
   background: var(--gradient);
-  display: flex; align-items: center; justify-content: center;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
   margin: 0 auto;
-  color: var(--accent-text);
-  font-size: 40px; font-weight: 700;
+  color: #ffffff;
+  font-size: 40px; 
+  font-weight: 700;
   box-shadow: var(--shadow-glow);
 }
 
@@ -198,4 +225,6 @@ body {
   font-weight: 500;
   cursor: pointer;
 }
-.logout-btn:hover { background: var(--card); }
+.logout-btn:hover { 
+  background-color: var(--bg-soft); 
+}
