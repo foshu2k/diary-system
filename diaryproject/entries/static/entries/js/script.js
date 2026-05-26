@@ -21,10 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (pendingFeedback) {
         sessionStorage.removeItem("voiceFeedback")
-        const unlock = new SpeechSynthesisUtterance("")
-        unlock.volume = 0
-        unlock.onend = () => speak(pendingFeedback)
-        speak(pendingFeedback)
+        setTimeout(() => {
+            speak(pendingFeedback)
+        }, 1000)
     }
 
     // Voice Command Functionality
