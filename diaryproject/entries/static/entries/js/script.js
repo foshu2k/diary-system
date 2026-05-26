@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "go to home": () => window.location.href = "/",
                 "go back": () => window.history.back(),
                 "go forward": () => window.history.forward(),
-                "go to profile": () => window.location.href = "/profile/",
+                "go to profile": () => window.location.href = "/accounts/profile/",
                 "go to entries": () => window.location.href = "/entrylist/",
                 "go to entry list": () => window.location.href = "/entrylist/",
                 "view entries": () => window.location.href = "/entrylist/",
