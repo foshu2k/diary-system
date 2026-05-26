@@ -1,5 +1,9 @@
 {% extends 'entries/base.html' %}
-{% load static %}{% block content %}
+{% load static %}
+
+{% block page_name %}Entry Detail{{ entry.title }}{% endblock %}
+
+{% block content %}
 <div class="app">
 
     <!-- Top Bar -->
