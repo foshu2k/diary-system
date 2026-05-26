@@ -2,40 +2,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Voice Command
     const voiceNavBtn = document.getElementById("micNavBtn")
-    const pendingFeedback = sessionStorage.getItem("voiceFeedback")
 
     // Speech to Text
     const speechBtn = document.getElementById("micBtn")
     const clearBtn = document.getElementById("clearBtn")
     
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-
-    // Text to Speech Feedback Helper
-    function speak(text) {
-        const utterance = new SpeechSynthesisUtterance(text)
-        utterance.volume = 1
-        utterance.rate = 1
-        utterance.pitch = 1
-        window.speechSynthesis.speak(utterance)
-    }
-
-    if (pendingFeedback) {
-        console.log("1. pendingFeedback found:", pendingFeedback)
-        sessionStorage.removeItem("voiceFeedback")
-
-        const unlock = new SpeechSynthesisUtterance("")
-        unlock.volume = 0
-        unlock.onstart = () => console.log("2. unlock started")
-        unlock.onend = () => {
-            console.log("3. unlock ended, calling speak...")
-            speak(pendingFeedback)
-        }
-        unlock.onerror = (e) => console.log("unlock error:", e)
-
-        console.log("4. calling speechSynthesis.speak(unlock)")
-        window.speechSynthesis.speak(unlock)
-        console.log("5. speechSynthesis state:", window.speechSynthesis.speaking, window.speechSynthesis.pending)
-    }
 
     // Voice Command Functionality
     if (voiceNavBtn) {
@@ -48,18 +20,18 @@ document.addEventListener("DOMContentLoaded", function () {
             let navObj = null
 
             const commands = {
-                "go home": () => { sessionStorage.setItem("voiceFeedback", "You are now on the home page"); window.location.href = "/" },
-                "go to home": () => { sessionStorage.setItem("voiceFeedback", "You are now on the home page"); window.location.href = "/" },
-                "go back": () => { speak("Going back"); window.history.back() },
-                "go forward": () => { speak("Going forward"); window.history.forward() },
-                "go to profile": () => { sessionStorage.setItem("voiceFeedback", "You are now on your profile"); window.location.href = "/profile/" },
-                "go to entries": () => { sessionStorage.setItem("voiceFeedback", "You are now viewing entries"); window.location.href = "/entrylist/" },
-                "go to entry list": () => { sessionStorage.setItem("voiceFeedback", "You are now viewing the entry list"); window.location.href = "/entrylist/" },
-                "view entries": () => { sessionStorage.setItem("voiceFeedback", "You are now viewing entries"); window.location.href = "/entrylist/" },
-                "view all entries": () => { sessionStorage.setItem("voiceFeedback", "You are now viewing all entries"); window.location.href = "/entrylist/" },
-                "create entry": () => { sessionStorage.setItem("voiceFeedback", "You are now creating a new entry"); window.location.href = "/create/" },
-                "new entry": () => { sessionStorage.setItem("voiceFeedback", "You are now creating a new entry"); window.location.href = "/create/" },
-                "add entry": () => { sessionStorage.setItem("voiceFeedback", "You are now adding a new entry"); window.location.href = "/create/" },
+                "go home": () => window.location.href = "/",
+                "go to home": () => window.location.href = "/",
+                "go back": () => window.history.back(),
+                "go forward": () => window.history.forward(),
+                "go to profile": () => window.location.href = "/profile/",
+                "go to entries": () => window.location.href = "/entrylist/",
+                "go to entry list": () => window.location.href = "/entrylist/",
+                "view entries": () => window.location.href = "/entrylist/",
+                "view all entries": () => window.location.href = "/entrylist/",
+                "create entry": () => window.location.href = "/create/",
+                "new entry": () => window.location.href = "/create/",
+                "add entry": () => window.location.href = "/create/",
             }
 
             voiceNavBtn.addEventListener("click", () => {
