@@ -48,9 +48,18 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             const commands = {
+                // Replace your old "go home" command with this logic
                 "go home": () => {
-                    // Option A: Use the tutorial style to speak immediately before redirecting
-                    speakAndNavigate("Navigating to home page.", "/");
+                    window.speechSynthesis.cancel(); // Stop any overlapping speech
+                    
+                    const voice = new SpeechSynthesisUtterance("You are navigating to the home page.");
+                    
+                    // CRITICAL: Wait until the browser finishes talking BEFORE changing the page
+                    voice.onend = function() {
+                        window.location.href = "/";
+                    };
+
+                    window.speechSynthesis.speak(voice);
                 },
                 "go to home": () => speakAndNavigate("Going home.", "/"),
                 "go back": () => {
