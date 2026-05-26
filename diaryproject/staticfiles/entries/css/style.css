@@ -424,6 +424,40 @@ p  { color: var(--c-text-muted); }
     filter: drop-shadow(0px 0px 0px transparent);
 }
 
+.filter-select-all {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    padding: 0 32px 0 16px; 
+    
+    border-radius: 20px; 
+    border: 1px solid rgba(253, 224, 178, 0.15);
+    background-color: rgba(24, 18, 43, 0.4); 
+    
+    color: var(--c-accent) !important; 
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+
+    background-position: right 12px center;
+    background-size: 12px;
+
+    filter: drop-shadow(0px 0px 0px transparent);
+}
+
+.filter-select-all.active {
+    background-color: var(--c-primary) !important; 
+    border-color: var(--c-primary) !important;
+    color: #18122B !important; /* Beautiful deep purple text contrast */
+    font-weight: 600;
+}
+
 /* Style the popup window box directly */
 .filter-select select,
 .filter-select option {

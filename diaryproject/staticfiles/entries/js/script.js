@@ -1,67 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Speech to Text
-    const speechBtn = document.getElementById("micBtn")
-    const clearBtn = document.getElementById("clearBtn")
-
     // Voice Command
     const voiceNavBtn = document.getElementById("micNavBtn")
 
+    // Speech to Text
+    const speechBtn = document.getElementById("micBtn")
+    const clearBtn = document.getElementById("clearBtn")
+    
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 
-    if (speechBtn) {
-        const micIcon = document.getElementById("micIcon")
-        const outputField = document.getElementById("id_content")
-
-        if (!SpeechRecognition) {
-            speechBtn.disabled = true
-        } else {
-            let isRecording = false
-            let speechObj = null
-
-            speechBtn.addEventListener("click", () => {
-                isRecording = !isRecording
-
-                if (isRecording) {
-                    startRecording()
-                } else {
-                    stopRecording()
-                }
-            })
-
-            if(clearBtn) {
-                clearBtn.addEventListener("click", () => {
-                    if (isRecording) {
-                        stopRecording()
-                        isRecording = false
-                    }
-                    
-                    outputField.value = ""
-                })
-            }
-
-            function startRecording() {
-                micIcon.src = "/static/entries/svg/mic-recording.svg"
-                speechObj = new SpeechRecognition()
-                speechObj.start()
-                speechObj.onresult = transcribe
-            }
-
-            function transcribe(e) {
-                const transcript = e.results[0][0].transcript
-                outputField.value += transcript + " "
-            }
-
-            function stopRecording() {
-                micIcon.src = "/static/entries/svg/mic-idle.svg"
-                if (speechObj) {
-                    speechObj.stop()
-                    speechObj = null
-                }
-            }
-        }
+    // Feedback
+    const voiceFeedback = () => {
+        let text = sessionStorage.getItem("voiceNavFeedback");
+        const voice = new SpeechSynthesisUtterance(text)
+        window.speechSynthesis.speak(voice);
+        sessionStorage.removeItem("voiceNavFeedback")
     }
 
+    voiceFeedback()
+
+    // Voice Command Functionality
     if (voiceNavBtn) {
         const micNavIcon = document.getElementById("micNavIcon")
 
@@ -72,7 +30,10 @@ document.addEventListener("DOMContentLoaded", function () {
             let navObj = null
 
             const commands = {
-                "go home": () => window.location.href = "/",
+                "go home": () => {
+                    sessionStorage.setItem("voiceNavFeedback", "You are at the home page.");
+                    window.location.href = "/"
+                },
                 "go to home": () => window.location.href = "/",
                 "go back": () => window.history.back(),
                 "go forward": () => window.history.forward(),
@@ -121,6 +82,60 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (navObj) {
                     navObj.stop()
                     navObj = null
+                }
+            }
+        }
+    }
+
+    // Speech to Text Functionality
+    if (speechBtn) {
+        const micIcon = document.getElementById("micIcon")
+        const outputField = document.getElementById("id_content")
+
+        if (!SpeechRecognition) {
+            speechBtn.disabled = true
+        } else {
+            let isRecording = false
+            let speechObj = null
+
+            speechBtn.addEventListener("click", () => {
+                isRecording = !isRecording
+
+                if (isRecording) {
+                    startRecording()
+                } else {
+                    stopRecording()
+                }
+            })
+
+            if(clearBtn) {
+                clearBtn.addEventListener("click", () => {
+                    if (isRecording) {
+                        stopRecording()
+                        isRecording = false
+                    }
+                    
+                    outputField.value = ""
+                })
+            }
+
+            function startRecording() {
+                micIcon.src = "/static/entries/svg/mic-recording.svg"
+                speechObj = new SpeechRecognition()
+                speechObj.start()
+                speechObj.onresult = transcribe
+            }
+
+            function transcribe(e) {
+                const transcript = e.results[0][0].transcript
+                outputField.value += transcript + " "
+            }
+
+            function stopRecording() {
+                micIcon.src = "/static/entries/svg/mic-idle.svg"
+                if (speechObj) {
+                    speechObj.stop()
+                    speechObj = null
                 }
             }
         }
