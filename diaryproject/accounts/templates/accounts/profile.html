@@ -1,24 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMEN: Create Account</title>
+  <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+</head>
+<body class="auth-body">
+  <div class="auth-card">
+    <h1 class="auth-title">Create account</h1>
+    <p class="auth-subtitle">Start your journaling journey</p>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LUMEN: Profile Page</title>
-    </head>
+    <form method="POST" action="">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn-primary">Create account</button>
+    </form>
 
-    <body>
-         <a href="{% url 'home' %}" class="btn btn-secondary entry-detail-back">
-            <img src="" class="padding-top: 9px icon" alt="Back">Back
-        </a>
-        <h1>{{ user.username }}'s Profile</h1>
-
-        <h3>Total Entries: {{ entry_count }}</h3>
-
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
-    </body>
-
+    <p class="auth-footer">
+      Already have an account? <a href="{% url 'login' %}">Sign in</a>
+    </p>
+  </div>
+</body>
 </html>
