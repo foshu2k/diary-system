@@ -24,7 +24,7 @@
 
                 <!-- Reset filter / All button -->
                 <a href="{% url 'entry_list' %}" 
-                    class="filter-select {% if not request.GET.year and not request.GET.month and not request.GET.day %}active{% endif %}" style="background-image: none; padding-right: 16px;">
+                    class="filter-select-all {% if not request.GET.year and not request.GET.month and not request.GET.day %}active{% endif %}">
                     All
                 </a>
 
