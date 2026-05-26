@@ -32,9 +32,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const commands = {
                 "go home": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the home page.");
-                    window.speechSynthesis.speak(new SpeechSynthesisUtterance(""))
-                    window.location.href = "/"
+                    const unlock = new SpeechSynthesisUtterance("")
+                    unlock.onend = () => {
+                        sessionStorage.setItem("voiceNavFeedback", "You are at the home page.")
+                        window.location.href = "/"
+                    }
+                    window.speechSynthesis.speak(unlock)
                 },
                 "go to home": () => window.location.href = "/",
                 "go back": () => window.history.back(),
