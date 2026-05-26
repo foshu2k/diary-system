@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (pendingFeedback) {
         sessionStorage.removeItem("voiceFeedback")
-        setTimeout(() => speak(pendingFeedback), 200)
+        const unlock = new SpeechSynthesisUtterance("")
+        unlock.volume = 0
+        unlock.onend = () => speak(pendingFeedback)
         speak(pendingFeedback)
     }
 
