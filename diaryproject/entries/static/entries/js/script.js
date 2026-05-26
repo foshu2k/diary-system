@@ -2,12 +2,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Voice Command
     const voiceNavBtn = document.getElementById("micNavBtn")
+    const navFeedback = sessionStorage.getItem("voiceNavFeedback")
 
     // Speech to Text
     const speechBtn = document.getElementById("micBtn")
     const clearBtn = document.getElementById("clearBtn")
     
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+
+    // Feedback
+    const voiceFeedback = () => {
+        let text = navFeedback;
+        const voice = new SpeechSynthesisUtterance(text)
+        window.speechSynthesis.speak(voice);
+    }
 
     // Voice Command Functionality
     if (voiceNavBtn) {
@@ -20,7 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
             let navObj = null
 
             const commands = {
-                "go home": () => window.location.href = "/",
+                "go home": () => {
+                    sessionStorage.setItem("voiceNavFeedback", "You are at the home page.");
+                    window.location.href = "/"
+                },
                 "go to home": () => window.location.href = "/",
                 "go back": () => window.history.back(),
                 "go forward": () => window.history.forward(),
@@ -65,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             function stopNavigating() {
                 isNavigating = false
+                voiceFeedback();
                 micNavIcon.src = "/static/entries/svg/mic-idle.svg"
                 if (navObj) {
                     navObj.stop()
