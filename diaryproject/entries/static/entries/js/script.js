@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    // DEBUG — remove after fixing
+    console.log("Script loaded on:", window.location.pathname)
+    console.log("pendingFeedback value:", sessionStorage.getItem("voiceFeedback"))
+    console.log("speechSynthesis available:", 'speechSynthesis' in window)
+
     // Voice Command
     const voiceNavBtn = document.getElementById("micNavBtn")
     const pendingFeedback = sessionStorage.getItem("voiceFeedback")
@@ -10,20 +15,20 @@ document.addEventListener("DOMContentLoaded", function () {
     
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 
-    // Text to Speech Feedback Helper
     function speak(text) {
+        console.log("speak() called with:", text)
+        console.log("speechSynthesis speaking:", window.speechSynthesis.speaking)
+        console.log("speechSynthesis paused:", window.speechSynthesis.paused)
+
         const utterance = new SpeechSynthesisUtterance(text)
+        utterance.onstart = () => console.log("utterance started")
+        utterance.onend = () => console.log("utterance ended")
+        utterance.onerror = (e) => console.error("utterance error:", e.error)
+
         utterance.volume = 1
         utterance.rate = 1
         utterance.pitch = 1
         window.speechSynthesis.speak(utterance)
-    }
-
-    if (pendingFeedback) {
-        sessionStorage.removeItem("voiceFeedback")
-        setTimeout(() => {
-            speak(pendingFeedback)
-        }, 1000)
     }
 
     // Voice Command Functionality
