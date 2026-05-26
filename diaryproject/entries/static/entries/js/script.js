@@ -38,61 +38,75 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const commands = {
                 // --- HOME NAVIGATION ---
-                "go home": () => { 
+                "go home": () => {
                     sessionStorage.setItem("voiceFeedback", "You are now on the home page")
-                    window.location.href = "/" 
+                    stopNavigating()
+                    window.location.href = "/"
                 },
-                "go to home": () => { 
+                "go to home": () => {
                     sessionStorage.setItem("voiceFeedback", "You are now on the home page")
-                    window.location.href = "/" 
+                    stopNavigating()
+                    window.location.href = "/"
                 },
 
-                // --- HISTORY NAVIGATION (FIXED: Added delay to allow audio to finish) ---
-                "go back": () => { 
-                    speak("Going back")
-                    setTimeout(() => { window.history.back() }, 800) 
+                // --- HISTORY NAVIGATION ---
+                // Use sessionStorage so feedback plays after the destination page loads,
+                // not before — speak() would get cut off by the navigation otherwise.
+                "go back": () => {
+                    sessionStorage.setItem("voiceFeedback", "Going back")
+                    stopNavigating()
+                    setTimeout(() => { window.history.back() }, 300)
                 },
-                "go forward": () => { 
-                    speak("Going forward")
-                    setTimeout(() => { window.history.forward() }, 800) 
+                "go forward": () => {
+                    sessionStorage.setItem("voiceFeedback", "Going forward")
+                    stopNavigating()
+                    setTimeout(() => { window.history.forward() }, 300)
                 },
 
                 // --- PROFILE NAVIGATION ---
-                "go to profile": () => { 
+                "go to profile": () => {
                     sessionStorage.setItem("voiceFeedback", "You are now on your profile")
-                    window.location.href = "/profile/" 
+                    stopNavigating()
+                    window.location.href = "/profile/"
                 },
 
-                // --- VIEW ENTRIES NAVIGATION ---
-                "go to entries": () => { 
+                // --- VIEW ENTRIES ---
+                "go to entries": () => {
                     sessionStorage.setItem("voiceFeedback", "You are now viewing entries")
-                    window.location.href = "/entrylist/" 
+                    stopNavigating()
+                    window.location.href = "/entrylist/"
                 },
-                "go to entry list": () => { 
+                "go to entry list": () => {
                     sessionStorage.setItem("voiceFeedback", "You are now viewing the entry list")
-                    window.location.href = "/entrylist/" 
+                    stopNavigating()
+                    window.location.href = "/entrylist/"
                 },
-                "view entries": () => { 
+                "view entries": () => {
                     sessionStorage.setItem("voiceFeedback", "You are now viewing entries")
-                    window.location.href = "/entrylist/" 
+                    stopNavigating()
+                    window.location.href = "/entrylist/"
                 },
-                "view all entries": () => { 
+                "view all entries": () => {
                     sessionStorage.setItem("voiceFeedback", "You are now viewing all entries")
-                    window.location.href = "/entrylist/" 
+                    stopNavigating()
+                    window.location.href = "/entrylist/"
                 },
 
-                // --- CREATE ENTRY NAVIGATION ---
-                "create entry": () => { 
+                // --- CREATE ENTRY ---
+                "create entry": () => {
                     sessionStorage.setItem("voiceFeedback", "You are now creating a new entry")
-                    window.location.href = "/create/" 
+                    stopNavigating()
+                    window.location.href = "/create/"
                 },
-                "new entry": () => { 
+                "new entry": () => {
                     sessionStorage.setItem("voiceFeedback", "You are now creating a new entry")
-                    window.location.href = "/create/" 
+                    stopNavigating()
+                    window.location.href = "/create/"
                 },
-                "add entry": () => { 
+                "add entry": () => {
                     sessionStorage.setItem("voiceFeedback", "You are now adding a new entry")
-                    window.location.href = "/create/" 
+                    stopNavigating()
+                    window.location.href = "/create/"
                 },
             }
             voiceNavBtn.addEventListener("click", () => {
