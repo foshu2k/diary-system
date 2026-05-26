@@ -7,16 +7,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Global reusable text-to-speech engine
     function speak(text) {
         if (!SpeechSynthesis || !text) return;
-        SpeechSynthesis.cancel(); // Stop any currently playing audio track
+        SpeechSynthesis.cancel(); // Clean the active pipeline
         const voice = new SpeechSynthesisUtterance(text);
         SpeechSynthesis.speak(voice);
     }
 
-    // Replace your old voiceFeedback function with this updated version:
     const voiceFeedback = () => {
         let customFeedback = sessionStorage.getItem("voiceNavFeedback");
-    
-        // Safety check: force clear any frozen speech queues
         if (SpeechSynthesis) {
             SpeechSynthesis.cancel();
         }
@@ -30,12 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Trigger feedback instantly on page render
+    // Trigger initial feedback
     voiceFeedback();
 
-
     // ==========================================
-    // VOICE COMMAND NAVIGATION
+    // VOICE COMMAND NAVIGATION (SPA STYLED)
     // ==========================================
     const voiceNavBtn = document.getElementById("micNavBtn");
 
@@ -48,27 +44,61 @@ document.addEventListener("DOMContentLoaded", function () {
             let isNavigating = false;
             let navObj = null;
 
-            // Helper to clean up redirects and stage voice announcements
+            // SMART ROUTER: Fetches page content dynamically to preserve voice permissions
             const navigateTo = (url, feedbackText) => {
-                sessionStorage.setItem("voiceNavFeedback", feedbackText);
-                window.location.href = url;
+                if (!url) return;
+
+                // 1. Speak immediately before the browser context changes!
+                speak(feedbackText);
+
+                // 2. Fetch the new HTML page background data
+                fetch(url)
+                    .then(response => response.text())
+                    .then(html => {
+                        // Create a temporary parser to scan the new page payload
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, "text/html");
+
+                        // Find the core container in current page and new page
+                        const targetContainer = document.querySelector(".app") || document.querySelector(".container");
+                        const newContainer = doc.querySelector(".app") || doc.querySelector(".container");
+
+                        if (targetContainer && newContainer) {
+                            // Swap out the old view content seamlessly
+                            targetContainer.innerHTML = newContainer.innerHTML;
+
+                            // Update browser URL state history without dropping audio profiles
+                            window.history.pushState({ path: url }, "", url);
+
+                            // Update active page tracking text
+                            const newPageName = doc.body.getAttribute("data-page-name") || "a new page";
+                            document.body.setAttribute("data-page-name", newPageName);
+                        } else {
+                            // Fallback if containers don't align cleanly across unique standalone structures
+                            sessionStorage.setItem("voiceNavFeedback", feedbackText);
+                            window.location.href = url;
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Failed handling voice navigation async swap:", err);
+                        window.location.href = url; // Hard fallback route
+                    });
             };
 
             const commands = {
-                "go home": () => navigateTo(document.body.getAttribute("data-url-home"), "You are at the home page."),
+                "go home": () => navigateTo(document.body.getAttribute("data-url-home"), "Going to the home page."),
                 "go to home": () => navigateTo(document.body.getAttribute("data-url-home"), "Returning home."),
                 "go back": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "Going back a page.");
+                    speak("Going back a page.");
                     window.history.back();
                 },
                 "go forward": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "Going forward a page.");
+                    speak("Going forward a page.");
                     window.history.forward();
                 },
-                "go to profile": () => navigateTo("/profile/", "Opening your profile."), // Keep if profile matches
                 "go to entries": () => navigateTo(document.body.getAttribute("data-url-entries"), "Loading your entry list."),
                 "go to entry list": () => navigateTo(document.body.getAttribute("data-url-entries"), "Loading your entry list."),
-                "view entries": () => navigateTo(document.body.getAttribute("data-url-entries"), "Displaying entries."),
+                "view entries": () => navigateTo(document.body.getAttribute("data-url-entries"), "Displaying your entry list."),
                 "view all entries": () => navigateTo(document.body.getAttribute("data-url-entries"), "Displaying all entries."),
                 "create entry": () => navigateTo(document.body.getAttribute("data-url-create"), "Opening new entry creator."),
                 "new entry": () => navigateTo(document.body.getAttribute("data-url-create"), "Opening new entry creator."),
@@ -89,8 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 navObj = new SpeechRecognition();
                 navObj.start();
                 navObj.onresult = handleCommand;
-                
-                // Reset state cleanly if microphone times out naturally
                 navObj.onend = () => {
                     if (isNavigating) stopNavigating();
                 };
@@ -119,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
-
 
     // ==========================================
     // SPEECH TO TEXT (FORM FIELD TRANSCRIPTION)
@@ -161,7 +188,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 speechObj = new SpeechRecognition();
                 speechObj.start();
                 speechObj.onresult = transcribe;
-                
                 speechObj.onend = () => {
                     if (isRecording) stopRecording();
                 };
@@ -169,7 +195,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             function transcribe(e) {
                 const transcript = e.results[0][0].transcript;
-                outputField.value += transcript + " ";
+                if (outputField) {
+                    outputField.value += transcript + " ";
+                }
             }
 
             function stopRecording() {
