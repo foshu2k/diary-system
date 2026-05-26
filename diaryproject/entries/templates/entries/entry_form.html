@@ -19,7 +19,9 @@
             <a href="{% url 'home' %}" class="btn btn-secondary entry-detail-back">
                 <img src="{% static 'entries/svg/back.svg' %}" class="padding-top: 9px icon" alt="Back">Back
             </a>
-            <div class="avatar"></div>
+            <a href="{% url 'profile' %}">
+                <div class="avatar" aria-label="Profile"></div>
+            </a>
         </div>
 
         <header class="entry-header-group">
