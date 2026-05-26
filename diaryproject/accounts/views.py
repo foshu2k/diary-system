@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.views.decorators.http import require_POST
 
 def register_view(request):
     if request.user.is_authenticated:
@@ -34,8 +35,10 @@ def login_view(request):
 
 @login_required
 def profile_view(request):
-    return render(request, "accounts/profile.html", {"user": request.user})
+    entry_count = request.user.entry_set.count()
+    return render(request, "accounts/profile.html", {"user": request.user, "entry_count": entry_count})
 
+@require_POST
 def logout_view(request):
     logout(request)
     return redirect("login")

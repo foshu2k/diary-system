@@ -12,7 +12,13 @@
             <img src="" class="padding-top: 9px icon" alt="Back">Back
         </a>
         <h1>{{ user.username }}'s Profile</h1>
-        <a href="{% url 'logout' %}">Logout</a>
+
+        <h3>Total Entries: {{ entry_count }}</h3>
+
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
     </body>
 
 </html>
