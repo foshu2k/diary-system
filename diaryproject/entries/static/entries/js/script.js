@@ -21,9 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (pendingFeedback) {
         sessionStorage.removeItem("voiceFeedback")
-        setTimeout(() => {
-            speak(pendingFeedback)
-        }, 1000)
+        const unlock = new SpeechSynthesisUtterance("")
+        unlock.volume = 0
+        unlock.onend = () => speak(pendingFeedback)
+        window.speechSynthesis.speak(unlock)
     }
 
     // Voice Command Functionality
@@ -37,64 +38,20 @@ document.addEventListener("DOMContentLoaded", function () {
             let navObj = null
 
             const commands = {
-                // --- HOME NAVIGATION ---
-                "go home": () => { 
-                    sessionStorage.setItem("voiceFeedback", "You are now on the home page")
-                    window.location.href = "/" 
-                },
-                "go to home": () => { 
-                    sessionStorage.setItem("voiceFeedback", "You are now on the home page")
-                    window.location.href = "/" 
-                },
-
-                // --- HISTORY NAVIGATION (FIXED: Added delay to allow audio to finish) ---
-                "go back": () => { 
-                    speak("Going back")
-                    setTimeout(() => { window.history.back() }, 800) 
-                },
-                "go forward": () => { 
-                    speak("Going forward")
-                    setTimeout(() => { window.history.forward() }, 800) 
-                },
-
-                // --- PROFILE NAVIGATION ---
-                "go to profile": () => { 
-                    sessionStorage.setItem("voiceFeedback", "You are now on your profile")
-                    window.location.href = "/profile/" 
-                },
-
-                // --- VIEW ENTRIES NAVIGATION ---
-                "go to entries": () => { 
-                    sessionStorage.setItem("voiceFeedback", "You are now viewing entries")
-                    window.location.href = "/entrylist/" 
-                },
-                "go to entry list": () => { 
-                    sessionStorage.setItem("voiceFeedback", "You are now viewing the entry list")
-                    window.location.href = "/entrylist/" 
-                },
-                "view entries": () => { 
-                    sessionStorage.setItem("voiceFeedback", "You are now viewing entries")
-                    window.location.href = "/entrylist/" 
-                },
-                "view all entries": () => { 
-                    sessionStorage.setItem("voiceFeedback", "You are now viewing all entries")
-                    window.location.href = "/entrylist/" 
-                },
-
-                // --- CREATE ENTRY NAVIGATION ---
-                "create entry": () => { 
-                    sessionStorage.setItem("voiceFeedback", "You are now creating a new entry")
-                    window.location.href = "/create/" 
-                },
-                "new entry": () => { 
-                    sessionStorage.setItem("voiceFeedback", "You are now creating a new entry")
-                    window.location.href = "/create/" 
-                },
-                "add entry": () => { 
-                    sessionStorage.setItem("voiceFeedback", "You are now adding a new entry")
-                    window.location.href = "/create/" 
-                },
+                "go home": () => { sessionStorage.setItem("voiceFeedback", "You are now on the home page"); window.location.href = "/" },
+                "go to home": () => { sessionStorage.setItem("voiceFeedback", "You are now on the home page"); window.location.href = "/" },
+                "go back": () => { speak("Going back"); window.history.back() },
+                "go forward": () => { speak("Going forward"); window.history.forward() },
+                "go to profile": () => { sessionStorage.setItem("voiceFeedback", "You are now on your profile"); window.location.href = "/profile/" },
+                "go to entries": () => { sessionStorage.setItem("voiceFeedback", "You are now viewing entries"); window.location.href = "/entrylist/" },
+                "go to entry list": () => { sessionStorage.setItem("voiceFeedback", "You are now viewing the entry list"); window.location.href = "/entrylist/" },
+                "view entries": () => { sessionStorage.setItem("voiceFeedback", "You are now viewing entries"); window.location.href = "/entrylist/" },
+                "view all entries": () => { sessionStorage.setItem("voiceFeedback", "You are now viewing all entries"); window.location.href = "/entrylist/" },
+                "create entry": () => { sessionStorage.setItem("voiceFeedback", "You are now creating a new entry"); window.location.href = "/create/" },
+                "new entry": () => { sessionStorage.setItem("voiceFeedback", "You are now creating a new entry"); window.location.href = "/create/" },
+                "add entry": () => { sessionStorage.setItem("voiceFeedback", "You are now adding a new entry"); window.location.href = "/create/" },
             }
+            
             voiceNavBtn.addEventListener("click", () => {
             isNavigating = !isNavigating
 
