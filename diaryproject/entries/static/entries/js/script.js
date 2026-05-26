@@ -10,14 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 
     // Feedback
-    const voiceFeedback = () => {
-        let text = sessionStorage.getItem("voiceNavFeedback");
+    const voiceFeedback = (text, callback) => {
         const voice = new SpeechSynthesisUtterance(text)
-        window.speechSynthesis.speak(voice);
-        sessionStorage.removeItem("voiceNavFeedback")
+        if (callback) voice.onend = callback
+        window.speechSynthesis.speak(voice)
     }
-
-    voiceFeedback()
 
     // Voice Command Functionality
     if (voiceNavBtn) {
@@ -30,10 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let navObj = null
 
             const commands = {
-                "go home": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the home page.");
-                    window.location.href = "/"
-                },
+                "go home": () => voiceFeedback("You are at the home page.", () => window.location.href = "/"),
                 "go to home": () => window.location.href = "/",
                 "go back": () => window.history.back(),
                 "go forward": () => window.history.forward(),
