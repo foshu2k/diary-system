@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const commands = {
                 "go home": () => {
                     sessionStorage.setItem("voiceNavFeedback", "You are at the home page.");
+                    window.speechSynthesis.speak(new SpeechSynthesisUtterance(""))
                     window.location.href = "/"
                 },
                 "go to home": () => window.location.href = "/",
