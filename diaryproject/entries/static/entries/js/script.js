@@ -12,16 +12,19 @@ document.addEventListener("DOMContentLoaded", function () {
         SpeechSynthesis.speak(voice);
     }
 
-    // Voice Feedback on Landing
+    // Replace your old voiceFeedback function with this updated version:
     const voiceFeedback = () => {
         let customFeedback = sessionStorage.getItem("voiceNavFeedback");
-        
+    
+        // Safety check: force clear any frozen speech queues
+        if (SpeechSynthesis) {
+            SpeechSynthesis.cancel();
+        }
+
         if (customFeedback) {
-            // Speak custom contextual command text if it exists
             speak(customFeedback);
             sessionStorage.removeItem("voiceNavFeedback");
         } else {
-            // Fallback to the current Django data attribute page name 
             const currentPage = document.body.getAttribute("data-page-name") || "a new page";
             speak(`You have landed on the ${currentPage}`);
         }
@@ -52,8 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             const commands = {
-                "go home": () => navigateTo("/", "You are at the home page."),
-                "go to home": () => navigateTo("/", "Returning home."),
+                "go home": () => navigateTo(document.body.getAttribute("data-url-home"), "You are at the home page."),
+                "go to home": () => navigateTo(document.body.getAttribute("data-url-home"), "Returning home."),
                 "go back": () => {
                     sessionStorage.setItem("voiceNavFeedback", "Going back a page.");
                     window.history.back();
@@ -62,14 +65,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     sessionStorage.setItem("voiceNavFeedback", "Going forward a page.");
                     window.history.forward();
                 },
-                "go to profile": () => navigateTo("/profile/", "Opening your profile."),
-                "go to entries": () => navigateTo("/entrylist/", "Loading your entry list."),
-                "go to entry list": () => navigateTo("/entrylist/", "Loading your entry list."),
-                "view entries": () => navigateTo("/entrylist/", "Displaying entries."),
-                "view all entries": () => navigateTo("/entrylist/", "Displaying all entries."),
-                "create entry": () => navigateTo("/create/", "Opening new entry creator."),
-                "new entry": () => navigateTo("/create/", "Opening new entry creator."),
-                "add entry": () => navigateTo("/create/", "Opening new entry creator."),
+                "go to profile": () => navigateTo("/profile/", "Opening your profile."), // Keep if profile matches
+                "go to entries": () => navigateTo(document.body.getAttribute("data-url-entries"), "Loading your entry list."),
+                "go to entry list": () => navigateTo(document.body.getAttribute("data-url-entries"), "Loading your entry list."),
+                "view entries": () => navigateTo(document.body.getAttribute("data-url-entries"), "Displaying entries."),
+                "view all entries": () => navigateTo(document.body.getAttribute("data-url-entries"), "Displaying all entries."),
+                "create entry": () => navigateTo(document.body.getAttribute("data-url-create"), "Opening new entry creator."),
+                "new entry": () => navigateTo(document.body.getAttribute("data-url-create"), "Opening new entry creator."),
+                "add entry": () => navigateTo(document.body.getAttribute("data-url-create"), "Opening new entry creator."),
             };
 
             voiceNavBtn.addEventListener("click", () => {

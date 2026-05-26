@@ -10,7 +10,12 @@
             <link rel="stylesheet" href="{% static 'entries/css/style.css' %}">
         </head>
 
-        <body data-page-name="{% if form.instance.id %}Edit Entry for {{ form.instance.title }}{% else %}Create New Entry{% endif %}">
+        <body 
+            data-page-name="{% if form.instance.id %}Edit Entry for {{ form.instance.title }}{% else %}Create New Entry{% endif %}"
+            data-url-home="{% url 'home' %}"
+            data-url-entries="{% url 'entry_list' %}"
+            data-url-create="{% url 'create_entry' %}"
+        >
             <div class="app">
 
                 <!-- Top Bar -->

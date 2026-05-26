@@ -11,7 +11,12 @@
         <link rel="stylesheet" href="{% static 'entries/css/style.css' %}">
     </head>
 
-    <body data-page-name="{% block page_name %}a new page{% endblock %}">
+    <body 
+        data-page-name="{% block page_name %}a new page{% endblock %}"
+        data-url-home="{% url 'home' %}"
+        data-url-entries="{% url 'entry_list' %}"
+        data-url-create="{% url 'create_entry' %}"
+    >
 
         <!-- Topbar -->
         <header class="topbar">
