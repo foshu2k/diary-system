@@ -1,21 +1,26 @@
 /* accounts/static/accounts/style.css */
 :root {
-  --bg: #1a0f2e;              /* deep navy-purple page bg */
-  --bg-soft: #221538;
-  --card: #3d2347;            /* muted plum card */
-  --card-border: #5a3566;
-  --input-bg: #2a1a3d;
-  --input-border: #4a2d5a;
-  --text: #f3e7d9;            /* warm cream body text */
-  --muted: #b89bb0;           /* dusty mauve */
-  --heading: #f5d9a8;         /* cream/peach headings */
-  --accent: #f5d59a;          /* warm peach button */
-  --accent-hover: #f0c97d;
-  --accent-text: #2a1a3d;     /* dark text on peach button */
-  --pink: #f0a8b8;            /* soft pink gradient stop */
-  --gradient: linear-gradient(135deg, #f5d9a8 0%, #f0a8b8 100%);
-  --shadow-glow: 0 10px 40px rgba(240, 168, 184, 0.15);
-  --radius: 18px;
+  --bg: #0c0714;               /* Very dark, near-black obsidian background from screenshot */
+  --bg-soft: #140d1f;          /* Slightly lighter dark background for panels */
+  --card: #20132b;             /* Deep plum/berry container background */
+  --card-border: #321e42;      /* Subtle deep purple border for inputs and cards */
+  --input-bg: #140d1f;         /* Inner inputs matched to dark page accents */
+  --input-border: #2c1a3b;
+  
+  --text: #f5eefc;             /* Clear, cool cream/white text color */
+  --muted: #a38fb8;            /* Soft violet-tinted mauve for secondary copy */
+  --heading: #ffffff;          /* Pure white headings */
+  
+  /* Primary Accents from your main dashboard cards & buttons */
+  --accent: #fcd7a1;           /* The exact pastel peach color from your 'Start Writing' button */
+  --accent-hover: #ebd0a7;
+  --accent-text: #1b0e24;      /* High-contrast deep text color for readability inside the peach button */
+  
+  /* Gradient elements matched to your large dashboard card */
+  --pink: #ff8fa3;             /* Vibrant rose-pink for highlights and auth-footer links */
+  --gradient: linear-gradient(135deg, #a04ef6 0%, #d84b80 50%, #f98465 100%); 
+  --shadow-glow: 0 10px 40px rgba(216, 75, 128, 0.12); /* Soft magenta ambient aura */
+  --radius: 24px;             
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
