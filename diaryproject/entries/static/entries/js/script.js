@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    // DEBUG — remove after fixing
+    console.log("Script loaded on:", window.location.pathname)
+    console.log("pendingFeedback value:", sessionStorage.getItem("voiceFeedback"))
+    console.log("speechSynthesis available:", 'speechSynthesis' in window)
+
     // Voice Command
     const voiceNavBtn = document.getElementById("micNavBtn")
 
