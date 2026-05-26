@@ -2,159 +2,160 @@
 {% load static %}
 
 {% block content %}
-    <div class="app">
+<div class="app">
 
-        <!-- Page Header -->
-        <div class="page-header">
-            <h1>Entries</h1>
-            <p>All your diary entries in one place.</p>
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Entries</h1>
+        <p>All your diary entries in one place.</p>
+    </div>
+
+    <form method="GET" action="{% url 'entry_list' %}" id="filterForm">
+        <div class="search-bar">
+            <img src="{% static 'entries/svg/search.svg' %}" class="search-icon" alt="search">
+            <input type="text" name="search" class="input" placeholder="Search entries…" value="{{ search_query }}" />
+            <button type="submit" class="search-pill-btn">
+                <img src="{% static 'entries/svg/search.svg' %}" class="search-btn-icon" alt="" aria-hidden="true">
+                Search
+            </button>
         </div>
 
-        <form method="GET" action="{% url 'entry_list' %}" id="filterForm">
-            <div class="search-bar">
-                <img src="{% static 'entries/svg/search.svg' %}" class="search-icon" alt="search">
-                <input type="text" name="search" class="input" placeholder="Search entries…" value="{{ search_query }}" />
-                <button type="submit" class="search-pill-btn">
-                    <img src="{% static 'entries/svg/search.svg' %}" class="search-btn-icon" alt="" aria-hidden="true">
-                    Search
-                </button>
-            </div>
-        
-            <div class="filter-bar">
+        <div class="filter-bar">
 
-                <!-- Reset filter / All button -->
-                <a href="{% url 'entry_list' %}" 
-                    class="filter-select-all {% if not request.GET.year and not request.GET.month and not request.GET.day %}active{% endif %}">
-                    All
-                </a>
+            <!-- Reset filter / All button -->
+            <a href="{% url 'entry_list' %}"
+                class="filter-select-all {% if not request.GET.year and not request.GET.month and not request.GET.day %}active{% endif %}">
+                All
+            </a>
 
-                <select name="year" class="filter-select" onchange="document.getElementById('filterForm').submit();">
-                    {% for value, label in entry_filter.form.fields.year.choices %}
-                        <option value="{{ value }}" {% if value|stringformat:"s" == request.GET.year %}selected{% endif %}>
-                            {{ label }}
-                        </option>
-                    {% endfor %}
-                </select>
+            <select name="year" class="filter-select" onchange="document.getElementById('filterForm').submit();">
+                {% for value, label in entry_filter.form.fields.year.choices %}
+                <option value="{{ value }}" {% if value|stringformat:"s"==request.GET.year %}selected{% endif %}>
+                    {{ label }}
+                </option>
+                {% endfor %}
+            </select>
 
-                <select name="month" class="filter-select" onchange="document.getElementById('filterForm').submit();">
-                    {% for value, label in entry_filter.form.fields.month.choices %}
-                        <option value="{{ value }}" {% if value|stringformat:"s" == request.GET.month %}selected{% endif %}>
-                            {{ label }}
-                        </option>
-                    {% endfor %}
-                </select>
+            <select name="month" class="filter-select" onchange="document.getElementById('filterForm').submit();">
+                {% for value, label in entry_filter.form.fields.month.choices %}
+                <option value="{{ value }}" {% if value|stringformat:"s"==request.GET.month %}selected{% endif %}>
+                    {{ label }}
+                </option>
+                {% endfor %}
+            </select>
 
-                <select name="day" class="filter-select" onchange="document.getElementById('filterForm').submit();">
-                    {% for value, label in entry_filter.form.fields.day.choices %}
-                        <option value="{{ value }}" {% if value|stringformat:"s" == request.GET.day %}selected{% endif %}>
-                            {{ label }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div> 
+            <select name="day" class="filter-select" onchange="document.getElementById('filterForm').submit();">
+                {% for value, label in entry_filter.form.fields.day.choices %}
+                <option value="{{ value }}" {% if value|stringformat:"s"==request.GET.day %}selected{% endif %}>
+                    {{ label }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
 
-            {% if filter_errors %}
-                <ul class="filter-error-list">
-                    {% for error in filter_errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </form> 
-
-        <!-- Calendar Section -->
-        <section class="py-5 text-center border border-1">
-            <div class="table">
-                <button class="btn btn-secondary btn-lg w-100" onclick="document.getElementById('dateFilter').showPicker()">
-                    <img src="{% static 'entries/svg/calendar.svg' %}" class="icon-inline">
-                    Calendar
-                </button>
-            </div>
-        </section>
-
-        <!-- Entry Section -->
-        <section class="py-2">
-            <div class="p-5 border border-1 text-center">
-                <a href="{% url 'create_entry' %}" class="btn btn-primary btn-lg w-100">
-                    <img src="{% static 'entries/svg/plus.svg' %}" class="icon-inline">
-                    Add Entry
-                </a>
-                <h1 class="fs-6">Create your new entry</h1>
-            </div>
-        </section>
-
-        <!-- Search Result Text -->
-        {% if search_query %}
-            <p>You searched for <strong>"{{ search_query }}"</strong></p>
+        {% if filter_errors %}
+        <ul class="filter-error-list">
+            {% for error in filter_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
         {% endif %}
+    </form>
 
-<div class="entry-grid">
-            {% for entry in entries|slice:":2" %}
-                <a href="/entry/{{ entry.id }}">
-                    <div class="entry-card">
-                        <span class="date">{{ entry.created_at|date:"M d" }}</span>
-                        <h3>{{ entry.title }}</h3>
-                        <p class="preview">{{ entry.content|truncatechars:100 }}</p>
-                    </div>
-                </a>
-            {% empty %}
-                <div class="empty-state-container">
-                    <div class="empty-state-icon-wrapper">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon">
-                            <path d="M16 2v4M8 2v4M3 10h18M21 14v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h2"/>
-                            <line x1="3" y1="3" x2="21" y2="21" />
-                        </svg>
-                    </div>
-                    
-                    <h2>No entries found</h2>
-                    
-                    {% if request.GET.year or request.GET.month or request.GET.day or search_query %}
-                        <p>There are no entries matching your selected criteria.</p>
-                    {% else %}
-                        <p>Start writing your thoughts and capture your moments today.</p>
-                    {% endif %}
+    <!-- Calendar Section -->
+    <section class="py-5 text-center border border-1">
+        <div class="table">
+            <button class="btn btn-secondary btn-lg w-100" onclick="document.getElementById('dateFilter').showPicker()">
+                <img src="{% static 'entries/svg/calendar.svg' %}" class="icon-inline">
+                Calendar
+            </button>
+        </div>
+    </section>
 
-                    <div class="empty-state-actions">
-                        {% if request.GET.year or request.GET.month or request.GET.day or search_query %}
-                            <a href="{% url 'entry_list' %}" class="btn-empty-secondary">Clear filters</a>
-                        {% endif %}
-                        <a href="{% url 'create_entry' %}" class="btn-empty-primary">+ New entry</a>
-                    </div>
+    <!-- Entry Section -->
+    <section class="py-2">
+        <div class="p-5 border border-1 text-center">
+            <a href="{% url 'create_entry' %}" class="btn btn-primary btn-lg w-100">
+                <img src="{% static 'entries/svg/plus.svg' %}" class="icon-inline">
+                Add Entry
+            </a>
+            <h1 class="fs-6">Create your new entry</h1>
+        </div>
+    </section>
+
+    <!-- Search Result Text -->
+    {% if search_query %}
+    <p>You searched for <strong>"{{ search_query }}"</strong></p>
+    {% endif %}
+
+    <div class="entry-grid">
+        {% for entry in entries|slice:":2" %}
+        <a href="/entry/{{ entry.id }}">
+            <div class="entry-card">
+                <span class="date">{{ entry.created_at|date:"M d" }}</span>
+                <h3>{{ entry.title }}</h3>
+                <p class="preview">{{ entry.content|truncatechars:100 }}</p>
+            </div>
+        </a>
+        {% empty %}
+        <div class="empty-state-container">
+            <div class="empty-state-icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon">
+                    <path d="M16 2v4M8 2v4M3 10h18M21 14v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h2" />
+                    <line x1="3" y1="3" x2="21" y2="21" />
+                </svg>
+            </div>
+
+            <h2>No entries found</h2>
+
+            {% if request.GET.year or request.GET.month or request.GET.day or search_query %}
+            <p>There are no entries matching your selected criteria.</p>
+            {% else %}
+            <p>Start writing your thoughts and capture your moments today.</p>
+            {% endif %}
+
+            <div class="empty-state-actions">
+                {% if request.GET.year or request.GET.month or request.GET.day or search_query %}
+                <a href="{% url 'entry_list' %}" class="btn-empty-secondary">Clear filters</a>
+                {% endif %}
+                <a href="{% url 'create_entry' %}" class="btn-empty-primary">+ New entry</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- All Entries Grouped by Month -->
+    <div style="overflow-y: auto; padding-bottom: 32px;">
+
+        {% regroup entries by created_at|date:"F Y" as entries_by_month %}
+
+        {% for month_group in entries_by_month %}
+
+        <!-- Month Divider -->
+        <div class="month-divider">
+            <span>{{ month_group.grouper }}</span>
+        </div>
+
+        <div class="entry-grid">
+            {% for entry in month_group.list %}
+            <a href="/entry/{{ entry.id }}">
+                <div class="entry-card">
+                    <span class="date">{{ entry.created_at|date:"M d" }}</span>
+                    <h3>{{ entry.title }}</h3>
+                    <p class="preview">{{ entry.content|truncatechars:100 }}</p>
                 </div>
+            </a>
             {% endfor %}
         </div>
 
-        <!-- All Entries Grouped by Month -->
-        <div style="overflow-y: auto; padding-bottom: 32px;">
-
-            {% regroup entries by created_at|date:"F Y" as entries_by_month %}
-
-            {% for month_group in entries_by_month %}
-
-                <!-- Month Divider -->
-                <div class="month-divider">
-                    <span>{{ month_group.grouper }}</span>
-                </div>
-
-                <div class="entry-grid">
-                    {% for entry in month_group.list %}
-                        <a href="/entry/{{ entry.id }}">
-                            <div class="entry-card">
-                                <span class="date">{{ entry.created_at|date:"M d" }}</span>
-                                <h3>{{ entry.title }}</h3>
-                                <p class="preview">{{ entry.content|truncatechars:100 }}</p>
-                            </div>
-                        </a>
-                    {% endfor %}
-                </div>
-
-            {% endfor %}
-
-        </div>
+        {% endfor %}
 
     </div>
 
-    {% load static %}
-    <script src="{% static 'entries/js/script.js' %}"></script>
+</div>
+
+{% load static %}
+<script src="{% static 'entries/js/script.js' %}"></script>
 
 {% endblock %}

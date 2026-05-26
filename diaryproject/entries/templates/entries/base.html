@@ -2,60 +2,62 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>LUMEN: Diary Web App</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="{% static 'entries/css/style.css' %}">
-    </head>
+    <title>LUMEN: Diary Web App</title>
 
-    <body>
+    <link rel="stylesheet" href="{% static 'entries/css/style.css' %}">
+</head>
 
-        <!-- Topbar -->
-        <header class="topbar">
-            <div class="brand">LUMEN</div>
-            <a href="{% url 'profile' %}">
-                <div class="avatar" aria-label="Profile"></div>
-            </a>
-        </header>
-        
-        <div class="container">
-            {% block content %}
-            {% endblock %}
-        </div>
-        
-        <nav class="bottom-nav" aria-label="Primary">
+<body>
 
-            <!-- HOME -->
-            <a href="{% url 'home' %}" class="nav-item active">
-                <img src="{% static 'entries/svg/home-active.svg' %}" class="icon" alt="Home">
-                <span>Home</span>
-            </a>
-            
-            <!-- ADD BUTTON -->
-            <a href="{% url 'create_entry' %}" class="nav-fab" aria-label="New diary entry">
-                <img src="{% static 'entries/svg/plus.svg' %}" alt="Add">
-            </a>
+    <!-- Topbar -->
+    <header class="topbar">
+        <div class="brand">LUMEN</div>
+        <a href="{% url 'profile' %}">
+            <div class="avatar" aria-label="Profile"></div>
+        </a>
+    </header>
 
-            <!-- ENTRIES -->
-            <a href="{% url 'entry_list' %}" class="nav-item active">
-                <img src="{% static 'entries/svg/entries-idle.svg' %}" class="icon" alt="Entries">
-                <span>Entries</span>
-            </a>  
-
-        </nav>
-
-        <!-- Voice Navigation Trigger -->
-        <div class="voice-assistant-wrapper">
-            <button type="button" class="voice-btn record" id="micNavBtn" aria-label="Voice Navigation Trigger">
-                <img src="{% static 'entries/svg/mic-idle.svg' %}" id="micNavIcon" alt="Mic">
-            </button>
-        </div>
-
-        {% block javascript %}
-        <script src="{% static 'entries/js/script.js' %}"></script>
+    <div class="container">
+        {% block content %}
         {% endblock %}
-    </body>
+    </div>
+
+    <nav class="bottom-nav" aria-label="Primary">
+
+        <!-- HOME -->
+        <a href="{% url 'home' %}" class="nav-item active">
+            <img src="{% static 'entries/svg/home-active.svg' %}" class="icon" alt="Home">
+            <span>Home</span>
+        </a>
+
+        <!-- ADD BUTTON -->
+        <a href="{% url 'create_entry' %}" class="nav-fab" aria-label="New diary entry">
+            <img src="{% static 'entries/svg/plus.svg' %}" alt="Add">
+        </a>
+
+        <!-- ENTRIES -->
+        <a href="{% url 'entry_list' %}" class="nav-item active">
+            <img src="{% static 'entries/svg/entries-idle.svg' %}" class="icon" alt="Entries">
+            <span>Entries</span>
+        </a>
+
+    </nav>
+
+    <!-- Voice Navigation Trigger -->
+    <div class="voice-assistant-wrapper">
+        <button type="button" class="voice-btn record" id="micNavBtn" aria-label="Voice Navigation Trigger">
+            <img src="{% static 'entries/svg/mic-idle.svg' %}" id="micNavIcon" alt="Mic">
+        </button>
+    </div>
+
+    {% block javascript %}
+    <script src="{% static 'entries/js/script.js' %}"></script>
+    {% endblock %}
+</body>
+
 </html>
