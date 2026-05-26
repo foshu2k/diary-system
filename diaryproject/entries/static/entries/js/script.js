@@ -1,213 +1,143 @@
-// Voice Feature (Safari/Chrome)
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-const SpeechSynthesis = window.speechSynthesis;
-
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Global reusable text-to-speech engine
-    function speak(text) {
-        if (!SpeechSynthesis || !text) return;
-        SpeechSynthesis.cancel(); // Clean the active pipeline
-        const voice = new SpeechSynthesisUtterance(text);
-        SpeechSynthesis.speak(voice);
-    }
+    // Voice Command
+    const voiceNavBtn = document.getElementById("micNavBtn")
 
+    // Speech to Text
+    const speechBtn = document.getElementById("micBtn")
+    const clearBtn = document.getElementById("clearBtn")
+    
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+
+    // Feedback
     const voiceFeedback = () => {
-        let customFeedback = sessionStorage.getItem("voiceNavFeedback");
-        if (SpeechSynthesis) {
-            SpeechSynthesis.cancel();
-        }
-
-        if (customFeedback) {
-            speak(customFeedback);
-            sessionStorage.removeItem("voiceNavFeedback");
-        } else {
-            const currentPage = document.body.getAttribute("data-page-name") || "a new page";
-            speak(`You have landed on the ${currentPage}`);
-        }
+        let text = sessionStorage.getItem("voiceNavFeedback");
+        const voice = new SpeechSynthesisUtterance(text)
+        window.speechSynthesis.speak(voice);
+        sessionStorage.removeItem("voiceNavFeedback")
     }
 
-    // Trigger initial feedback
-    voiceFeedback();
+    voiceFeedback()
 
-    // ==========================================
-    // VOICE COMMAND NAVIGATION (SPA STYLED)
-    // ==========================================
-    const voiceNavBtn = document.getElementById("micNavBtn");
-
+    // Voice Command Functionality
     if (voiceNavBtn) {
-        const micNavIcon = document.getElementById("micNavIcon");
+        const micNavIcon = document.getElementById("micNavIcon")
 
         if (!SpeechRecognition) {
-            voiceNavBtn.disabled = true;
+            voiceNavBtn.disabled = true
         } else {
-            let isNavigating = false;
-            let navObj = null;
-
-            // SMART ROUTER: Fetches page content dynamically to preserve voice permissions
-            const navigateTo = (url, feedbackText) => {
-                if (!url) return;
-
-                // 1. Speak immediately before the browser context changes!
-                speak(feedbackText);
-
-                // 2. Fetch the new HTML page background data
-                fetch(url)
-                    .then(response => response.text())
-                    .then(html => {
-                        // Create a temporary parser to scan the new page payload
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(html, "text/html");
-
-                        // Find the core container in current page and new page
-                        const targetContainer = document.querySelector(".app") || document.querySelector(".container");
-                        const newContainer = doc.querySelector(".app") || doc.querySelector(".container");
-
-                        if (targetContainer && newContainer) {
-                            // Swap out the old view content seamlessly
-                            targetContainer.innerHTML = newContainer.innerHTML;
-
-                            // Update browser URL state history without dropping audio profiles
-                            window.history.pushState({ path: url }, "", url);
-
-                            // Update active page tracking text
-                            const newPageName = doc.body.getAttribute("data-page-name") || "a new page";
-                            document.body.setAttribute("data-page-name", newPageName);
-                        } else {
-                            // Fallback if containers don't align cleanly across unique standalone structures
-                            sessionStorage.setItem("voiceNavFeedback", feedbackText);
-                            window.location.href = url;
-                        }
-                    })
-                    .catch(err => {
-                        console.error("Failed handling voice navigation async swap:", err);
-                        window.location.href = url; // Hard fallback route
-                    });
-            };
+            let isNavigating = false
+            let navObj = null
 
             const commands = {
-                "go home": () => navigateTo(document.body.getAttribute("data-url-home"), "Going to the home page."),
-                "go to home": () => navigateTo(document.body.getAttribute("data-url-home"), "Returning home."),
-                "go back": () => {
-                    speak("Going back a page.");
-                    window.history.back();
+                "go home": () => {
+                    sessionStorage.setItem("voiceNavFeedback", "You are at the home page.");
+                    window.location.href = "/"
                 },
-                "go forward": () => {
-                    speak("Going forward a page.");
-                    window.history.forward();
-                },
-                "go to entries": () => navigateTo(document.body.getAttribute("data-url-entries"), "Loading your entry list."),
-                "go to entry list": () => navigateTo(document.body.getAttribute("data-url-entries"), "Loading your entry list."),
-                "view entries": () => navigateTo(document.body.getAttribute("data-url-entries"), "Displaying your entry list."),
-                "view all entries": () => navigateTo(document.body.getAttribute("data-url-entries"), "Displaying all entries."),
-                "create entry": () => navigateTo(document.body.getAttribute("data-url-create"), "Opening new entry creator."),
-                "new entry": () => navigateTo(document.body.getAttribute("data-url-create"), "Opening new entry creator."),
-                "add entry": () => navigateTo(document.body.getAttribute("data-url-create"), "Opening new entry creator."),
-            };
+                "go to home": () => window.location.href = "/",
+                "go back": () => window.history.back(),
+                "go forward": () => window.history.forward(),
+                "go to profile": () => window.location.href = "/profile/",
+                "go to entries": () => window.location.href = "/entrylist/",
+                "go to entry list": () => window.location.href = "/entrylist/",
+                "view entries": () => window.location.href = "/entrylist/",
+                "view all entries": () => window.location.href = "/entrylist/",
+                "create entry": () => window.location.href = "/create/",
+                "new entry": () => window.location.href = "/create/",
+                "add entry": () => window.location.href = "/create/",
+            }
 
             voiceNavBtn.addEventListener("click", () => {
-                isNavigating = !isNavigating;
+            isNavigating = !isNavigating
+
                 if (isNavigating) {
-                    startNavigating();
+                    startNavigating()
                 } else {
-                    stopNavigating();
+                    stopNavigating()
                 }
-            });
+            })
 
             function startNavigating() {
-                micNavIcon.src = "/static/entries/svg/mic-recording.svg";
-                navObj = new SpeechRecognition();
-                navObj.start();
-                navObj.onresult = handleCommand;
-                navObj.onend = () => {
-                    if (isNavigating) stopNavigating();
-                };
+                micNavIcon.src = "/static/entries/svg/mic-recording.svg"
+                navObj = new SpeechRecognition()
+                navObj.start()
+                navObj.onresult = handleCommand
             }
 
             function handleCommand(e) {
-                const last = e.results.length - 1;
-                const said = e.results[last][0].transcript.trim().toLowerCase();
+                const last = e.results.length - 1
+                const said = e.results[last][0].transcript.trim().toLowerCase()
 
-                const match = Object.keys(commands).find(cmd => said.includes(cmd));
+                const match = Object.keys(commands).find(cmd => said.includes(cmd))
                 if (match) {
-                    commands[match]();
+                    commands[match]()
                 } else {
-                    console.log("Voice nav: no command matched for →", said);
-                    speak("Command not recognized.");
+                    console.log("Voice nav: no command matched for →", said)
                 }
             }
 
             function stopNavigating() {
-                isNavigating = false;
-                micNavIcon.src = "/static/entries/svg/mic-idle.svg";
+                isNavigating = false
+                micNavIcon.src = "/static/entries/svg/mic-idle.svg"
                 if (navObj) {
-                    navObj.stop();
-                    navObj = null;
+                    navObj.stop()
+                    navObj = null
                 }
             }
         }
     }
 
-    // ==========================================
-    // SPEECH TO TEXT (FORM FIELD TRANSCRIPTION)
-    // ==========================================
-    const speechBtn = document.getElementById("micBtn");
-    const clearBtn = document.getElementById("clearBtn");
-
+    // Speech to Text Functionality
     if (speechBtn) {
-        const micIcon = document.getElementById("micIcon");
-        const outputField = document.getElementById("id_content");
+        const micIcon = document.getElementById("micIcon")
+        const outputField = document.getElementById("id_content")
 
         if (!SpeechRecognition) {
-            speechBtn.disabled = true;
+            speechBtn.disabled = true
         } else {
-            let isRecording = false;
-            let speechObj = null;
+            let isRecording = false
+            let speechObj = null
 
             speechBtn.addEventListener("click", () => {
-                isRecording = !isRecording;
-                if (isRecording) {
-                    startRecording();
-                } else {
-                    stopRecording();
-                }
-            });
+                isRecording = !isRecording
 
-            if (clearBtn) {
+                if (isRecording) {
+                    startRecording()
+                } else {
+                    stopRecording()
+                }
+            })
+
+            if(clearBtn) {
                 clearBtn.addEventListener("click", () => {
                     if (isRecording) {
-                        stopRecording();
-                        isRecording = false;
+                        stopRecording()
+                        isRecording = false
                     }
-                    outputField.value = "";
-                });
+                    
+                    outputField.value = ""
+                })
             }
 
             function startRecording() {
-                micIcon.src = "/static/entries/svg/mic-recording.svg";
-                speechObj = new SpeechRecognition();
-                speechObj.start();
-                speechObj.onresult = transcribe;
-                speechObj.onend = () => {
-                    if (isRecording) stopRecording();
-                };
+                micIcon.src = "/static/entries/svg/mic-recording.svg"
+                speechObj = new SpeechRecognition()
+                speechObj.start()
+                speechObj.onresult = transcribe
             }
 
             function transcribe(e) {
-                const transcript = e.results[0][0].transcript;
-                if (outputField) {
-                    outputField.value += transcript + " ";
-                }
+                const transcript = e.results[0][0].transcript
+                outputField.value += transcript + " "
             }
 
             function stopRecording() {
-                isRecording = false;
-                micIcon.src = "/static/entries/svg/mic-idle.svg";
+                micIcon.src = "/static/entries/svg/mic-idle.svg"
                 if (speechObj) {
-                    speechObj.stop();
-                    speechObj = null;
+                    speechObj.stop()
+                    speechObj = null
                 }
             }
         }
     }
-});
+})
