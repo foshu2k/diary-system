@@ -1,143 +1,182 @@
+// Voice Feature (Safari/Chrome)
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const SpeechSynthesis = window.speechSynthesis;
+
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Voice Command
-    const voiceNavBtn = document.getElementById("micNavBtn")
-
-    // Speech to Text
-    const speechBtn = document.getElementById("micBtn")
-    const clearBtn = document.getElementById("clearBtn")
-    
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-
-    // Feedback
-    const voiceFeedback = () => {
-        let text = sessionStorage.getItem("voiceNavFeedback");
-        const voice = new SpeechSynthesisUtterance(text)
-        window.speechSynthesis.speak(voice);
-        sessionStorage.removeItem("voiceNavFeedback")
+    // Global reusable text-to-speech engine
+    function speak(text) {
+        if (!SpeechSynthesis || !text) return;
+        SpeechSynthesis.cancel(); // Stop any currently playing audio track
+        const voice = new SpeechSynthesisUtterance(text);
+        SpeechSynthesis.speak(voice);
     }
 
-    voiceFeedback()
+    // Voice Feedback on Landing
+    const voiceFeedback = () => {
+        let customFeedback = sessionStorage.getItem("voiceNavFeedback");
+        
+        if (customFeedback) {
+            // Speak custom contextual command text if it exists
+            speak(customFeedback);
+            sessionStorage.removeItem("voiceNavFeedback");
+        } else {
+            // Fallback to the current Django data attribute page name 
+            const currentPage = document.body.getAttribute("data-page-name") || "a new page";
+            speak(`You have landed on the ${currentPage}`);
+        }
+    }
 
-    // Voice Command Functionality
+    // Trigger feedback instantly on page render
+    voiceFeedback();
+
+
+    // ==========================================
+    // VOICE COMMAND NAVIGATION
+    // ==========================================
+    const voiceNavBtn = document.getElementById("micNavBtn");
+
     if (voiceNavBtn) {
-        const micNavIcon = document.getElementById("micNavIcon")
+        const micNavIcon = document.getElementById("micNavIcon");
 
         if (!SpeechRecognition) {
-            voiceNavBtn.disabled = true
+            voiceNavBtn.disabled = true;
         } else {
-            let isNavigating = false
-            let navObj = null
+            let isNavigating = false;
+            let navObj = null;
+
+            // Helper to clean up redirects and stage voice announcements
+            const navigateTo = (url, feedbackText) => {
+                sessionStorage.setItem("voiceNavFeedback", feedbackText);
+                window.location.href = url;
+            };
 
             const commands = {
-                "go home": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the home page.");
-                    window.location.href = "/"
+                "go home": () => navigateTo("/", "You are at the home page."),
+                "go to home": () => navigateTo("/", "Returning home."),
+                "go back": () => {
+                    sessionStorage.setItem("voiceNavFeedback", "Going back a page.");
+                    window.history.back();
                 },
-                "go to home": () => window.location.href = "/",
-                "go back": () => window.history.back(),
-                "go forward": () => window.history.forward(),
-                "go to profile": () => window.location.href = "/profile/",
-                "go to entries": () => window.location.href = "/entrylist/",
-                "go to entry list": () => window.location.href = "/entrylist/",
-                "view entries": () => window.location.href = "/entrylist/",
-                "view all entries": () => window.location.href = "/entrylist/",
-                "create entry": () => window.location.href = "/create/",
-                "new entry": () => window.location.href = "/create/",
-                "add entry": () => window.location.href = "/create/",
-            }
+                "go forward": () => {
+                    sessionStorage.setItem("voiceNavFeedback", "Going forward a page.");
+                    window.history.forward();
+                },
+                "go to profile": () => navigateTo("/profile/", "Opening your profile."),
+                "go to entries": () => navigateTo("/entrylist/", "Loading your entry list."),
+                "go to entry list": () => navigateTo("/entrylist/", "Loading your entry list."),
+                "view entries": () => navigateTo("/entrylist/", "Displaying entries."),
+                "view all entries": () => navigateTo("/entrylist/", "Displaying all entries."),
+                "create entry": () => navigateTo("/create/", "Opening new entry creator."),
+                "new entry": () => navigateTo("/create/", "Opening new entry creator."),
+                "add entry": () => navigateTo("/create/", "Opening new entry creator."),
+            };
 
             voiceNavBtn.addEventListener("click", () => {
-            isNavigating = !isNavigating
-
+                isNavigating = !isNavigating;
                 if (isNavigating) {
-                    startNavigating()
+                    startNavigating();
                 } else {
-                    stopNavigating()
+                    stopNavigating();
                 }
-            })
+            });
 
             function startNavigating() {
-                micNavIcon.src = "/static/entries/svg/mic-recording.svg"
-                navObj = new SpeechRecognition()
-                navObj.start()
-                navObj.onresult = handleCommand
+                micNavIcon.src = "/static/entries/svg/mic-recording.svg";
+                navObj = new SpeechRecognition();
+                navObj.start();
+                navObj.onresult = handleCommand;
+                
+                // Reset state cleanly if microphone times out naturally
+                navObj.onend = () => {
+                    if (isNavigating) stopNavigating();
+                };
             }
 
             function handleCommand(e) {
-                const last = e.results.length - 1
-                const said = e.results[last][0].transcript.trim().toLowerCase()
+                const last = e.results.length - 1;
+                const said = e.results[last][0].transcript.trim().toLowerCase();
 
-                const match = Object.keys(commands).find(cmd => said.includes(cmd))
+                const match = Object.keys(commands).find(cmd => said.includes(cmd));
                 if (match) {
-                    commands[match]()
+                    commands[match]();
                 } else {
-                    console.log("Voice nav: no command matched for →", said)
+                    console.log("Voice nav: no command matched for →", said);
+                    speak("Command not recognized.");
                 }
             }
 
             function stopNavigating() {
-                isNavigating = false
-                micNavIcon.src = "/static/entries/svg/mic-idle.svg"
+                isNavigating = false;
+                micNavIcon.src = "/static/entries/svg/mic-idle.svg";
                 if (navObj) {
-                    navObj.stop()
-                    navObj = null
+                    navObj.stop();
+                    navObj = null;
                 }
             }
         }
     }
 
-    // Speech to Text Functionality
+
+    // ==========================================
+    // SPEECH TO TEXT (FORM FIELD TRANSCRIPTION)
+    // ==========================================
+    const speechBtn = document.getElementById("micBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
     if (speechBtn) {
-        const micIcon = document.getElementById("micIcon")
-        const outputField = document.getElementById("id_content")
+        const micIcon = document.getElementById("micIcon");
+        const outputField = document.getElementById("id_content");
 
         if (!SpeechRecognition) {
-            speechBtn.disabled = true
+            speechBtn.disabled = true;
         } else {
-            let isRecording = false
-            let speechObj = null
+            let isRecording = false;
+            let speechObj = null;
 
             speechBtn.addEventListener("click", () => {
-                isRecording = !isRecording
-
+                isRecording = !isRecording;
                 if (isRecording) {
-                    startRecording()
+                    startRecording();
                 } else {
-                    stopRecording()
+                    stopRecording();
                 }
-            })
+            });
 
-            if(clearBtn) {
+            if (clearBtn) {
                 clearBtn.addEventListener("click", () => {
                     if (isRecording) {
-                        stopRecording()
-                        isRecording = false
+                        stopRecording();
+                        isRecording = false;
                     }
-                    
-                    outputField.value = ""
-                })
+                    outputField.value = "";
+                });
             }
 
             function startRecording() {
-                micIcon.src = "/static/entries/svg/mic-recording.svg"
-                speechObj = new SpeechRecognition()
-                speechObj.start()
-                speechObj.onresult = transcribe
+                micIcon.src = "/static/entries/svg/mic-recording.svg";
+                speechObj = new SpeechRecognition();
+                speechObj.start();
+                speechObj.onresult = transcribe;
+                
+                speechObj.onend = () => {
+                    if (isRecording) stopRecording();
+                };
             }
 
             function transcribe(e) {
-                const transcript = e.results[0][0].transcript
-                outputField.value += transcript + " "
+                const transcript = e.results[0][0].transcript;
+                outputField.value += transcript + " ";
             }
 
             function stopRecording() {
-                micIcon.src = "/static/entries/svg/mic-idle.svg"
+                isRecording = false;
+                micIcon.src = "/static/entries/svg/mic-idle.svg";
                 if (speechObj) {
-                    speechObj.stop()
-                    speechObj = null
+                    speechObj.stop();
+                    speechObj = null;
                 }
             }
         }
     }
-})
+});
