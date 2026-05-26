@@ -61,8 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
-
-/*     if (voiceNavBtn) {
+   if (voiceNavBtn) {
         const micNavIcon = document.getElementById("micNavIcon")
 
         if (!SpeechRecognition) {
@@ -124,5 +123,5 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         }
-    } */
+    }
 })
