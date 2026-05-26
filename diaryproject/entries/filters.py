@@ -12,21 +12,21 @@ month_choices = [
 
 class EntryFilter(django_filters.FilterSet):
     year = django_filters.ChoiceFilter(
-        field_name = "date",
+        field_name = "created_at",
         lookup_expr = "year",
         choices = [(y, y) for y in range(2020, date.today().year + 1)],
         empty_label = "Year"
     )
 
     month = django_filters.ChoiceFilter(
-        field_name = "date",
+        field_name = "created_at",
         lookup_expr = "month",
         choices = month_choices,
         empty_label = "Month"
     )
 
     day = django_filters.ChoiceFilter(
-        field_name = "date",
+        field_name = "created_at",
         lookup_expr = "day",
         choices = [(d, d) for d in range(1, 32)],
         empty_label = "Day"

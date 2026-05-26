@@ -22,12 +22,13 @@
         {% for entry in entries|slice:":3" %}
             <a href="/entry/{{ entry.id }}">
                 <div class="entry-card">
-                    <span class="date">{{ entry.date|date:"M d" }}</span>
+                    <span class="date">{{ entry.created_at|date:"M d" }}</span>
                     <h3>{{ entry.title }}</h3>
                     <p class="preview">{{ entry.content|truncatechars:100 }}</p>
                 </div>
             </a>
-        {% empty %}
+
+            {% empty %}
             <p>No recent entries.</p>
         {% endfor %}
     </div>

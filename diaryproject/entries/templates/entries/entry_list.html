@@ -92,7 +92,7 @@
             {% for entry in entries|slice:":2" %}
                 <a href="/entry/{{ entry.id }}">
                     <div class="entry-card">
-                        <span class="date">{{ entry.date|date:"M d" }}</span>
+                        <span class="date">{{ entry.created_at|date:"M d" }}</span>
                         <h3>{{ entry.title }}</h3>
                         <p class="preview">{{ entry.content|truncatechars:100 }}</p>
                     </div>
@@ -127,7 +127,7 @@
         <!-- All Entries Grouped by Month -->
         <div style="overflow-y: auto; padding-bottom: 32px;">
 
-            {% regroup entries by date|date:"F Y" as entries_by_month %}
+            {% regroup entries by created_at|date:"F Y" as entries_by_month %}
 
             {% for month_group in entries_by_month %}
 
@@ -140,7 +140,7 @@
                     {% for entry in month_group.list %}
                         <a href="/entry/{{ entry.id }}">
                             <div class="entry-card">
-                                <span class="date">{{ entry.date|date:"M d" }}</span>
+                                <span class="date">{{ entry.created_at|date:"M d" }}</span>
                                 <h3>{{ entry.title }}</h3>
                                 <p class="preview">{{ entry.content|truncatechars:100 }}</p>
                             </div>
