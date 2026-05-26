@@ -20,11 +20,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (pendingFeedback) {
+        console.log("1. pendingFeedback found:", pendingFeedback)
         sessionStorage.removeItem("voiceFeedback")
+
         const unlock = new SpeechSynthesisUtterance("")
         unlock.volume = 0
-        unlock.onend = () => speak(pendingFeedback)
+        unlock.onstart = () => console.log("2. unlock started")
+        unlock.onend = () => {
+            console.log("3. unlock ended, calling speak...")
+            speak(pendingFeedback)
+        }
+        unlock.onerror = (e) => console.log("unlock error:", e)
+
+        console.log("4. calling speechSynthesis.speak(unlock)")
         window.speechSynthesis.speak(unlock)
+        console.log("5. speechSynthesis state:", window.speechSynthesis.speaking, window.speechSynthesis.pending)
     }
 
     // Voice Command Functionality
@@ -51,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "new entry": () => { sessionStorage.setItem("voiceFeedback", "You are now creating a new entry"); window.location.href = "/create/" },
                 "add entry": () => { sessionStorage.setItem("voiceFeedback", "You are now adding a new entry"); window.location.href = "/create/" },
             }
-            
+
             voiceNavBtn.addEventListener("click", () => {
             isNavigating = !isNavigating
 
