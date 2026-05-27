@@ -1189,14 +1189,14 @@ p  { color: var(--c-text-muted); }
 }
 
 .container {
-    max-width: 480px;
+    max-width: 656px;    
     margin: 0 auto;
-    padding: 84px 20px 100px; /* 84px top clears the 60px topbar + breathing room */
+    padding: 90px 20px 100px;   
 }
 
 .topbar {
     background-color: var(--c-surface);
-    height: 60px;
+    height: 66.39px;            /* Set exact height target parameter */
     position: fixed;
     top: 0;
     left: 0;
@@ -1204,16 +1204,16 @@ p  { color: var(--c-text-muted); }
     z-index: 100;
     box-shadow: 0 2px 10px rgba(24, 18, 43, 0.4);
     
-    /* This centers the topbar wrapper block on desktop/wide viewports */
     display: flex;
     justify-content: center; 
 }
 
+
 .topbar-content {
     width: 100%;
-    max-width: 480px;      /* 1. Change this from 448px to 480px */      
+    max-width: 656px;        
     height: 100%;
-    padding: 0 20px;       /* 2. Change this from 0 to 0 20px */       
+    padding: 0 20px;         
     
     display: flex;
     align-items: center;
