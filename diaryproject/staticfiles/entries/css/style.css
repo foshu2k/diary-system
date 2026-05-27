@@ -197,7 +197,7 @@ p  { color: var(--c-text-muted); }
 }
 
 /* Fixed Primary Floating Action Button (+ Button) */
-.bottom-nav .nav-fab {
+.bottom-nav {
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -216,10 +216,6 @@ p  { color: var(--c-text-muted); }
   
   box-shadow: 0 0 0 4px rgba(228, 145, 167, .15), 0 8px 22px rgba(228, 145, 167, 0.4);
   transition: transform .2s ease;
-}
-
-.bottom-nav .nav-fab:hover {
-  transform: translateY(-3px) scale(1.04);
 }
 
 /* Responsive Viewports Layout adjustments */
@@ -241,12 +237,6 @@ p  { color: var(--c-text-muted); }
 
 .nav-item.active .icon {
   filter: brightness(0) saturate(100%) invert(77%) sepia(18%) saturate(500%) hue-rotate(300deg);
-}
-
-.nav-fab img {
-  width: 26px;
-  height: 26px;
-  filter: brightness(0) invert(1);
 }
 
 /* VOICE ASSISTANT WRAPPER - SIDE FLOAT CONTEXT */
@@ -313,6 +303,7 @@ p  { color: var(--c-text-muted); }
         padding-right: 20px; 
     }
 }
+
 
 /* ==========================================================================
    4. GLOBAL UI UI COMPONENTS (Buttons, Cards, Inputs, Filter Bar)
@@ -431,8 +422,9 @@ p  { color: var(--c-text-muted); }
     
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     height: 38px;
-    padding: 0 32px 0 16px; 
+    padding: 0 16px; 
     
     border-radius: 20px; 
     border: 1px solid rgba(253, 224, 178, 0.15);
@@ -942,6 +934,82 @@ p  { color: var(--c-text-muted); }
     backdrop-filter: blur(4px); /* Modern frosted-glass blur look */
 }
 
+/* Custom Section Header Layout */
+.section-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--c-accent);
+    margin: 0;
+}
+
+/* Ensures inline icons align perfectly with button text */
+.icon-inline {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* --------------------------------------------------------------------------
+   FILTER ERROR NOTICES (Pure CSS, No SVGs)
+   -------------------------------------------------------------------------- */
+.filter-error-container {
+    background-color: rgba(228, 145, 167, 0.12); /* Soft blend of your --c-primary pink */
+    border-left: 4px solid var(--c-primary);      /* Thicker pink accent line on the left side */
+    border-top: 1px solid rgba(228, 145, 167, 0.2);
+    border-right: 1px solid rgba(228, 145, 167, 0.2);
+    border-bottom: 1px solid rgba(228, 145, 167, 0.2);
+    padding: 12px 18px;
+    border-radius: var(--radius-sm);
+    margin-top: 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(24, 18, 43, 0.3); /* Dark shadow to lift it off the background */
+    animation: fadeInSlide 0.25s ease-out;
+}
+
+/* Clear list defaults */
+.filter-error-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filter-error-list li {
+    color: var(--c-accent); /* Warm cream text color for great contrast */
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Elegant star/diamond bullet icon using pure text */
+.filter-error-list .error-bullet {
+    color: var(--c-primary); /* Pink star matching your main branding */
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+/* Smooth pop-in animation when the form automatically submits */
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* ==========================================================================
    7. PAGE: ENTRY VIEW & AUDIO PANELS
    ========================================================================== */
@@ -1108,4 +1176,85 @@ p  { color: var(--c-text-muted); }
 .action-circle-btn.delete-action:hover .action-icon {
     /* Turns the icon pure white over the red background */
     filter: brightness(0) invert(1);
+}
+
+.container {
+    max-width: 656px;    
+    margin: 0 auto;
+    padding: 90px 20px 100px;   
+}
+
+/* ==========================================================================
+   TOPBAR COMPONENTS
+   ========================================================================== */
+
+.topbar {
+    background-color: var(--c-surface);
+    height: 66.39px;            
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(24, 18, 43, 0.4);
+    
+    display: flex;
+    justify-content: center; 
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--c-primary);
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--c-surface-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+    background-color: var(--c-primary-deep);
+    border-color: var(--c-primary);
+}
+
+.avatar-icon {
+    width: 20px;
+    height: 20px;
+    /* Keeps the profile icon looking sharp and matching the theme */
+    filter: brightness(0) invert(1); 
+    justify-content: center;
+}
+
+.entry-list-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; 
+  width: 100%;
+}
+
+.entry-card-link {
+  text-decoration: none;
+  width: 100%;
+}
+
+.entry-card {
+  width: 100%;
+}
+
+.app-top {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 20px 24px;
+  position: relative;
 }
