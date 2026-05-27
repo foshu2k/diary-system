@@ -990,10 +990,13 @@ p  { color: var(--c-text-muted); }
 }
 
 .error-banner-icon {
-    width: 14px;               
-    height: 14px;
+    display: inline-block;     /* Forces it to behave like typography layout text */
+    width: 14px !important;    /* Locks exact matching size */
+    height: 14px !important;
+    max-width: 14px;
+    max-height: 14px;
     color: var(--c-primary); 
-    flex-shrink: 0;            
+    flex-shrink: 0;            /* Strictly prevents container compression */
 }
 
 .error-message-item {
