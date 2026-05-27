@@ -114,7 +114,7 @@ p  { color: var(--c-text-muted); }
 .app {
   max-width: 480px;
   margin: 0 auto;
-  padding: 24px 20px 24px;
+  padding: 50px 20px 100px;
   min-height: 100vh;
   position: relative;
 }
@@ -1112,13 +1112,30 @@ p  { color: var(--c-text-muted); }
     resize: vertical;
 }
 
-/* Container Layout Fix */
 .entry-detail-back {
-    display: inline-flex;  
-    align-items: center;   
-    justify-content: center;
-    gap: var(--space-2);   
-    padding: 10px 18px;    
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    border-radius: var(--radius-pill);
+    background: var(--c-surface);
+    color: var(--c-accent);
+    border: 1px solid rgba(228, 145, 167, 0.2);
+    transition: background 0.2s ease;
+}
+
+.entry-detail-back:hover {
+    background: var(--c-surface-2);
+    color: var(--c-text-dark);
+}
+
+.entry-detail-back .icon {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    opacity: 0.85;
+    padding-top: 0;
 }
 
 /* ==========================================================================
@@ -1192,7 +1209,7 @@ p  { color: var(--c-text-muted); }
 .container {
     max-width: 656px;    
     margin: 0 auto;
-    padding: 90px 20px 100px;   
+    padding: 15px 20px 100px;   
 }
 
 /* ==========================================================================
