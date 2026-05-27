@@ -1212,6 +1212,15 @@ p  { color: var(--c-text-muted); }
     justify-content: center; 
 }
 
+.topbar-inner {
+    width: 100%;
+    max-width: 656px;       /* Matches your .container's width (change to 480px if aligning to .app) */
+    padding: 0 20px;        /* Matches your layout side padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .brand {
     font-size: 1.5rem;
     font-weight: 700;
@@ -1266,6 +1275,5 @@ p  { color: var(--c-text-muted); }
   max-width: 480px;
   margin: 0 auto;
   padding: 24px 20px 24px;
-  min-height: 100vh;
   position: relative;
 }
