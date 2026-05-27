@@ -38,10 +38,12 @@
             <span>Home</span>
         </a>
 
-        <!-- ADD BUTTON -->
-        <a href="{% url 'create_entry' %}" class="nav-fab" aria-label="New diary entry">
-            <img src="{% static 'entries/svg/plus.svg' %}" alt="Add">
-        </a>
+        <!-- Voice Navigation Trigger -->
+        <div class="voice-assistant-wrapper">
+            <button type="button" class="voice-btn record" id="micNavBtn" aria-label="Voice Navigation Trigger">
+                <img src="{% static 'entries/svg/mic-idle.svg' %}" id="micNavIcon" alt="Mic">
+            </button>
+        </div>
 
         <!-- ENTRIES -->
         <a href="{% url 'entry_list' %}" class="nav-item active">
@@ -50,13 +52,6 @@
         </a>
 
     </nav>
-
-    <!-- Voice Navigation Trigger -->
-    <div class="voice-assistant-wrapper">
-        <button type="button" class="voice-btn record" id="micNavBtn" aria-label="Voice Navigation Trigger">
-            <img src="{% static 'entries/svg/mic-idle.svg' %}" id="micNavIcon" alt="Mic">
-        </button>
-    </div>
 
     {% block javascript %}
     <script src="{% static 'entries/js/script.js' %}"></script>

@@ -5,9 +5,12 @@
 
     <!-- Top Bar -->
     <div class="topbar">
-        <a href="{% url 'home' %}" class="btn btn-secondary entry-detail-back">
-            <img src="{% static 'entries/svg/back.svg' %}" class="padding-top: 9px icon" alt="Back">Back
-        </a>
+        <button type="button" 
+                onclick="history.back()" 
+                class="btn btn-secondary entry-detail-back">
+            <img src="{% static 'entries/svg/back.svg' %}" style="padding-top: 9px;" class="icon" alt="Back">
+            Back
+        </button>
     </div>
 
     <!-- Entry Header Card -->
