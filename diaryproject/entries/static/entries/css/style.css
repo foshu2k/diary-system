@@ -965,6 +965,58 @@ p  { color: var(--c-text-muted); }
     vertical-align: middle;
 }
 
+/* --------------------------------------------------------------------------
+   FILTER ERROR NOTICES (Pure CSS, No SVGs)
+   -------------------------------------------------------------------------- */
+.filter-error-container {
+    background-color: rgba(228, 145, 167, 0.12); /* Soft blend of your --c-primary pink */
+    border-left: 4px solid var(--c-primary);      /* Thicker pink accent line on the left side */
+    border-top: 1px solid rgba(228, 145, 167, 0.2);
+    border-right: 1px solid rgba(228, 145, 167, 0.2);
+    border-bottom: 1px solid rgba(228, 145, 167, 0.2);
+    padding: 12px 18px;
+    border-radius: var(--radius-sm);
+    margin-top: 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(24, 18, 43, 0.3); /* Dark shadow to lift it off the background */
+    animation: fadeInSlide 0.25s ease-out;
+}
+
+/* Clear list defaults */
+.filter-error-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filter-error-list li {
+    color: var(--c-accent); /* Warm cream text color for great contrast */
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Elegant star/diamond bullet icon using pure text */
+.filter-error-list .error-bullet {
+    color: var(--c-primary); /* Pink star matching your main branding */
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+/* Smooth pop-in animation when the form automatically submits */
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* ==========================================================================
    7. PAGE: ENTRY VIEW & AUDIO PANELS

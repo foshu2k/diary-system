@@ -54,11 +54,13 @@
             </div> 
 
             {% if filter_errors %}         
-                <ul class="filter-error-list">
-                    {% for error in filter_errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
+                <div class="filter-error-container">
+                    <ul class="filter-error-list">
+                        {% for error in filter_errors %}
+                            <li><span class="error-bullet">✦</span> {{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% endif %}
         </form> 
 
