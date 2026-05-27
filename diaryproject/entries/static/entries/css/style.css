@@ -965,48 +965,6 @@ p  { color: var(--c-text-muted); }
     vertical-align: middle;
 }
 
-/* ==========================================================================\
-   FILTER ERROR BANNER (COMPACT HORIZONTAL PILL)
-   ========================================================================== */
-.filter-error-banner {
-    display: inline-flex;      
-    align-items: center;       
-    justify-content: center;   
-    gap: 8px;                 
-    
-    background-color: rgba(144, 66, 111, 0.15); 
-    border: 1px solid rgba(224, 145, 167, 0.3); 
-    border-radius: 20px;       
-    padding: 6px 14px;         
-    margin: 12px auto 4px auto; 
-    
-    width: max-content;        
-    max-width: 95%;            
-    
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    box-sizing: border-box;
-    animation: fadeInSlide 0.2s ease-out;
-}
-
-.error-banner-icon {
-    display: inline-block;     /* Forces it to behave like typography layout text */
-    width: 14px !important;    /* Locks exact matching size */
-    height: 14px !important;
-    max-width: 14px;
-    max-height: 14px;
-    color: var(--c-primary); 
-    flex-shrink: 0;            /* Strictly prevents container compression */
-}
-
-.error-message-item {
-    font-size: 0.8rem;         
-    font-weight: 500;
-    color: var(--c-primary);
-    margin: 0 !important;
-    line-height: 1;            
-    white-space: nowrap;       
-}
 
 /* ==========================================================================
    7. PAGE: ENTRY VIEW & AUDIO PANELS
