@@ -197,7 +197,7 @@ p  { color: var(--c-text-muted); }
 }
 
 /* Fixed Primary Floating Action Button (+ Button) */
-.bottom-nav {
+.bottom-nav .nav-fab {
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -216,6 +216,10 @@ p  { color: var(--c-text-muted); }
   
   box-shadow: 0 0 0 4px rgba(228, 145, 167, .15), 0 8px 22px rgba(228, 145, 167, 0.4);
   transition: transform .2s ease;
+}
+
+.bottom-nav .nav-fab:hover {
+  transform: translateY(-3px) scale(1.04);
 }
 
 /* Responsive Viewports Layout adjustments */
@@ -237,6 +241,12 @@ p  { color: var(--c-text-muted); }
 
 .nav-item.active .icon {
   filter: brightness(0) saturate(100%) invert(77%) sepia(18%) saturate(500%) hue-rotate(300deg);
+}
+
+.nav-fab img {
+  width: 26px;
+  height: 26px;
+  filter: brightness(0) invert(1);
 }
 
 /* VOICE ASSISTANT WRAPPER - SIDE FLOAT CONTEXT */
