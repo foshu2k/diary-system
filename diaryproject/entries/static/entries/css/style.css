@@ -1211,17 +1211,14 @@ p  { color: var(--c-text-muted); }
 
 .topbar-content {
     width: 100%;
-    /* EXACT APP BOUNDARY: Keeps everything inside the 480px layout bounds */
-    max-width: 480px;      
+    max-width: 448px;      
     height: 100%;
-    
-    /* EXACT APP PADDING: Mirrors the 16px horizontal spacing of your cards/headers */
-    padding: 0 16px;       
+    padding: 0;       
     
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-sizing: border-box; /* Forces padding to measure inward, avoiding layout breakage */
+    box-sizing: border-box;
 }
 
 .avatar {
