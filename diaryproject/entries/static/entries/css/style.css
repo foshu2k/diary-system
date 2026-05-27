@@ -1243,9 +1243,5 @@ p  { color: var(--c-text-muted); }
     height: 20px;
     /* Keeps the profile icon looking sharp and matching the theme */
     filter: brightness(0) invert(1); 
-}
-
-header {
-    width: 656px;
-    height: 6.39px;
+    justify-content: center;
 }
