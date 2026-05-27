@@ -991,12 +991,13 @@ p  { color: var(--c-text-muted); }
 
 .filter-error-list li {
     color: var(--c-accent); /* Warm cream text color for great contrast */
-    font-size: 0.92rem;
+    font-size: 1.05rem;
     font-weight: 500;
+    line-height: 1.4;
     letter-spacing: 0.3px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 
 /* Elegant star/diamond bullet icon using pure text */
