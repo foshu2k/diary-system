@@ -682,7 +682,7 @@ p  { color: var(--c-text-muted); }
 
 /* New Entry Header Group Styling */
 .entry-header-group {
-  margin-top: 80px;
+  margin-top: 20px;
   margin-bottom: 24px;
 }
 
