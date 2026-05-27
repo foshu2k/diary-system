@@ -966,51 +966,43 @@ p  { color: var(--c-text-muted); }
 }
 
 /* ==========================================================================\
-   FILTER ERROR BANNER (FIXED FOR OVERFLOW & ALIGNMENT)
+   FILTER ERROR BANNER (COMPACT HORIZONTAL PILL)
    ========================================================================== */
 .filter-error-banner {
-    display: flex;
+    display: inline-flex;      
     align-items: center;       
     justify-content: center;   
-    gap: 8px;
+    gap: 8px;                 
     
     background-color: rgba(144, 66, 111, 0.15); 
     border: 1px solid rgba(224, 145, 167, 0.3); 
-    border-radius: 20px;
-    
-    padding: 6px 16px;        
+    border-radius: 20px;       
+    padding: 6px 14px;         
     margin: 12px auto 4px auto; 
-    width: max-content;
-    max-width: 90%;           
-    height: auto !important;   
-    min-height: 38px;          
+    
+    width: max-content;        
+    max-width: 95%;            
     
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    box-sizing: border-box;    
+    box-sizing: border-box;
     animation: fadeInSlide 0.2s ease-out;
 }
 
 .error-banner-icon {
-    width: 16px;
-    height: 16px;
+    width: 14px;               
+    height: 14px;
     color: var(--c-primary); 
-    flex-shrink: 0;   
-}
-
-.error-banner-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;        
+    flex-shrink: 0;            
 }
 
 .error-message-item {
-    font-size: 0.82rem;    
+    font-size: 0.8rem;         
     font-weight: 500;
     color: var(--c-primary);
-    margin: 0;
-    line-height: 1.2;         
+    margin: 0 !important;
+    line-height: 1;            
+    white-space: nowrap;       
 }
 
 /* ==========================================================================
