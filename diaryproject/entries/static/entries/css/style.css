@@ -315,61 +315,56 @@ p  { color: var(--c-text-muted); }
 }
 
 .topbar {
-    background-color: var(--c-surface); /* Maintains your deep purple surface background */
+    background-color: var(--c-surface);
     height: 60px;
-    
-    /* Layout properties to separate elements to opposite edges */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
-    /* Horizontal breathing room matching your main app container margins */
-    padding: 0 20px; 
-    
+    padding: 0 16px;  
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    box-shadow: 0 2px 10px rgba(24, 18, 43, 0.4); /* Nice clean separation shadow */
+    box-shadow: 0 2px 10px rgba(24, 18, 43, 0.4);
 }
 
 .brand {
     font-size: 1.3rem;
     font-weight: 700;
     letter-spacing: 1.5px;
-    color: var(--c-primary); /* Uses your elegant pink brand color */
+    color: var(--c-primary); 
 }
 
 .avatar {
-    width: 40px;          /* Adjusted slightly to scale with the inner icon smoothly */
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background-color: rgba(253, 224, 178, 0.1); /* Subtle glowing background ring */
-    border: 2px solid var(--c-primary);          /* Elegant pink outline matching your theme */
+    border: 2px solid var(--c-primary);
+    background-color: rgba(253, 224, 178, 0.05); 
     
-    /* Flexbox properties to center the SVG inside perfectly */
+    
     display: flex;
     align-items: center;
     justify-content: center;
     
+    overflow: hidden; 
     cursor: pointer;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .avatar:hover {
     transform: scale(1.05);
-    border-color: var(--c-accent); /* Glows warm cream when you hover over it */
 }
 
-/* Styling for the SVG element inside the avatar wrapper */
+
 .avatar-icon {
-    width: 22px;  /* Sizes the avatar cleanly inside the 40px circle */
-    height: 22px;
-    display: block;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
+    display: block;
     
-    /* Color matrix matching your signature soft brand cream token (#FDE0B2) */
+    
     filter: brightness(0) saturate(100%) invert(91%) sepia(10%) saturate(1450%) hue-rotate(318deg) brightness(101%) contrast(99%);
 }
 
