@@ -1249,7 +1249,7 @@ p  { color: var(--c-text-muted); }
 .entry-list-layout {
   display: flex;
   flex-direction: column;
-  gap: 16px; /* Spacing between rows */
+  gap: 24px; 
   width: 100%;
 }
 
@@ -1260,4 +1260,11 @@ p  { color: var(--c-text-muted); }
 
 .entry-card {
   width: 100%;
+}
+
+.app-top {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 20px 24px;
+  position: relative;
 }
