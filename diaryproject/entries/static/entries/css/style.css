@@ -1211,9 +1211,9 @@ p  { color: var(--c-text-muted); }
 
 .topbar-content {
     width: 100%;
-    max-width: 448px;      
+    max-width: 480px;      /* 1. Change this from 448px to 480px */      
     height: 100%;
-    padding: 0;       
+    padding: 0 20px;       /* 2. Change this from 0 to 0 20px */       
     
     display: flex;
     align-items: center;
