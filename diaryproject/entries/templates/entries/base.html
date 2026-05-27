@@ -18,7 +18,9 @@
     <header class="topbar">
         <div class="brand">LUMEN</div>
         <a href="{% url 'profile' %}">
-            <div class="avatar" aria-label="Profile"></div>
+            <div class="avatar" aria-label="Profile">
+                <img src="{% static 'entries/svg/profile.svg' %}" class="avatar-icon" alt="Profile Icon">
+            </div>
         </a>
     </header>
 
