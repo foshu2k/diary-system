@@ -18,7 +18,7 @@
     <a href="{% url 'entry_list' %}">View all</a>
   </div>
 
-  <div class="entry-grid">
+  <div class="entry-list-layout">
     {% for entry in entries|slice:":3" %}
     <a href="/entry/{{ entry.id }}">
       <div class="entry-card">

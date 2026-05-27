@@ -1245,3 +1245,19 @@ p  { color: var(--c-text-muted); }
     filter: brightness(0) invert(1); 
     justify-content: center;
 }
+
+.entry-list-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Spacing between rows */
+  width: 100%;
+}
+
+.entry-card-link {
+  text-decoration: none;
+  width: 100%;
+}
+
+.entry-card {
+  width: 100%;
+}
