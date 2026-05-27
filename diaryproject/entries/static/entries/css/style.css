@@ -972,15 +972,16 @@ p  { color: var(--c-text-muted); }
     display: flex;
     align-items: center;       
     justify-content: center;   
-    gap: 10px;
+    gap: 8px;
     
     background-color: rgba(144, 66, 111, 0.15); 
     border: 1px solid rgba(224, 145, 167, 0.3); 
-    border-radius: var(--radius-sm);
+    border-radius: 20px;
     
-    padding: 10px 16px;        
-    margin: 14px auto 6px auto; 
-    max-width: 100%;           
+    padding: 6px 16px;        
+    margin: 12px auto 4px auto; 
+    width: max-content;
+    max-width: 90%;           
     height: auto !important;   
     min-height: 38px;          
     
