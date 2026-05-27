@@ -317,23 +317,29 @@ p  { color: var(--c-text-muted); }
 .topbar {
     background-color: var(--c-surface);
     height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;  
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
     box-shadow: 0 2px 10px rgba(24, 18, 43, 0.4);
+    
+    /* Center the topbar container layout structural layer */
+    display: flex;
+    justify-content: center; 
 }
 
-.brand {
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    color: var(--c-primary); 
+/* This new block forces alignment exactly with your .container layout */
+.topbar-content {
+    width: 100%;
+    max-width: 480px;      /* Matches your app shell wrapper boundaries perfectly */
+    height: 100%;
+    padding: 0 16px;       /* Keeps elements aligned with grid card gutters */
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .avatar {
@@ -341,14 +347,12 @@ p  { color: var(--c-text-muted); }
     height: 36px;
     border-radius: 50%;
     border: 2px solid var(--c-primary);
-    background-color: rgba(253, 224, 178, 0.05); 
-    
+    background-color: rgba(253, 224, 178, 0.05);
     
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    overflow: hidden; 
+    overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
@@ -357,14 +361,11 @@ p  { color: var(--c-text-muted); }
     transform: scale(1.05);
 }
 
-
 .avatar-icon {
     width: 20px;
     height: 20px;
     object-fit: contain;
     display: block;
-    
-    
     filter: brightness(0) saturate(100%) invert(91%) sepia(10%) saturate(1450%) hue-rotate(318deg) brightness(101%) contrast(99%);
 }
 
