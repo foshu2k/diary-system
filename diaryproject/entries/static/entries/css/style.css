@@ -1194,9 +1194,13 @@ p  { color: var(--c-text-muted); }
     padding: 90px 20px 100px;   
 }
 
+/* ==========================================================================
+   TOPBAR COMPONENTS
+   ========================================================================== */
+
 .topbar {
     background-color: var(--c-surface);
-    height: 66.39px;            /* Set exact height target parameter */
+    height: 66.39px;            
     position: fixed;
     top: 0;
     left: 0;
@@ -1207,7 +1211,6 @@ p  { color: var(--c-text-muted); }
     display: flex;
     justify-content: center; 
 }
-
 
 .topbar-content {
     width: 100%;
@@ -1221,29 +1224,40 @@ p  { color: var(--c-text-muted); }
     box-sizing: border-box;
 }
 
+.brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--c-primary);
+}
+
 .avatar {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    border: 2px solid var(--c-primary);
-    background-color: rgba(253, 224, 178, 0.05);
-    
+    background-color: var(--c-surface-2);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
+    border: 2px solid transparent;
 }
 
 .avatar:hover {
     transform: scale(1.05);
+    background-color: var(--c-primary-deep);
+    border-color: var(--c-primary);
 }
 
 .avatar-icon {
     width: 20px;
     height: 20px;
-    object-fit: contain;
-    display: block;
-    filter: brightness(0) saturate(100%) invert(91%) sepia(10%) saturate(1450%) hue-rotate(318deg) brightness(101%) contrast(99%);
+    /* Keeps the profile icon looking sharp and matching the theme */
+    filter: brightness(0) invert(1); 
+}
+
+header {
+    width: 656px;
+    height: 6.39px;
 }
