@@ -6,12 +6,12 @@ from .filters import EntryFilter
 
 @login_required
 def home(request):
-    entries = Entry.objects.filter(user=request.user).order_by("-date")
+    entries = Entry.objects.filter(user=request.user).order_by("-created_at")
     return render(request, "entries/home.html", {"entries" : entries})
 
 @login_required
 def entry_list(request):
-    entries = Entry.objects.filter(user=request.user).order_by("-date")
+    entries = Entry.objects.filter(user=request.user).order_by("-created_at")
     search_query = request.GET.get("search", "")
 
     entry_filter = EntryFilter(request.GET, queryset=entries)

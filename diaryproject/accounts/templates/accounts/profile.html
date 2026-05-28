@@ -1,24 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LUMEN: Profile Page</title>
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMEN: Profile</title>
+  <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+</head>
 
-    <body>
-         <a href="{% url 'home' %}" class="btn btn-secondary entry-detail-back">
-            <img src="" class="padding-top: 9px icon" alt="Back">Back
-        </a>
-        <h1>{{ user.username }}'s Profile</h1>
+<body class="auth-body">
+  <div class="profile-wrap">
+    <a href="{% url 'home' %}" class="back-btn">&larr; Back</a>
 
-        <h3>Total Entries: {{ entry_count }}</h3>
+    <div class="name-pill">{{ user.username }}</div>
 
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
-    </body>
+    <div class="stats-card">
+      <p class="stats-label">Total Journal Entries</p>
+      <div class="stats-circle">{{ entry_count }}</div>
+
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="logout-btn">Log out</button>
+      </form>
+    </div>
+  </div>
+
+
+  <script src="{% static 'entries/js/script.js' %}"></script>
+</body>
 
 </html>

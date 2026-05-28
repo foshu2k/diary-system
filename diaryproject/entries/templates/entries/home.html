@@ -1,36 +1,37 @@
 {% extends 'entries/base.html' %}
 
 {% block content %}
-  <main class="app">
-    <section class="hero">
-      <div class="greeting">Good evening,  {{ request.user.username }}</div>
-      <h1>Your story<br/><span>continues today.</span></h1>
-    </section>
+<main class="app">
+  <section class="hero">
+    <div class="greeting">Good day, {{ request.user.username }}!</div>
+    <h1>Your story<br /><span>continues today.</span></h1>
+  </section>
 
-    <section class="featured-card">
-      <div class="label">Today · {% now "F j, Y" %}</div>
-      <h2>Capture the moment before it fades.</h2>
-      <a href="{% url 'create_entry' %}" class="btn">Start Writing →</a>
-    </section>
+  <section class="featured-card">
+    <div class="label">Today · {% now "F j, Y" %}</div>
+    <h2>Capture the moment before it fades.</h2>
+    <a href="{% url 'create_entry' %}" class="btn">Start Writing →</a>
+  </section>
 
-    <div class="section-title">
-      <h2>Recent Entries</h2>
-      <a href="{% url 'entry_list' %}">View all</a>
-    </div>
+  <div class="section-title">
+    <h2>Recent Entries</h2>
+    <a href="{% url 'entry_list' %}">View all</a>
+  </div>
 
-    <div class="entry-grid">
-        {% for entry in entries|slice:":3" %}
-            <a href="/entry/{{ entry.id }}">
-                <div class="entry-card">
-                    <span class="date">{{ entry.date|date:"M d" }}</span>
-                    <h3>{{ entry.title }}</h3>
-                    <p class="preview">{{ entry.content|truncatechars:100 }}</p>
-                </div>
-            </a>
-        {% empty %}
-            <p>No recent entries.</p>
-        {% endfor %}
-    </div>
-  </main>
+  <div class="entry-list-layout">
+    {% for entry in entries|slice:":3" %}
+    <a href="/entry/{{ entry.id }}">
+      <div class="entry-card">
+        <span class="date">{{ entry.created_at|date:"M d" }}</span>
+        <h3>{{ entry.title }}</h3>
+        <p class="preview">{{ entry.content|truncatechars:100 }}</p>
+      </div>
+    </a>
+
+    {% empty %}
+    <p>No recent entries.</p>
+    {% endfor %}
+  </div>
+</main>
 
 {% endblock %}

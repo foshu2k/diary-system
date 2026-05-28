@@ -1,18 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Diary Web App</title>
-    </head>
 
-    <body>
-        <form method="POST" action="">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="create-account-btn">Create Account</button>
-        </form>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMEN: Create Account</title>
+  <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+</head>
 
-        <a href="{% url 'login' %}">I already have an account</a>
-    </body>
+<body class="auth-body">
+  <div class="auth-card">
+    <h1 class="auth-title">Create account</h1>
+    <p class="auth-subtitle">Start your journaling journey</p>
+
+    <form method="POST" action="">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn-primary">Create account</button>
+    </form>
+
+    <p class="auth-footer">
+      Already have an account? <a href="{% url 'login' %}">Sign in</a>
+    </p>
+  </div>
+</body>
+
 </html>
