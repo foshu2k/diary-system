@@ -19,7 +19,3 @@ class EntryForm(forms.ModelForm):
                 'class': 'textarea',
             }),
         }
-
-    def clean_content(self):
-        content = self.cleaned_data.get("content")
-        return content.strip() if content else content

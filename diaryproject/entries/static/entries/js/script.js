@@ -11,15 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Feedback
     const voiceFeedback = () => {
-        if (sessionStorage.getItem("voiceNavTriggered") !== "true") return;
-
         let text = sessionStorage.getItem("voiceNavFeedback");
-
-        if (text) {
-            const voice = new SpeechSynthesisUtterance(text)
-            window.speechSynthesis.speak(voice);
-        }
-
+        const voice = new SpeechSynthesisUtterance(text)
+        window.speechSynthesis.speak(voice);
         sessionStorage.removeItem("voiceNavFeedback")
     }
 
@@ -40,44 +34,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     sessionStorage.setItem("voiceNavFeedback", "You are at the home page.");
                     window.location.href = "/"
                 },
-                "go to home": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the home page.");
-                    window.location.href = "/"
-                },
+                "go to home": () => window.location.href = "/",
                 "go back": () => window.history.back(),
                 "go forward": () => window.history.forward(),
-                "go to profile": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the profile page.");
-                    window.location.href = "/accounts/profile/"
-                },
-                "go to entries": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry list page.");
-                    window.location.href = "/entrylist/"
-                },
-                "go to entry list": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry list page.")
-                    window.location.href = "/entrylist/"
-                },
-                "view entries": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry list page.")
-                    window.location.href = "/entrylist/"
-                },
-                "view all entries": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry list page.")
-                    window.location.href = "/entrylist/"
-                },
-                "create entry": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry creation page.")
-                    window.location.href = "/create/"
-                },
-                "new entry": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry creation page.")
-                    window.location.href = "/create/"
-                },
-                "add entry": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry creation page.")
-                    window.location.href = "/create/"
-                },
+                "go to profile": () => window.location.href = "/profile/",
+                "go to entries": () => window.location.href = "/entrylist/",
+                "go to entry list": () => window.location.href = "/entrylist/",
+                "view entries": () => window.location.href = "/entrylist/",
+                "view all entries": () => window.location.href = "/entrylist/",
+                "create entry": () => window.location.href = "/create/",
+                "new entry": () => window.location.href = "/create/",
+                "add entry": () => window.location.href = "/create/",
             }
 
             voiceNavBtn.addEventListener("click", () => {
@@ -103,8 +70,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const match = Object.keys(commands).find(cmd => said.includes(cmd))
                 if (match) {
-                    sessionStorage.setItem("voiceNavTriggered", "true")
                     commands[match]()
+                } else {
+                    console.log("Voice nav: no command matched for →", said)
                 }
             }
 
