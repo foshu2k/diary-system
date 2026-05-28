@@ -1,75 +1,68 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <title>LUMEN: Diary Web App</title>
 
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'entries/css/style.css' %}">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <body>
-        <div class="app">
+    <title>LUMEN: Diary Web App</title>
 
-            <div class="back-btn">
-                <a href="{% url 'home' %}" class="btn btn-secondary entry-detail-back">
-                    <img src="{% static 'entries/svg/back.svg' %}" class="padding-top: 9px icon" alt="Back">Back
-                </a>
-                <div class="avatar"></div>
-            </div>
+    <link rel="stylesheet" href="{% static 'entries/css/style.css' %}">
+</head>
 
-            <header class="entry-header-group">
-                <span class="current-date-stamp">{% now "l · M d" %}</span>
-                <h1 class="page-title">New entry</h1>
-            </header>
+<body>
 
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.non_field_errors }}
-
-                <!-- Title Field -->
-                <div class="form-group">
-                    {{ form.title }}
-                    {% if form.title.errors %}
-                    <span class="form-error">{{ form.title.errors|join:", " }}</span>
-                    {% endif %}
-                </div>
-
-                <!-- Content Field -->
-                <div class="form-group">
-                    {{ form.content }} 
-                    {% if form.content.errors %}
-                    <span class="form-error">{{ form.content.errors|join:", " }}</span>
-                    {% endif %}
-                </div>
-
-                <!-- Voice Panel -->
-                <section class="voice-panel" aria-label="Voice recorder">
-                    <div class="waveform" role="img" aria-label="Audio waveform"></div>
-                    <div class="voice-controls">
-
-                        <button type="button" class="voice-btn" id="clearBtn">
-                            <img src="{% static 'entries/svg/clear.svg' %}" alt="Clear">
-                        </button>
-
-                        <button type="button" class="voice-btn record" id="micBtn">
-                            <img src="{% static 'entries/svg/mic-idle.svg' %}" id="micIcon" alt="Mic">
-                        </button>
-
-                        <button type="submit" class="voice-btn save">
-                            <img src="{% static 'entries/svg/save.svg' %}" alt="Save">
-                        </button>
-
+    <!-- Topbar -->
+    <div class="app-top">
+        <div class="topbar">
+            <div class="topbar-inner">
+                <div class="brand">LUMEN</div>
+                <a href="{% url 'profile' %}">
+                    <div class="avatar" aria-label="Profile">
+                        <img src="{% static 'entries/svg/profile.svg' %}" class="avatar-icon" alt="Profile Icon">
                     </div>
-                </section>
-
-            </form>
-
+                </a>
+            </div>
         </div>
+    </div>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
 
-        {% load static %}
-        <script src="{% static 'entries/js/script.js' %}"></script>
-    </body>
+    <nav class="bottom-nav" aria-label="Primary">
+
+        <!-- HOME -->
+        <a href="{% url 'home' %}" class="nav-item active">
+            <img src="{% static 'entries/svg/home-active.svg' %}" class="icon" alt="Home">
+            <span>Home</span>
+        </a>
+
+        <!-- ADD BUTTON -->
+        <a href="{% url 'create_entry' %}" class="nav-fab" aria-label="New diary entry">
+            <img src="{% static 'entries/svg/plus.svg' %}" alt="Add">
+        </a>
+
+        <!-- ENTRIES -->
+        <a href="{% url 'entry_list' %}" class="nav-item active">
+            <img src="{% static 'entries/svg/entries-idle.svg' %}" class="icon" alt="Entries">
+            <span>Entries</span>
+        </a>
+
+    </nav>
+
+    <!-- Voice Navigation Trigger -->
+    <div class="voice-assistant-wrapper">
+        <button type="button" class="voice-btn record" id="micNavBtn" aria-label="Voice Navigation Trigger">
+            <img src="{% static 'entries/svg/mic-idle.svg' %}" id="micNavIcon" alt="Mic">
+        </button>
+    </div>
+
+    {% block javascript %}
+    <script src="{% static 'entries/js/script.js' %}"></script>
+    {% endblock %}
+</body>
+
 </html>
