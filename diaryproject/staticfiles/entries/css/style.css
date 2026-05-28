@@ -249,22 +249,6 @@ p  { color: var(--c-text-muted); }
   filter: brightness(0) invert(1);
 }
 
-/* VOICE ASSISTANT WRAPPER - SIDE FLOAT CONTEXT */
-.voice-assistant-wrapper {
-    position: fixed;
-    bottom: 110px;          /* Vertically aligned with your menu cluster */
-    left: 50%;              /* Standard center layout anchor alignment */
-    transform: translateX(-50%);
-    
-    /* THE SIDE FIX: Sets full layout box to match container width */
-    width: 100%;
-    max-width: 430px;       
-    
-    display: flex;
-    justify-content: flex-end; 
-    pointer-events: none;   
-    z-index: 9999;          
-}
 
 /* TARGET DESKTOP SCREENS TO PUSH ICON OUTSIDE */
 @media (min-width: 577px) {
@@ -1110,11 +1094,6 @@ p  { color: var(--c-text-muted); }
 .form-group textarea {
     min-height: 220px;
     resize: vertical;
-}
-
-.back-btn {
-    margin-top: 0;
-    margin-bottom: 10px;
 }
 
 .entry-detail-back {

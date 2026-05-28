@@ -9,18 +9,22 @@ document.addEventListener("DOMContentLoaded", function () {
     
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 
+    // Pages Feedback Map
+    const pages = {
+        "/": "You are at the home page.",
+        "/accounts/profile/": "You are at the profile page.",
+        "/entrylist/": "You are at the entry list page.",
+        "/create/": "You are at the entry creation page.",
+    }
+
     // Feedback
     const voiceFeedback = () => {
         if (sessionStorage.getItem("voiceNavTriggered") !== "true") return;
 
-        let text = sessionStorage.getItem("voiceNavFeedback");
+        const text = pages[window.location.pathname] || "Page loaded."
+        window.speechSynthesis.speak(new SpeechSynthesisUtterance(text))
 
-        if (text) {
-            const voice = new SpeechSynthesisUtterance(text)
-            window.speechSynthesis.speak(voice);
-        }
-
-        sessionStorage.removeItem("voiceNavFeedback")
+        sessionStorage.removeItem("voiceNavTriggered")
     }
 
     voiceFeedback()
@@ -36,48 +40,18 @@ document.addEventListener("DOMContentLoaded", function () {
             let navObj = null
 
             const commands = {
-                "go home": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the home page.");
-                    window.location.href = "/"
-                },
-                "go to home": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the home page.");
-                    window.location.href = "/"
-                },
+                "go home": () => window.location.href = "/",
+                "go to home": () => window.location.href = "/",
                 "go back": () => window.history.back(),
                 "go forward": () => window.history.forward(),
-                "go to profile": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the profile page.");
-                    window.location.href = "/accounts/profile/"
-                },
-                "go to entries": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry list page.");
-                    window.location.href = "/entrylist/"
-                },
-                "go to entry list": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry list page.")
-                    window.location.href = "/entrylist/"
-                },
-                "view entries": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry list page.")
-                    window.location.href = "/entrylist/"
-                },
-                "view all entries": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry list page.")
-                    window.location.href = "/entrylist/"
-                },
-                "create entry": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry creation page.")
-                    window.location.href = "/create/"
-                },
-                "new entry": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry creation page.")
-                    window.location.href = "/create/"
-                },
-                "add entry": () => {
-                    sessionStorage.setItem("voiceNavFeedback", "You are at the entry creation page.")
-                    window.location.href = "/create/"
-                },
+                "go to profile": () => window.location.href = "/accounts/profile/",
+                "go to entries": () => window.location.href = "/entrylist/",
+                "go to entry list": () => window.location.href = "/entrylist/",
+                "view entries": () => window.location.href = "/entrylist/",
+                "view all entries": () => window.location.href = "/entrylist/",
+                "create entry": () => window.location.href = "/create/",
+                "new entry": () => window.location.href = "/create/",
+                "add entry": () => window.location.href = "/create/",
             }
 
             voiceNavBtn.addEventListener("click", () => {
