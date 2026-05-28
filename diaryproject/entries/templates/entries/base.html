@@ -41,12 +41,9 @@
         </a>
 
         <!-- Voice Navigation Trigger -->
-        <div class="voice-assistant-wrapper">
-            <button type="button" class="voice-btn record" id="micNavBtn" aria-label="Voice Navigation Trigger">
-                <img src="{% static 'entries/svg/mic-idle.svg' %}" id="micNavIcon" alt="Mic">
-            </button>
-        </div>
-
+        <button type="button" class="voice-btn record" id="micNavBtn" aria-label="Voice Navigation Trigger">
+            <img src="{% static 'entries/svg/mic-idle.svg' %}" id="micNavIcon" alt="Mic">
+        </button>
 
         <!-- ENTRIES -->
         <a href="{% url 'entry_list' %}" class="nav-item active">
