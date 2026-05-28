@@ -24,7 +24,7 @@
 
                 <!-- Reset filter / All button -->
                 <a href="{% url 'entry_list' %}" 
-                    class="filter-select {% if not request.GET.year and not request.GET.month and not request.GET.day %}active{% endif %}">
+                    class="filter-select-all {% if not request.GET.year and not request.GET.month and not request.GET.day %}active{% endif %}">
                     All
                 </a>
 
@@ -53,33 +53,25 @@
                 </select>
             </div> 
 
-            {% if filter_errors %}
-                <ul class="filter-error-list">
-                    {% for error in filter_errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
+            {% if filter_errors %}         
+                <div class="filter-error-container">
+                    <ul class="filter-error-list">
+                        {% for error in filter_errors %}
+                            <li><span class="error-bullet">✦</span> {{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% endif %}
         </form> 
 
-        <!-- Calendar Section -->
-        <section class="py-5 text-center border border-1">
-            <div class="table">
-                <button class="btn btn-secondary btn-lg w-100" onclick="document.getElementById('dateFilter').showPicker()">
-                    <img src="{% static 'entries/svg/calendar.svg' %}" class="icon-inline">
-                    Calendar
-                </button>
-            </div>
-        </section>
-
         <!-- Entry Section -->
         <section class="py-2">
-            <div class="p-5 border border-1 text-center">
-                <a href="{% url 'create_entry' %}" class="btn btn-primary btn-lg w-100">
-                    <img src="{% static 'entries/svg/plus.svg' %}" class="icon-inline">
+            <div class="section-header-container">
+                <h2 class="section-title">Recent Entries</h2>
+                <a href="{% url 'create_entry' %}" class="btn-empty-primary">
+                    <img src="{% static 'entries/svg/plus.svg' %}" class="icon-inline" style="filter: brightness(0) saturate(100%) invert(9%) sepia(34%) saturate(1900%) hue-rotate(236deg) brightness(93%) contrast(101%); margin-right: 6px; width: 14px; height: 14px;">
                     Add Entry
                 </a>
-                <h1 class="fs-6">Create your new entry</h1>
             </div>
         </section>
 
@@ -92,7 +84,7 @@
             {% for entry in entries|slice:":2" %}
                 <a href="/entry/{{ entry.id }}">
                     <div class="entry-card">
-                        <span class="date">{{ entry.date|date:"M d" }}</span>
+                        <span class="date">{{ entry.created_at|date:"M d" }}</span>
                         <h3>{{ entry.title }}</h3>
                         <p class="preview">{{ entry.content|truncatechars:100 }}</p>
                     </div>
@@ -127,7 +119,7 @@
         <!-- All Entries Grouped by Month -->
         <div style="overflow-y: auto; padding-bottom: 32px;">
 
-            {% regroup entries by date|date:"F Y" as entries_by_month %}
+            {% regroup entries by created_at|date:"F Y" as entries_by_month %}
 
             {% for month_group in entries_by_month %}
 
@@ -140,7 +132,7 @@
                     {% for entry in month_group.list %}
                         <a href="/entry/{{ entry.id }}">
                             <div class="entry-card">
-                                <span class="date">{{ entry.date|date:"M d" }}</span>
+                                <span class="date">{{ entry.created_at|date:"M d" }}</span>
                                 <h3>{{ entry.title }}</h3>
                                 <p class="preview">{{ entry.content|truncatechars:100 }}</p>
                             </div>

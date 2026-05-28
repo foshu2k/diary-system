@@ -1112,6 +1112,11 @@ p  { color: var(--c-text-muted); }
     resize: vertical;
 }
 
+.back-btn {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
 .entry-detail-back {
     display: inline-flex;
     align-items: center;
