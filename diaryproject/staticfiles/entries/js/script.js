@@ -42,8 +42,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const commands = {
                 "go home": () => window.location.href = "/",
                 "go to home": () => window.location.href = "/",
-                "go back": () => window.history.back(),
-                "go forward": () => window.history.forward(),
+                "go back": () => {
+                    sessionStorage.setItem("voiceNavTriggered", "true")
+                    window.history.back()
+                },
+                "go forward": () => {
+                    sessionStorage.setItem("voiceNavTriggered", "true")
+                    window.history.forward()
+                },
                 "go to profile": () => window.location.href = "/accounts/profile/",
                 "go to entries": () => window.location.href = "/entrylist/",
                 "go to entry list": () => window.location.href = "/entrylist/",
