@@ -27,7 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
         sessionStorage.removeItem("voiceNavTriggered")
     }
 
-    voiceFeedback()
+    window.addEventListener("pageshow", () => {
+        voiceFeedback()
+    })
 
     // Voice Command Functionality
     if (voiceNavBtn) {
