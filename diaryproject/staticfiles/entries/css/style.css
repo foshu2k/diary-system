@@ -1096,6 +1096,10 @@ p  { color: var(--c-text-muted); }
     resize: vertical;
 }
 
+.back-btn{
+  margin-bottom: 18px;
+}
+
 .entry-detail-back {
     display: inline-flex;
     align-items: center;
@@ -1262,6 +1266,7 @@ p  { color: var(--c-text-muted); }
   flex-direction: column;
   gap: 24px; 
   width: 100%;
+  margin-top: 12px;
 }
 
 .entry-card-link {

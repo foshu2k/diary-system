@@ -68,12 +68,14 @@ body {
   font-weight: 700;
   color: var(--c-text);
   margin-bottom: var(--space-2);
+  text-align: center;
 }
 
 .auth-subtitle {
   color: var(--c-text-muted);
   font-size: 14px;
   margin-bottom: var(--space-6);
+  text-align: center;
 }
 
 .auth-card form p,
