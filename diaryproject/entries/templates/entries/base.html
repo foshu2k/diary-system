@@ -32,6 +32,38 @@
         {% endblock %}
     </div>
 
+    <!-- Voice Command Popup -->
+    <div class="voice-popup" id="voicePopup" hidden>
+        <div class="voice-popup-header">
+            <span class="voice-popup-title">Voice Commands</span>
+        </div>
+        <p class="voice-popup-hint">Try saying one of these:</p>
+        <ul class="voice-command-list">
+            <li><span class="cmd-group">Navigation</span>
+            <div class="cmd-chips">
+                <span class="cmd-chip">"go home"</span>
+                <span class="cmd-chip">"go back"</span>
+                <span class="cmd-chip">"go forward"</span>
+                <span class="cmd-chip">"go to profile"</span>
+            </div>
+            </li>
+            <li><span class="cmd-group">Entries</span>
+            <div class="cmd-chips">
+                <span class="cmd-chip">"go to entry list"</span>
+                <span class="cmd-chip">"view all entries"</span>
+            </div>
+            </li>
+            <li><span class="cmd-group">Create</span>
+            <div class="cmd-chips">
+                <span class="cmd-chip">"new entry"</span>
+                <span class="cmd-chip">"create entry"</span>
+                <span class="cmd-chip">"add entry"</span>
+            </div>
+            </li>
+        </ul>
+    </div>
+
+
     <nav class="bottom-nav" aria-label="Primary">
 
         <!-- HOME -->

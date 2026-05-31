@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             function startNavigating() {
                 micNavIcon.src = "/static/entries/svg/mic-recording.svg"
+                showVoicePopup()
                 navObj = new SpeechRecognition()
                 navObj.start()
                 navObj.onresult = handleCommand
@@ -93,12 +94,27 @@ document.addEventListener("DOMContentLoaded", function () {
             function stopNavigating() {
                 isNavigating = false
                 micNavIcon.src = "/static/entries/svg/mic-idle.svg"
+                hideVoicePopup()
                 if (navObj) {
                     navObj.stop()
                     navObj = null
                 }
             }
         }
+    }
+
+    function showVoicePopup() {
+        const p = document.getElementById("voicePopup")
+        if (!p) return
+        p.hidden = false
+        requestAnimationFrame(() => p.classList.add("is-open"))
+    }
+
+    function hideVoicePopup() {
+        const p = document.getElementById("voicePopup")
+        if (!p) return
+        p.classList.remove("is-open")
+        setTimeout(() => { p.hidden = true }, 180)
     }
 
     // Speech to Text Functionality
